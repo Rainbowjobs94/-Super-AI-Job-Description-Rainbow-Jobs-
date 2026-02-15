@@ -52,12 +52,13 @@ python -m src.guardian.community_guardian
 
 ## Community Health Thresholds
 
-| Level     | Threshold |
-|-----------|-----------|
-| Excellent | >= 0.9    |
-| Healthy   | >= 0.7    |
-| Warning   | >= 0.5    |
-| Critical  | < 0.3     |
+| Level     | Threshold   |
+|-----------|-------------|
+| Excellent | >= 0.9      |
+| Healthy   | >= 0.7      |
+| Warning   | >= 0.5      |
+| At Risk   | >= 0.3      |
+| Critical  | < 0.3       |
 
 ## Key Metrics
 
