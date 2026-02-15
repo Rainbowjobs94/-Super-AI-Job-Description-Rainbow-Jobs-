@@ -1,0 +1,48 @@
+{
+  "community_guidelines": {
+    "version": "1.0",
+    "rules": [
+      {
+        "id": "CG-001",
+        "name": "respectful_communication",
+        "description": "All community members must communicate respectfully",
+        "severity": "high",
+        "action": "warn_then_restrict"
+      },
+      {
+        "id": "CG-002",
+        "name": "no_spam",
+        "description": "No spam, unsolicited promotions, or repetitive content",
+        "severity": "medium",
+        "action": "remove_and_warn"
+      },
+      {
+        "id": "CG-003",
+        "name": "authentic_content",
+        "description": "Content must be authentic and not misleading",
+        "severity": "high",
+        "action": "review_and_flag"
+      },
+      {
+        "id": "CG-004",
+        "name": "inclusive_environment",
+        "description": "Foster an inclusive environment for all community members",
+        "severity": "critical",
+        "action": "immediate_review"
+      },
+      {
+        "id": "CG-005",
+        "name": "on_topic",
+        "description": "Keep discussions relevant to the community purpose",
+        "severity": "low",
+        "action": "gentle_redirect"
+      }
+    ],
+    "health_thresholds": {
+      "critical": 0.3,
+      "warning": 0.5,
+      "healthy": 0.7,
+      "excellent": 0.9
+    }
+  }
+}
