@@ -1,0 +1,29 @@
+{
+  "platforms": {
+    "twitch": {
+      "enabled": true,
+      "features": ["live_streaming", "chat_moderation", "community_engagement"],
+      "guardian_actions": ["monitor_chat", "enforce_guidelines", "welcome_members"]
+    },
+    "facebook": {
+      "enabled": true,
+      "features": ["posts", "groups", "community_moderation"],
+      "guardian_actions": ["moderate_comments", "flag_violations", "community_updates"]
+    },
+    "instagram": {
+      "enabled": true,
+      "features": ["posts", "stories", "comments"],
+      "guardian_actions": ["monitor_comments", "content_review", "engagement_tracking"]
+    },
+    "youtube": {
+      "enabled": true,
+      "features": ["videos", "live_streams", "comments"],
+      "guardian_actions": ["moderate_comments", "stream_monitoring", "content_analysis"]
+    },
+    "ltf": {
+      "enabled": true,
+      "features": ["community_hub", "job_postings", "networking"],
+      "guardian_actions": ["verify_postings", "community_standards", "trend_analysis"]
+    }
+  }
+}
