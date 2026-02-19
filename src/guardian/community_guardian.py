@@ -6,7 +6,6 @@ guidelines, and tracks engagement metrics for the Rainbow Jobs community.
 """
 
 import json
-import os
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -63,6 +62,8 @@ class CommunityGuardian:
             return "healthy"
         elif health >= thresholds["warning"]:
             return "warning"
+        elif health >= thresholds["critical"]:
+            return "at_risk"
         else:
             return "critical"
 
