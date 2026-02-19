@@ -9,4 +9,6 @@ build/
 venv/
 data/latest_report.json
 data/content_library.json
+data/AiRainbowRepo/
+data/AiRainbowRepo-*.zip
 *.log

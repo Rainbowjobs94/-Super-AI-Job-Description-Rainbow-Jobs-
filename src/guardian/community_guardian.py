@@ -6,6 +6,8 @@ guidelines, and tracks engagement metrics for the Rainbow Jobs community.
 """
 
 import json
+import os
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -132,6 +134,120 @@ class CommunityGuardian:
             json.dump(report, f, indent=2)
         return str(report_path)
 
+    def build_repo_archive(self, output_dir=None):
+        """Build the AiRainbowRepo archive with all project artifacts."""
+        project_number = "123-7104"
+        date_str = datetime.now().strftime("%Y%m%d")
+        version = "v1.1"
+        zip_filename = f"AiRainbowRepo-{date_str}-{project_number}-{version}.zip"
+
+        if output_dir is None:
+            output_dir = str(DATA_DIR)
+        os.makedirs(output_dir, exist_ok=True)
+
+        directories = [
+            "AiRainbowRepo/docs",
+            "AiRainbowRepo/code/backend",
+            "AiRainbowRepo/code/frontend",
+            "AiRainbowRepo/security",
+            "AiRainbowRepo/blockchain",
+            "AiRainbowRepo/media",
+        ]
+
+        files = {
+            "AiRainbowRepo/README.md": (
+                "# Love Transcends Reality: Shift Nexus Protocol v3\n"
+                "**Project**: 123-7104\n"
+                "**Type**: Font Miner Architecture & Proof of Concept\n"
+                "**Description**: Layer 2 architecture for Decentralized Type Foundry. "
+                "Miners compute vector optimization math to generate artist-signed, "
+                "blockchain-encrypted typography.\n"
+            ),
+            "AiRainbowRepo/CHANGELOG.md": (
+                "# Changelog\n"
+                "- **v1.1 (2026-02-19)**: Regenerated archive locally to bypass sandbox "
+                "expiration. Added FontNexusProtocol.sol and font_miner_core.py.\n"
+                "- **v1.0 (2026-02-18)**: Initial conceptualization of Shift Nexus "
+                "Protocol v3 (Font Miner Edition).\n"
+            ),
+            "AiRainbowRepo/LTAiCollab-WATERMARK.txt": (
+                "=========================================\n"
+                "PROPERTY OF LOVE TRANSCENDS REALITY LLC\n"
+                "\u00a9 2013-2026 Rainbow Strongman / John Strongman\n"
+                "Patents Pending. All Rights Reserved.\n"
+                "Project 123-7104\n"
+                "=========================================\n"
+                "This code and its output bear the LTAiCollab Watermark for IP Protection.\n"
+            ),
+            "AiRainbowRepo/blockchain/FontNexusProtocol.sol": (
+                "// SPDX-License-Identifier: MIT\n"
+                "pragma solidity ^0.8.0;\n"
+                "contract FontNexusProtocol {\n"
+                '    string public constant WATERMARK = "LTAiCollab-123-7104";\n'
+                "    mapping(bytes32 => address) public fontOwners;\n"
+                "\n"
+                "    event FontMined(address indexed miner, bytes32 fontHash, string glyphData);\n"
+                "    function registerMinedFont(bytes32 _fontHash, string memory _glyphData) public {\n"
+                '        require(fontOwners[_fontHash] == address(0), "Font already mined!");\n'
+                "        fontOwners[_fontHash] = msg.sender;\n"
+                "        emit FontMined(msg.sender, _fontHash, _glyphData);\n"
+                "    }\n"
+                "}\n"
+            ),
+            "AiRainbowRepo/code/backend/font_miner_core.py": (
+                "import hashlib\n"
+                "import json\n"
+                "import random\n"
+                "class FontMinerV3:\n"
+                "    def __init__(self, miner_address, difficulty=4):\n"
+                "        self.miner_address = miner_address\n"
+                "        self.difficulty = difficulty\n"
+                '        self.target = "0" * difficulty\n'
+                "        self.font_data = {"
+                '"Family": "NexusSerif", "Glyphs": [], '
+                '"Watermark": "LTAiCollab-123-7104"}\n'
+                "    def mine_glyph(self, char, previous_hash):\n"
+                "        nonce = 0\n"
+                "        print(f\"Mining Glyph '{char}'...\")\n"
+                "        while True:\n"
+                "            data_string = f\"{char}{previous_hash}{self.miner_address}{nonce}\"\n"
+                "            block_hash = hashlib.sha256(data_string.encode()).hexdigest()\n"
+                "            if block_hash.startswith(self.target):\n"
+                "                print(f\"Glyph '{char}' Mined! Hash: {block_hash}\")\n"
+                "                return block_hash\n"
+                "            nonce += 1\n"
+                'if __name__ == "__main__":\n'
+                '    miner = FontMinerV3(miner_address="0xRainbowLTR", difficulty=4)\n'
+                '    miner.mine_glyph("A", "0000000000000000")\n'
+            ),
+        }
+
+        # Build in a temp working area inside output_dir
+        build_root = os.path.join(output_dir, "AiRainbowRepo")
+
+        # 1. Create directories
+        for d in directories:
+            os.makedirs(os.path.join(output_dir, d), exist_ok=True)
+
+        # 2. Create files
+        for filepath, content in files.items():
+            full_path = os.path.join(output_dir, filepath)
+            with open(full_path, "w", encoding="utf-8") as f:
+                f.write(content)
+
+        # 3. Zip everything
+        zip_path = os.path.join(output_dir, zip_filename)
+        print(f"  Generating {zip_filename}...")
+        with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zipf:
+            for root, dirs, files_in_dir in os.walk(build_root):
+                for file in files_in_dir:
+                    file_path = os.path.join(root, file)
+                    arcname = os.path.relpath(file_path, output_dir)
+                    zipf.write(file_path, arcname=arcname)
+
+        print(f"  Archive created: {zip_path}")
+        return zip_path
+
 
 def main():
     """Run the community guardian and generate a status report."""
@@ -152,6 +268,11 @@ def main():
 
     saved_path = guardian.save_report(report)
     print(f"\n  Report saved to: {saved_path}")
+
+    # Build AiRainbowRepo archive
+    print("\n  Building AiRainbowRepo archive...")
+    archive_path = guardian.build_repo_archive()
+    print(f"  Build complete: {archive_path}")
 
     return report
 
