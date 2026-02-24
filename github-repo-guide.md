@@ -4,18 +4,18 @@
 
 ## 1. 🛠️ AI Assistant Builders
 
-| Tool | Description |
-|------|-------------|
-| **OpenAI Assistants API** | Build custom AI assistants with tools, retrieval, and code execution |
-| **Microsoft Copilot Studio** | No-code/low-code AI assistant builder for enterprises |
-| **Google Vertex AI Agent Builder** | Build conversational AI agents on Google Cloud |
-| **Amazon Bedrock Agents** | Build AI assistants using multiple foundation models |
-| **LangChain / LangGraph** | Open-source framework for building LLM-powered applications |
-| **AutoGen (Microsoft)** | Multi-agent conversation framework |
-| **CrewAI** | Framework for orchestrating role-playing AI agents |
-| **Botpress** | Open-source chatbot builder platform |
-| **Voiceflow** | Visual AI agent builder for conversational experiences |
-| **Stack AI** | No-code AI app builder |
+| Tool | Description | Open API |
+|------|-------------|----------|
+| **OpenAI Assistants API** | Build custom AI assistants with tools, retrieval, and code execution | ✅ |
+| **Microsoft Copilot Studio** | No-code/low-code AI assistant builder for enterprises | ✅ |
+| **Google Vertex AI Agent Builder** | Build conversational AI agents on Google Cloud | ✅ |
+| **Amazon Bedrock Agents** | Build AI assistants using multiple foundation models | ✅ |
+| **LangChain / LangGraph** | Open-source framework for building LLM-powered applications | ✅ |
+| **AutoGen (Microsoft)** | Multi-agent conversation framework | ✅ |
+| **CrewAI** | Framework for orchestrating role-playing AI agents | ✅ |
+| **Botpress** | Open-source chatbot builder platform | ✅ |
+| **Voiceflow** | Visual AI agent builder for conversational experiences | ✅ |
+| **Stack AI** | No-code AI app builder | ✅ |
 
 ---
 
@@ -219,12 +219,28 @@ If you'd like open-source tools, here are some notable repos to look into:
 - `langchain-ai/langchain` — LLM application framework
 - `microsoft/autogen` — Multi-agent conversations
 - `FlowiseAI/Flowise` — Visual LLM app builder
+- `langflow-ai/langflow` — Visual LLM workflow
+- `langgenius/dify` — LLM app platform
 - `NVIDIA/NeMo-Guardrails` — AI safety guardrails
 - `protectai/llm-guard` — LLM security tools
+- `protectai/rebuff` — Prompt injection detection
 - `leondz/garak` — LLM vulnerability scanner
 - `huggingface/transformers` — Model training & inference
 - `run-llama/llama_index` — Data-augmented LLM framework
 - `crewAIInc/crewAI` — Multi-agent framework
+- `meta-llama/llama` — Open LLM
+- `contentauth/c2patool` — Content provenance
+- `microsoft/semantic-kernel` — Semantic Kernel
+- `botpress/botpress` — Botpress chatbot builder
+- `baptisteArno/typebot.io` — Typebot visual chatbot builder
+- `Stability-AI/generative-models` — Stable Diffusion models
+- `fastai/fastai` — fast.ai deep learning library
+- `pytorch/pytorch` — PyTorch
+- `tensorflow/tensorflow` — TensorFlow
+- `n8n-io/n8n` — n8n workflow builder
+- `guardrails-ai/guardrails` — Guardrails AI
+- `promptfoo/promptfoo` — Promptfoo
+- `Azure/PyRIT` — Python Risk Identification Tool for generative AI
 
 ---
 
@@ -497,6 +513,61 @@ If you'd like open-source tools, here are some notable repos to look into:
 
 ---
 
+# 💻 CODING FILE IDENTIFICATION
+
+## Code File Identification & Analysis
+| Tool | Description |
+|---|---|
+| **Linguist (GitHub)** | Language detection & file classification used by GitHub |
+| **tokei** | Fast code statistics tool — counts lines, files, blanks, comments by language |
+| **cloc (Count Lines of Code)** | Counts blank lines, comment lines, and physical lines of source code |
+| **Semgrep** | Lightweight static analysis for finding code patterns & vulnerabilities |
+| **SonarQube** | Continuous code quality & security inspection |
+| **Tree-sitter** | Incremental parsing library for syntax-aware code analysis |
+| **Universal Ctags** | Source code indexing — generates tag files for symbols |
+| **SourceTrail** | Interactive source explorer for understanding unfamiliar code |
+| **CodeQL (GitHub)** | Semantic code analysis engine for finding vulnerabilities |
+| **Understand (SciTools)** | Code comprehension & metrics tool for large codebases |
+
+---
+
+# 🖨️ 3D MODELING, SCANNING & BUILDING FOR 3D PRINTING
+
+## 3D Modeling
+| Tool | Description |
+|---|---|
+| **Blender** | Free, open-source 3D creation suite (modeling, sculpting, animation) |
+| **FreeCAD** | Open-source parametric 3D CAD modeler |
+| **OpenSCAD** | Script-based 3D CAD modeler for creating solid objects |
+| **Tinkercad (Autodesk)** | Browser-based 3D modeling for beginners |
+| **Fusion 360 (Autodesk)** | Professional CAD/CAM/CAE tool (free for hobbyists) |
+| **SolidWorks** | Industry-standard parametric CAD software |
+| **Meshmixer (Autodesk)** | Triangle mesh editing & repair for 3D printing |
+
+## 3D Scanning
+| Tool | Description |
+|---|---|
+| **MeshLab** | Open-source system for processing and editing 3D meshes |
+| **CloudCompare** | Open-source 3D point cloud & mesh processing |
+| **COLMAP** | Open-source photogrammetry pipeline (photos to 3D) |
+| **Meshroom (AliceVision)** | Open-source photogrammetry / 3D reconstruction |
+| **Regard3D** | Free, open-source structure-from-motion tool |
+| **Skanect** | Real-time 3D scanning from depth sensors |
+| **Polycam** | LiDAR-based 3D scanning app (iOS/Android) |
+
+## 3D Printing / Slicing
+| Tool | Description |
+|---|---|
+| **PrusaSlicer** | Open-source slicer with advanced features (fork of Slic3r) |
+| **Cura (Ultimaker)** | Popular open-source 3D printing slicer |
+| **OctoPrint** | Open-source web interface for 3D printer management |
+| **SuperSlicer** | Advanced fork of PrusaSlicer with extra features |
+| **Klipper** | High-performance 3D printer firmware |
+| **Marlin Firmware** | Open-source 3D printer firmware (most widely used) |
+| **3D Builder (Microsoft)** | Built-in Windows tool for 3D model viewing & repair |
+
+---
+
 ## 🏆 Top Picks Summary (If You Had to Choose One Per Category)
 
 | Category | Top Pick |
@@ -525,6 +596,9 @@ If you'd like open-source tools, here are some notable repos to look into:
 | Conversation Analysis | **Hugging Face Transformers** |
 | File Identification | **ExifTool** |
 | File Sharing | **IPFS** (decentralized) / **Nextcloud** (self-hosted) |
+| Coding File Identification | **Linguist + tokei** |
+| 3D Modeling & Scanning | **Blender** (modeling) / **MeshLab** (scanning) |
+| 3D Printing / Slicing | **PrusaSlicer** |
 
 ---
 
