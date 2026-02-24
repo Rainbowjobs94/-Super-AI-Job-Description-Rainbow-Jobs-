@@ -1,0 +1,585 @@
+system:
+  name: "AI-Native OS + Hybrid Web2/Web3 Network"
+  owner: "JohnJasper-RiverAlexander"
+  description: >
+    An AI-native computing environment with a hybrid Web2/Web3 social network,
+    simulated mining node, on-chain bridge, media engine, and security stack.
+
+layers:
+
+  - name: "ai_os"
+    description: "Local AI-native computer system and file intelligence."
+    tools:
+      - id: "llama_cpp"
+        type: "llm_engine"
+        description: "Local LLM inference engine for text generation and reasoning."
+        tags: ["llm", "local", "inference"]
+
+      - id: "ollama"
+        type: "llm_manager"
+        description: "Model manager and API wrapper for local LLMs."
+        tags: ["llm", "models", "local"]
+
+      - id: "gpt4all"
+        type: "llm_engine"
+        description: "Local LLM runner with a large model library."
+        tags: ["llm", "local"]
+
+      - id: "whisper_cpp"
+        type: "speech_to_text"
+        description: "Local speech recognition for commands and transcription."
+        tags: ["audio", "stt", "local"]
+
+      - id: "fastembed"
+        type: "embedding"
+        description: "Fast vector embeddings for search and retrieval."
+        tags: ["embeddings", "search"]
+
+      - id: "apache_tika"
+        type: "file_intel"
+        description: "Detects file types and extracts text/content."
+        tags: ["files", "parsing"]
+
+      - id: "exiftool"
+        type: "file_metadata"
+        description: "Reads and writes file metadata."
+        tags: ["files", "metadata"]
+
+      - id: "rmlint"
+        type: "file_cleanup"
+        description: "Finds duplicate and empty files."
+        tags: ["files", "cleanup"]
+
+      - id: "fdupes"
+        type: "file_cleanup"
+        description: "Duplicate file detection."
+        tags: ["files", "duplicates"]
+
+      - id: "ripgrep"
+        type: "search"
+        description: "Fast text search across files."
+        tags: ["search", "files"]
+
+      - id: "fswatch"
+        type: "fs_events"
+        description: "Monitors filesystem changes."
+        tags: ["files", "events"]
+
+  - name: "security_forensics"
+    description: "System, network, and malware security."
+    tools:
+      - id: "clamav"
+        type: "antivirus"
+        description: "Open-source antivirus scanning."
+        tags: ["security", "malware"]
+
+      - id: "yara"
+        type: "pattern_match"
+        description: "Rule-based malware and pattern detection."
+        tags: ["security", "malware"]
+
+      - id: "cuckoo_sandbox"
+        type: "sandbox"
+        description: "Automated malware analysis sandbox."
+        tags: ["security", "analysis"]
+
+      - id: "suricata"
+        type: "ids_ips"
+        description: "Network intrusion detection and prevention."
+        tags: ["network", "security"]
+
+      - id: "zeek"
+        type: "network_monitor"
+        description: "Network security monitoring and traffic analysis."
+        tags: ["network", "security"]
+
+      - id: "wireshark"
+        type: "packet_analyzer"
+        description: "Deep packet inspection and protocol analysis."
+        tags: ["network", "debug"]
+
+      - id: "volatility"
+        type: "memory_forensics"
+        description: "Memory forensics framework."
+        tags: ["forensics", "memory"]
+
+      - id: "osquery"
+        type: "system_intel"
+        description: "SQL-based system instrumentation and auditing."
+        tags: ["system", "security"]
+
+  - name: "web2_backend"
+    description: "Web2 backend for the social network."
+    tools:
+      - id: "nextjs"
+        type: "web_framework"
+        description: "React-based full-stack framework for frontend + SSR."
+        tags: ["web", "frontend"]
+
+      - id: "fastapi"
+        type: "api_framework"
+        description: "Python-based high-performance API framework."
+        tags: ["api", "backend"]
+
+      - id: "expressjs"
+        type: "api_framework"
+        description: "Node.js API framework."
+        tags: ["api", "backend"]
+
+      - id: "socket_io"
+        type: "realtime"
+        description: "Real-time communication for chat and mining updates."
+        tags: ["realtime", "web"]
+
+      - id: "postgresql"
+        type: "database"
+        description: "Primary relational database."
+        tags: ["db", "sql"]
+
+      - id: "redis"
+        type: "cache_queue"
+        description: "Caching, sessions, and job queues."
+        tags: ["cache", "queue"]
+
+      - id: "clickhouse"
+        type: "analytics_db"
+        description: "High-speed analytics database."
+        tags: ["analytics", "db"]
+
+      - id: "meilisearch"
+        type: "search_engine"
+        description: "Fast, lightweight search engine."
+        tags: ["search"]
+
+  - name: "web3_layer"
+    description: "Wallets, contracts, nodes, and indexing."
+    tools:
+      - id: "ethers_js"
+        type: "web3_library"
+        description: "Ethereum wallet, contract, and RPC interactions."
+        tags: ["web3", "wallet", "contracts"]
+
+      - id: "web3modal"
+        type: "wallet_ui"
+        description: "Connect multiple wallets from the browser."
+        tags: ["web3", "wallet"]
+
+      - id: "hardhat"
+        type: "contract_dev"
+        description: "Smart contract development and testing framework."
+        tags: ["web3", "contracts"]
+
+      - id: "foundry"
+        type: "contract_dev"
+        description: "Fast smart contract testing and tooling."
+        tags: ["web3", "contracts"]
+
+      - id: "openzeppelin_contracts"
+        type: "contract_library"
+        description: "Audited token and governance contract templates."
+        tags: ["web3", "security"]
+
+      - id: "geth"
+        type: "node_client"
+        description: "Ethereum node implementation."
+        tags: ["node", "ethereum"]
+
+      - id: "erigon"
+        type: "node_client"
+        description: "High-performance Ethereum client."
+        tags: ["node", "ethereum"]
+
+      - id: "the_graph"
+        type: "indexer"
+        description: "Blockchain data indexing and querying."
+        tags: ["web3", "indexing"]
+
+  - name: "simulated_mining"
+    description: "Off-chain mining simulation and fairness logic."
+    tools:
+      - id: "rustcrypto_hashes"
+        type: "hashing"
+        description: "Cryptographic hash functions for mining simulation."
+        tags: ["hash", "mining"]
+
+      - id: "node_crypto"
+        type: "hashing"
+        description: "Node.js crypto module for hashing."
+        tags: ["hash", "js"]
+
+      - id: "wasm_mining_core"
+        type: "wasm_module"
+        description: "WebAssembly mining logic for browser and server."
+        tags: ["wasm", "mining"]
+
+      - id: "bullmq"
+        type: "job_queue"
+        description: "Redis-based job queue for mining tasks."
+        tags: ["queue", "jobs"]
+
+      - id: "nats"
+        type: "message_bus"
+        description: "Lightweight messaging for distributed workers."
+        tags: ["messaging", "distributed"]
+
+      - id: "zeromq"
+        type: "message_bus"
+        description: "Peer-to-peer messaging for nodes."
+        tags: ["messaging", "p2p"]
+
+      - id: "merkle_tree_lib"
+        type: "proofs"
+        description: "Merkle tree construction and proof verification."
+        tags: ["proofs", "integrity"]
+
+  - name: "onchain_bridge"
+    description: "Connects simulated mining to real blockchain rewards."
+    tools:
+      - id: "chainlink_functions"
+        type: "offchain_compute"
+        description: "Off-chain compute and data verification for on-chain logic."
+        tags: ["oracle", "bridge"]
+
+      - id: "gelato_automate"
+        type: "automation"
+        description: "Automated on-chain task execution."
+        tags: ["automation", "web3"]
+
+      - id: "commit_reveal_lib"
+        type: "fairness"
+        description: "Commit-reveal scheme for fair randomness and work proofs."
+        tags: ["fairness", "crypto"]
+
+  - name: "media_engine"
+    description: "Image, video, audio, and music generation and filters."
+    tools:
+      - id: "stable_diffusion"
+        type: "image_gen"
+        description: "Text-to-image generation."
+        tags: ["image", "generation"]
+
+      - id: "comfyui"
+        type: "image_pipeline"
+        description: "Node-based UI for Stable Diffusion workflows."
+        tags: ["image", "ui"]
+
+      - id: "controlnet"
+        type: "image_control"
+        description: "Conditioning for Stable Diffusion (pose, edges, etc.)."
+        tags: ["image", "control"]
+
+      - id: "open_sora"
+        type: "video_gen"
+        description: "Video generation from prompts."
+        tags: ["video", "generation"]
+
+      - id: "modelscope_video"
+        type: "video_gen"
+        description: "Open-source video generation models."
+        tags: ["video", "generation"]
+
+      - id: "magenta"
+        type: "music_gen"
+        description: "Music and melody generation."
+        tags: ["music", "generation"]
+
+      - id: "riffusion"
+        type: "music_gen"
+        description: "Music generation via spectrogram diffusion."
+        tags: ["music", "generation"]
+
+      - id: "openvoice"
+        type: "voice_clone"
+        description: "Voice cloning and TTS."
+        tags: ["audio", "voice"]
+
+      - id: "ffmpeg"
+        type: "media_tool"
+        description: "Media conversion, filters, and processing."
+        tags: ["audio", "video", "filters"]
+
+      - id: "opencv"
+        type: "vision"
+        description: "Image and video processing."
+        tags: ["vision", "filters"]
+
+  - name: "ai_agi_research"
+    description: "Advanced AI, AGI, and neural mapping tools."
+    tools:
+      - id: "pytorch"
+        type: "dl_framework"
+        description: "Deep learning framework."
+        tags: ["ai", "training"]
+
+      - id: "tensorflow"
+        type: "dl_framework"
+        description: "Deep learning framework."
+        tags: ["ai", "training"]
+
+      - id: "jax"
+        type: "dl_framework"
+        description: "High-performance ML and autodiff."
+        tags: ["ai", "training"]
+
+      - id: "langchain"
+        type: "llm_orchestration"
+        description: "LLM tool orchestration and agents."
+        tags: ["llm", "agents"]
+
+      - id: "llamaindex"
+        type: "data_llm"
+        description: "Connects data sources to LLMs."
+        tags: ["llm", "data"]
+
+      - id: "opencog"
+        type: "cognitive_arch"
+        description: "Cognitive architecture for AGI research."
+        tags: ["agi", "research"]
+
+      - id: "numenta_htm"
+        type: "neuro_model"
+        description: "Hierarchical Temporal Memory models."
+        tags: ["brain", "agi"]
+
+  - name: "storage_and_decentralization"
+    description: "Decentralized and local storage."
+    tools:
+      - id: "ipfs"
+        type: "decentralized_storage"
+        description: "Content-addressed decentralized storage."
+        tags: ["storage", "p2p"]
+
+      - id: "arweave"
+        type: "perma_storage"
+        description: "Permanent data storage."
+        tags: ["storage", "permanent"]
+
+      - id: "sqlite"
+        type: "embedded_db"
+        description: "Lightweight embedded database."
+        tags: ["db", "local"]
+
+      - id: "duckdb"
+        type: "analytics_db"
+        description: "In-process analytics database."
+        tags: ["analytics", "local"]
+
+  - name: "devops_infra"
+    description: "Deployment, monitoring, and orchestration."
+    tools:
+      - id: "docker"
+        type: "container"
+        description: "Containerization for services."
+        tags: ["infra", "container"]
+
+      - id: "kubernetes"
+        type: "orchestrator"
+        description: "Cluster orchestration for containers."
+        tags: ["infra", "cluster"]
+
+      - id: "prometheus"
+        type: "metrics"
+        description: "Metrics collection and alerting."
+        tags: ["monitoring"]
+
+      - id: "grafana"
+        type: "dashboard"
+        description: "Dashboards and visualization."
+        tags: ["monitoring", "ui"]
+
+      - id: "jaeger"
+        type: "tracing"
+        description: "Distributed tracing."
+        tags: ["tracing"]
+
+  - name: "ai_coding_tools"
+    description: "AI tools that help write, refactor, and understand code."
+    tools:
+      - id: "code_llm_local"
+        type: "code_llm"
+        description: "Local code-focused LLM (e.g., Code Llama, StarCoder)."
+        tags: ["code", "llm", "local"]
+
+      - id: "tabby"
+        type: "code_assistant"
+        description: "Self-hosted AI code completion server."
+        tags: ["code", "completion"]
+
+      - id: "continue"
+        type: "ide_extension"
+        description: "Open-source VS Code extension for AI pair programming."
+        tags: ["code", "ide"]
+
+      - id: "tree_sitter"
+        type: "parser"
+        description: "Incremental parsing for many programming languages."
+        tags: ["code", "analysis"]
+
+      - id: "sonarqube"
+        type: "code_quality"
+        description: "Static analysis and code quality checks."
+        tags: ["code", "quality"]
+
+      - id: "pytest"
+        type: "test_framework"
+        description: "Python testing framework."
+        tags: ["test", "python"]
+
+      - id: "vitest"
+        type: "test_framework"
+        description: "Testing framework for TypeScript/JavaScript."
+        tags: ["test", "ts", "js"]
+
+  - name: "os_base_and_virtualization"
+    description: "Secure base OS distributions and virtualization for running multiple OSes in parallel."
+    tools:
+      - id: "debian"
+        type: "os_base"
+        description: "Stable, secure Linux base distribution."
+        tags: ["linux", "server", "secure"]
+
+      - id: "ubuntu_lts"
+        type: "os_base"
+        description: "Long-term support Ubuntu for desktops and servers."
+        tags: ["linux", "desktop", "lts"]
+
+      - id: "fedora_silverblue"
+        type: "os_base"
+        description: "Immutable desktop OS for reliability and security."
+        tags: ["linux", "immutable"]
+
+      - id: "nixos"
+        type: "os_base"
+        description: "Declarative, reproducible Linux distribution."
+        tags: ["linux", "declarative"]
+
+      - id: "freebsd"
+        type: "os_base"
+        description: "Secure, robust BSD operating system."
+        tags: ["bsd", "server", "secure"]
+
+      - id: "openbsd"
+        type: "os_base"
+        description: "Security-focused BSD OS."
+        tags: ["bsd", "secure"]
+
+      - id: "qemu_kvm"
+        type: "hypervisor"
+        description: "Virtualization for running multiple OSes in parallel."
+        tags: ["virtualization", "linux"]
+
+      - id: "virtualbox"
+        type: "hypervisor"
+        description: "Cross-platform virtualization."
+        tags: ["virtualization", "crossplatform"]
+
+      - id: "utm"
+        type: "hypervisor"
+        description: "Virtualization for Apple Silicon and iOS/macOS."
+        tags: ["virtualization", "apple"]
+
+      - id: "wine"
+        type: "compat_layer"
+        description: "Run Windows apps on Linux/macOS."
+        tags: ["windows", "compatibility"]
+
+  - name: "mobile_sensors"
+    description: "Abstractions and libraries for phone sensors (motion, GPS, etc.)."
+    tools:
+      - id: "react_native_sensors"
+        type: "sensor_lib"
+        description: "Access device sensors in React Native apps."
+        tags: ["mobile", "sensors"]
+
+      - id: "expo_sensors"
+        type: "sensor_lib"
+        description: "Expo module for accelerometer, gyroscope, magnetometer."
+        tags: ["mobile", "sensors"]
+
+      - id: "android_sensor_manager"
+        type: "platform_api"
+        description: "Android SensorManager API."
+        tags: ["android", "sensors"]
+
+      - id: "core_motion"
+        type: "platform_api"
+        description: "Apple Core Motion framework."
+        tags: ["ios", "sensors"]
+
+      - id: "core_location"
+        type: "platform_api"
+        description: "Apple Core Location framework."
+        tags: ["ios", "location"]
+
+  - name: "content_and_locale"
+    description: "Audio/document type libraries, fonts, dictionaries, alphabets, emoji."
+    tools:
+      - id: "libsndfile"
+        type: "audio_library"
+        description: "Read/write many audio file formats."
+        tags: ["audio", "files"]
+
+      - id: "taglib"
+        type: "audio_metadata"
+        description: "Audio metadata (ID3, etc.)."
+        tags: ["audio", "metadata"]
+
+      - id: "poppler"
+        type: "pdf_library"
+        description: "PDF rendering and manipulation."
+        tags: ["pdf", "documents"]
+
+      - id: "pdfium"
+        type: "pdf_library"
+        description: "PDF rendering engine."
+        tags: ["pdf", "documents"]
+
+      - id: "apache_poi"
+        type: "office_library"
+        description: "Read/write MS Office documents."
+        tags: ["office", "documents"]
+
+      - id: "libreoffice_sdk"
+        type: "office_suite"
+        description: "Programmatic access to LibreOffice formats."
+        tags: ["office", "documents"]
+
+      - id: "icu"
+        type: "locale_library"
+        description: "Unicode and internationalization support."
+        tags: ["unicode", "i18n"]
+
+      - id: "cldr"
+        type: "locale_data"
+        description: "Unicode Common Locale Data Repository."
+        tags: ["unicode", "i18n"]
+
+      - id: "harfbuzz"
+        type: "text_shaping"
+        description: "Text shaping for complex scripts."
+        tags: ["fonts", "scripts"]
+
+      - id: "noto_fonts"
+        type: "font_family"
+        description: "Google Noto fonts covering most languages."
+        tags: ["fonts", "multilingual"]
+
+      - id: "twemoji"
+        type: "emoji_set"
+        description: "Twitter open-source emoji set."
+        tags: ["emoji", "graphics"]
+
+      - id: "openmoji"
+        type: "emoji_set"
+        description: "Open-source emoji library."
+        tags: ["emoji", "graphics"]
+
+      - id: "wordnet"
+        type: "lexical_db"
+        description: "English lexical database."
+        tags: ["dictionary", "nlp"]
+
+      - id: "wiktionary_dump"
+        type: "lexical_db"
+        description: "Multilingual dictionary data from Wiktionary."
+        tags: ["dictionary", "multilingual"]
