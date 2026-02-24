@@ -525,3 +525,58 @@ If you'd like open-source tools, here are some notable repos to look into:
 | Conversation Analysis | **Hugging Face Transformers** |
 | File Identification | **ExifTool** |
 | File Sharing | **IPFS** (decentralized) / **Nextcloud** (self-hosted) |
+
+---
+
+# 🔗 BLOCKCHAIN, CRYPTO & HASHING
+
+## Blockchain Development & Building
+| Repository | Description | Stars |
+|---|---|---|
+| [ethereum/go-ethereum](https://github.com/ethereum/go-ethereum) | Official Go implementation of the Ethereum protocol (Geth) | 45k+ |
+| [bitcoin/bitcoin](https://github.com/bitcoin/bitcoin) | Bitcoin Core — the reference implementation of Bitcoin | 75k+ |
+| [hyperledger/fabric](https://github.com/hyperledger/fabric) | Enterprise-grade permissioned blockchain framework | 15k+ |
+| [parity-technologies/substrate](https://github.com/paritytech/substrate) | Framework for building custom blockchains (powers Polkadot) | 8k+ |
+| [cosmos/cosmos-sdk](https://github.com/cosmos/cosmos-sdk) | Framework for building public blockchains | 5k+ |
+| [lhartikk/naivechain](https://github.com/lhartikk/naivechain) | A simple blockchain implementation in 200 lines of JS (learning) | 5k+ |
+
+## Hashing
+| Repository | Description |
+|---|---|
+| [pyca/cryptography](https://github.com/pyca/cryptography) | Python cryptographic recipes & primitives (SHA, HMAC, etc.) |
+| [RustCrypto/hashes](https://github.com/RustCrypto/hashes) | Collection of hashing algorithms in Rust (SHA-2, SHA-3, BLAKE, etc.) |
+| [jsSHA/jsSHA](https://github.com/Caligatio/jsSHA) | SHA hashing in pure JavaScript |
+| [openssl/openssl](https://github.com/openssl/openssl) | Industry-standard TLS/crypto library with all major hash algorithms |
+
+## Crypto Mining
+| Repository | Description |
+|---|---|
+| [xmrig/xmrig](https://github.com/xmrig/xmrig) | High-performance Monero (XMR) CPU/GPU miner |
+| [ethereum-mining/ethminer](https://github.com/ethereum-mining/ethminer) | Ethereum GPU miner (OpenCL/CUDA) |
+| [pooler/cpuminer](https://github.com/pooler/cpuminer) | Multi-algorithm CPU miner |
+| [nicehash/NiceHashQuickMiner](https://github.com/nicehash/NiceHashQuickMiner) | Easy-to-use mining software |
+
+## Crypto Ledger Building
+| Repository | Description |
+|---|---|
+| [bigchaindb/bigchaindb](https://github.com/bigchaindb/bigchaindb) | Blockchain database for building decentralized ledgers |
+| [tendermint/tendermint](https://github.com/tendermint/tendermint) | BFT consensus engine for building ledgers |
+| [hyperledger/iroha](https://github.com/hyperledger/iroha) | Simple distributed ledger framework |
+
+## Crypto Nodes
+| Repository | Description |
+|---|---|
+| [ethereum/go-ethereum](https://github.com/ethereum/go-ethereum) | Run your own Ethereum node |
+| [prysmaticlabs/prysm](https://github.com/prysmaticlabs/prysm) | Ethereum Beacon Chain node (consensus layer) |
+| [nicholasgasior/gox](https://github.com/nicholasgasior/gox) | Multi-chain node manager |
+| [AvalancheGo](https://github.com/ava-labs/avalanchego) | Run Avalanche nodes |
+
+## NFT Minting
+| Repository | Description |
+|---|---|
+| [HashLips/hashlips_art_engine](https://github.com/HashLips/hashlips_art_engine) | Generate generative art and mint NFTs |
+| [metaplex-foundation/metaplex](https://github.com/metaplex-foundation/metaplex) | Solana NFT minting standard & tools |
+| [ProjectOpenSea/opensea-creatures](https://github.com/ProjectOpenSea/opensea-creatures) | Example NFT smart contracts for OpenSea |
+| [thirdweb-dev/contracts](https://github.com/thirdweb-dev/contracts) | Smart contracts for NFTs, tokens, marketplaces |
+
+---
