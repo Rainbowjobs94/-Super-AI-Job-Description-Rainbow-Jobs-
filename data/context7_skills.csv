@@ -1,0 +1,288 @@
+Skill Name,Repository,GitHub URL,Installs,Trust Score,Description
+frontend-design,anthropics/skills,https://github.com/anthropics/skills,2600,8.5,UI/UX design patterns and best practices for frontend development
+vercel-react-best-practices,vercel-labs/agent-skills,https://github.com/vercel-labs/agent-skills,1300,9.6,Best practices for React apps deployed on Vercel
+skill-creator,anthropics/skills,https://github.com/anthropics/skills,1000,8.5,Tool for creating new reusable AI assistant skills
+senior-frontend,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,992,8.9,Senior-level frontend engineering patterns and practices
+pdf,anthropics/skills,https://github.com/anthropics/skills,936,8.5,PDF generation and manipulation capabilities
+webapp-testing,anthropics/skills,https://github.com/anthropics/skills,709,8.5,Web application testing strategies and patterns
+web-design-guidelines,vercel-labs/agent-skills,https://github.com/vercel-labs/agent-skills,679,9.6,Guidelines for web design and UI consistency
+mcp-builder,anthropics/skills,https://github.com/anthropics/skills,646,8.5,Model Context Protocol (MCP) server builder
+web-artifacts-builder,anthropics/skills,https://github.com/anthropics/skills,621,8.5,Build and manage web artifacts in AI workflows
+gemini-api-dev,google-gemini/gemini-skills,https://github.com/google-gemini/gemini-skills,562,8.0,Google Gemini API development patterns
+canvas-design,anthropics/skills,https://github.com/anthropics/skills,539,8.5,Canvas-based design and drawing capabilities
+docx,anthropics/skills,https://github.com/anthropics/skills,508,8.5,Word document creation and manipulation
+xlsx,anthropics/skills,https://github.com/anthropics/skills,496,8.5,Excel spreadsheet creation and manipulation
+theme-factory,anthropics/skills,https://github.com/anthropics/skills,460,8.5,Design theme generation and management
+pptx,anthropics/skills,https://github.com/anthropics/skills,448,8.5,PowerPoint presentation creation and manipulation
+doc-coauthoring,anthropics/skills,https://github.com/anthropics/skills,424,8.5,Collaborative document authoring workflows
+algorithmic-art,anthropics/skills,https://github.com/anthropics/skills,423,8.5,Generative and algorithmic art creation
+brand-guidelines,anthropics/skills,https://github.com/anthropics/skills,395,8.5,Brand identity and design guideline enforcement
+template-skill,anthropics/skills,https://github.com/anthropics/skills,386,8.5,Template for creating new skills
+internal-comms,anthropics/skills,https://github.com/anthropics/skills,374,8.5,Internal communication tools and templates
+slack-gif-creator,anthropics/skills,https://github.com/anthropics/skills,327,8.5,GIF creation for Slack communications
+senior-fullstack,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,283,8.9,Senior-level full-stack development patterns
+better-auth-best-practices,better-auth/skills,https://github.com/better-auth/skills,274,7.8,Authentication best practices using Better Auth
+senior-backend,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,271,8.9,Senior-level backend engineering patterns
+senior-architect,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,259,8.9,Senior-level software architecture patterns
+code-reviewer,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,246,8.9,Automated code review and feedback
+tailwind-design-system,wshobson/agents,https://github.com/wshobson/agents,244,9.5,Design system implementation with Tailwind CSS
+cache-components,vercel/next.js,https://github.com/vercel/next.js,236,10.0,Component caching strategies for Next.js
+agent-browser,vercel-labs/agent-browser,https://github.com/vercel-labs/agent-browser,231,9.6,Browser automation for AI agents
+nextjs-app-router-patterns,wshobson/agents,https://github.com/wshobson/agents,224,9.5,Next.js App Router patterns and best practices
+shadcn-ui,giuseppe-trisciuoglio/developer-kit,https://github.com/giuseppe-trisciuoglio/developer-kit,217,7.5,shadcn/ui component library integration
+react-best-practices,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,217,10.0,React development best practices and patterns
+react-state-management,wshobson/agents,https://github.com/wshobson/agents,159,9.5,State management patterns for React apps
+react-native-architecture,wshobson/agents,https://github.com/wshobson/agents,158,9.5,Architecture patterns for React Native apps
+vue,onmax/nuxt-skills,https://github.com/onmax/nuxt-skills,158,9.6,Vue.js development patterns and best practices
+vercel-deploy,vercel-labs/agent-skills,https://github.com/vercel-labs/agent-skills,152,9.6,Deployment workflows and best practices for Vercel
+senior-devops,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,146,8.9,Senior-level DevOps engineering practices
+update-docs,vercel/next.js,https://github.com/vercel/next.js,134,10.0,Documentation update workflows for Next.js
+typescript-advanced-types,wshobson/agents,https://github.com/wshobson/agents,128,9.5,Advanced TypeScript type patterns and utilities
+senior-architect,sickn33/antigravity-awesome-skills,https://github.com/sickn33/antigravity-awesome-skills,124,6.8,Senior-level software architecture patterns
+code-review,agno-agi/agno,https://github.com/agno-agi/agno,123,9.5,Code review automation and best practices
+remotion-best-practices,remotion-dev/skills,https://github.com/remotion-dev/skills,122,8.3,Best practices for Remotion video creation
+postgresql-table-design,wshobson/agents,https://github.com/wshobson/agents,120,9.5,PostgreSQL database table design patterns
+vercel-react-native-skills,vercel-labs/agent-skills,https://github.com/vercel-labs/agent-skills,119,9.6,React Native skills for Vercel deployments
+ui-design-system,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,119,8.9,UI design system creation and management
+supabase-nextjs,alinaqi/claude-bootstrap,https://github.com/alinaqi/claude-bootstrap,118,8.7,Supabase integration with Next.js
+architecture-patterns,wshobson/agents,https://github.com/wshobson/agents,117,9.5,Software architecture patterns and principles
+epic-react-best-practices,rubenpenap/epic-stack-agent-skills,https://github.com/rubenpenap/epic-stack-agent-skills,115,7.1,Epic Stack React best practices
+dotnet-backend-patterns,wshobson/agents,https://github.com/wshobson/agents,114,9.5,.NET backend development patterns
+create-auth-skill,better-auth/skills,https://github.com/better-auth/skills,110,7.8,Authentication skill creation with Better Auth
+claude-automation-recommender,anthropics/claude-plugins-official,https://github.com/anthropics/claude-plugins-official,110,8.5,Claude automation recommendation engine
+senior-security,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,110,8.9,Senior-level security engineering practices
+react-native-design,wshobson/agents,https://github.com/wshobson/agents,108,9.5,Design patterns for React Native applications
+vercel-composition-patterns,vercel-labs/agent-skills,https://github.com/vercel-labs/agent-skills,106,9.6,Component composition patterns for Vercel
+frontend-patterns,affaan-m/everything-claude-code,https://github.com/affaan-m/everything-claude-code,106,9.4,General frontend development patterns
+building-native-ui,expo/skills,https://github.com/expo/skills,105,10.0,Native UI component building for Expo
+fastapi-templates,wshobson/agents,https://github.com/wshobson/agents,101,9.5,FastAPI backend templates and patterns
+senior-data-engineer,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,101,8.9,Senior-level data engineering practices
+expo-tailwind-setup,expo/skills,https://github.com/expo/skills,100,10.0,Tailwind CSS setup for Expo projects
+frontend-design,anthropics/claude-code,https://github.com/anthropics/claude-code,98,8.8,UI/UX design patterns and best practices for frontend development
+react-modernization,wshobson/agents,https://github.com/wshobson/agents,96,9.5,Modernizing legacy React applications
+api-design-principles,wshobson/agents,https://github.com/wshobson/agents,91,9.5,RESTful and GraphQL API design principles
+laravel,rawveg/skillsforge-marketplace,https://github.com/rawveg/skillsforge-marketplace,91,9.0,Laravel PHP framework development patterns
+nextjs,jezweb/claude-skills,https://github.com/jezweb/claude-skills,91,9.7,Next.js framework development patterns
+rag-implementation,wshobson/agents,https://github.com/wshobson/agents,90,9.5,Retrieval-Augmented Generation (RAG) implementation
+context7,intellectronica/agent-skills,https://github.com/intellectronica/agent-skills,87,N/A,Context7 documentation lookup integration
+expo-deployment,expo/skills,https://github.com/expo/skills,87,10.0,Expo app deployment workflows
+aws-solution-architect,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,87,8.9,AWS cloud solution architecture patterns
+senior-frontend,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,86,10.0,Senior-level frontend engineering patterns and practices
+responsive-design,wshobson/agents,https://github.com/wshobson/agents,85,9.5,Responsive web design patterns and techniques
+senior-qa,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,85,10.0,Senior QA engineering practices and templates
+senior-prompt-engineer,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,83,8.9,Advanced prompt engineering techniques
+tailwind-v4-shadcn,jezweb/claude-skills,https://github.com/jezweb/claude-skills,82,9.7,Tailwind v4 with shadcn/ui integration
+Agent Development,anthropics/claude-code,https://github.com/anthropics/claude-code,81,8.8,AI agent development patterns for Claude
+auth-implementation-patterns,wshobson/agents,https://github.com/wshobson/agents,79,9.5,Authentication implementation patterns
+ui-dev,gabrielantonyxaviour/Velox,https://github.com/gabrielantonyxaviour/Velox,79,N/A,UI development patterns and components
+nuxt-ui,onmax/nuxt-skills,https://github.com/onmax/nuxt-skills,78,9.6,Nuxt UI component library integration
+context7-skills,narumiruna/context7-skills-skill,https://github.com/narumiruna/context7-skills-skill,78,8.8,Context7 skills integration
+next-best-practices,vercel-labs/next-skills,https://github.com/vercel-labs/next-skills,76,9.6,Next.js development best practices
+nextjs,NaimalArain13/Hackathon-II_The-Evolution-of-Todo,https://github.com/NaimalArain13/Hackathon-II_The-Evolution-of-Todo,76,N/A,Next.js framework development patterns
+content-creator,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,75,8.9,Content creation workflows and templates
+nodejs-backend-patterns,wshobson/agents,https://github.com/wshobson/agents,74,9.5,Node.js backend development patterns
+tanstack-query,jezweb/claude-skills,https://github.com/jezweb/claude-skills,74,9.7,TanStack Query data fetching patterns
+langchain-architecture,wshobson/agents,https://github.com/wshobson/agents,73,9.5,LangChain AI application architecture
+Bun Next.js,secondsky/claude-skills,https://github.com/secondsky/claude-skills,73,6.5,Next.js with Bun runtime integration
+premium-ui-systems,njrini99-code/helmv3,https://github.com/njrini99-code/helmv3,73,2.3,Premium UI system components
+native-data-fetching,expo/skills,https://github.com/expo/skills,73,10.0,Data fetching patterns for Expo native apps
+react-web,alinaqi/claude-bootstrap,https://github.com/alinaqi/claude-bootstrap,72,8.7,React web application development patterns
+nextjs-expert,VoTruongDanh/Sentiment,https://github.com/VoTruongDanh/Sentiment,72,N/A,Expert-level Next.js development patterns
+python-performance-optimization,wshobson/agents,https://github.com/wshobson/agents,71,9.5,Python performance optimization techniques
+react-dev,softaworks/agent-toolkit,https://github.com/softaworks/agent-toolkit,71,6.0,React development toolkit patterns
+nextjs,secondsky/claude-skills,https://github.com/secondsky/claude-skills,71,6.5,Next.js framework development patterns
+shadcn,blencorp/claude-code-kit,https://github.com/blencorp/claude-code-kit,71,7.5,shadcn/ui component integration
+mobile-ios-design,wshobson/agents,https://github.com/wshobson/agents,70,9.5,iOS mobile design patterns and guidelines
+frontend-testing,langgenius/dify,https://github.com/langgenius/dify,70,8.9,Frontend testing strategies and patterns
+stripe-integration,wshobson/agents,https://github.com/wshobson/agents,69,9.5,Stripe payment integration patterns
+nuxt-better-auth,onmax/nuxt-skills,https://github.com/onmax/nuxt-skills,69,9.6,Better Auth integration with Nuxt.js
+react:components,google-labs-code/stitch-skills,https://github.com/google-labs-code/stitch-skills,69,6.8,React component design and development
+terraform-module-library,wshobson/agents,https://github.com/wshobson/agents,68,9.5,Terraform infrastructure module library
+async-python-patterns,wshobson/agents,https://github.com/wshobson/agents,68,9.5,Asynchronous Python programming patterns
+senior-data-scientist,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,68,8.9,Senior data science practices and patterns
+upgrading-expo,expo/skills,https://github.com/expo/skills,67,10.0,Expo SDK upgrade workflows
+web-component-design,wshobson/agents,https://github.com/wshobson/agents,66,9.5,Web component design and development
+brainstorming,obra/superpowers,https://github.com/obra/superpowers,66,9.5,AI-assisted brainstorming workflows
+coding-standards,affaan-m/everything-claude-code,https://github.com/affaan-m/everything-claude-code,66,9.4,General coding standards and conventions
+use-dom,expo/skills,https://github.com/expo/skills,65,10.0,DOM manipulation patterns for Expo
+vite,antfu/skills,https://github.com/antfu/skills,65,9.9,Vite build tool configuration and patterns
+senior-qa,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,65,8.9,Senior QA engineering practices and templates
+rust-async-patterns,wshobson/agents,https://github.com/wshobson/agents,64,9.5,Asynchronous Rust programming patterns
+monorepo-management,wshobson/agents,https://github.com/wshobson/agents,64,9.5,Monorepo setup and management patterns
+nuxt,onmax/nuxt-skills,https://github.com/onmax/nuxt-skills,64,9.6,Nuxt.js framework development patterns
+ux-researcher-designer,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,64,8.9,UX research and design methodologies
+uv-package-manager,wshobson/agents,https://github.com/wshobson/agents,63,9.5,UV Python package manager patterns
+e2e-testing-patterns,wshobson/agents,https://github.com/wshobson/agents,63,9.5,End-to-end testing patterns and strategies
+Skill Development,anthropics/claude-code,https://github.com/anthropics/claude-code,63,8.8,Claude skill development patterns
+MCP Integration,anthropics/claude-code,https://github.com/anthropics/claude-code,60,8.8,MCP server integration patterns
+react-19,Gentleman-Programming/Gentleman-Skills,https://github.com/Gentleman-Programming/Gentleman-Skills,60,N/A,React 19 features and migration patterns
+Convex Best Practices,waynesutton/convexskills,https://github.com/waynesutton/convexskills,59,9.6,Convex backend best practices
+documentation-lookup,upstash/context7,https://github.com/upstash/context7,59,8.5,Documentation lookup via Context7
+gsap,martinholovsky/claude-skills-generator,https://github.com/martinholovsky/claude-skills-generator,58,7.7,GSAP animation library integration
+gemini,openclaw/openclaw,https://github.com/openclaw/openclaw,57,7.8,Google Gemini AI integration
+nextjs-15,Gentleman-Programming/Gentleman-Skills,https://github.com/Gentleman-Programming/Gentleman-Skills,57,N/A,Next.js 15 features and patterns
+epic-database,rubenpenap/epic-stack-agent-skills,https://github.com/rubenpenap/epic-stack-agent-skills,56,7.1,Epic Stack database patterns
+better-auth,mrgoonie/claudekit-skills,https://github.com/mrgoonie/claudekit-skills,56,N/A,Better Auth authentication library integration
+expo-dev-client,expo/skills,https://github.com/expo/skills,56,10.0,Expo development client setup
+senior-architect,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,56,10.0,Senior-level software architecture patterns
+react-best-practices,0xBigBoss/claude-code,https://github.com/0xBigBoss/claude-code,55,N/A,React development best practices and patterns
+expo-api-routes,expo/skills,https://github.com/expo/skills,54,10.0,Expo API routes development patterns
+better-auth,binhmuc/autobot-review,https://github.com/binhmuc/autobot-review,54,N/A,Better Auth authentication library integration
+app-store-optimization,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,54,8.9,Mobile app store optimization strategies
+mobile-android-design,wshobson/agents,https://github.com/wshobson/agents,53,9.5,Android mobile design patterns and guidelines
+tailwind-patterns,jezweb/claude-skills,https://github.com/jezweb/claude-skills,53,9.7,Tailwind CSS design patterns
+stripe-best-practices,stripe/ai,https://github.com/stripe/ai,52,9.0,Stripe payment processing best practices
+go-concurrency-patterns,wshobson/agents,https://github.com/wshobson/agents,50,9.5,Go language concurrency patterns
+better-auth,jezweb/claude-skills,https://github.com/jezweb/claude-skills,50,9.7,Better Auth authentication library integration
+TanStack Table,jezweb/claude-skills,https://github.com/jezweb/claude-skills,50,9.7,TanStack Table data grid integration
+frontend-design,dmmulroy/.dotfiles,https://github.com/dmmulroy/.dotfiles,50,10.0,UI/UX design patterns and best practices for frontend development
+vitest,antfu/skills,https://github.com/antfu/skills,50,9.9,Vitest testing framework patterns
+tdd-guide,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,50,8.9,Test-driven development guide and practices
+expo-cicd-workflows,expo/skills,https://github.com/expo/skills,49,10.0,CI/CD workflows for Expo projects
+memory-safety-patterns,wshobson/agents,https://github.com/wshobson/agents,48,9.5,Memory safety programming patterns
+react-native-components,shipshitdev/library,https://github.com/shipshitdev/library,48,N/A,React Native component library
+systematic-debugging,obra/superpowers,https://github.com/obra/superpowers,48,9.5,Systematic debugging methodologies
+instructor,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,48,10.0,Instructor library for structured LLM outputs
+artifacts-builder,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,48,10.0,Artifact generation and management
+react-testing,citypaul/dotfiles,https://github.com/citypaul/dotfiles,48,N/A,React component testing patterns
+claude-opus-4-5-migration,anthropics/claude-code,https://github.com/anthropics/claude-code,48,8.8,Migration guide to Claude Opus 4.5
+nextjs-boilerplate,petekp/claude-skills,https://github.com/petekp/claude-skills,47,N/A,Next.js project boilerplate setup
+tailwind-best-practices,mastra-ai/mastra,https://github.com/mastra-ai/mastra,47,7.5,Tailwind CSS best practices
+senior-ml-engineer,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,47,8.9,Senior ML engineering practices
+writing-plans,obra/superpowers,https://github.com/obra/superpowers,46,9.5,AI-assisted writing plan creation
+wrangler,cloudflare/skills,https://github.com/cloudflare/skills,46,8.8,Cloudflare Wrangler CLI patterns
+prisma,blencorp/claude-code-kit,https://github.com/blencorp/claude-code-kit,46,7.5,Prisma ORM integration patterns
+nextjs-patterns,ashchupliak/dream-team,https://github.com/ashchupliak/dream-team,46,5.8,Next.js development patterns
+tech-stack-evaluator,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,46,8.9,Technology stack evaluation framework
+nextjs-modal-integration,JosiahSiegel/claude-plugin-marketplace,https://github.com/JosiahSiegel/claude-plugin-marketplace,46,N/A,Next.js modal component integration
+sql-optimization-patterns,wshobson/agents,https://github.com/wshobson/agents,45,9.5,SQL query optimization patterns
+context7-docs-lookup,upstash/context7,https://github.com/upstash/context7,45,8.5,Context7 documentation lookup tool
+cloudflare-nextjs,secondsky/claude-skills,https://github.com/secondsky/claude-skills,45,6.5,Next.js deployment on Cloudflare
+tailwind-4,prowler-cloud/prowler,https://github.com/prowler-cloud/prowler,45,7.8,Tailwind CSS v4 patterns
+test-driven-development,obra/superpowers,https://github.com/obra/superpowers,45,9.5,TDD methodology and practices
+Hook Development,anthropics/claude-code,https://github.com/anthropics/claude-code,45,8.8,Claude hook development patterns
+Command Development,anthropics/claude-code,https://github.com/anthropics/claude-code,45,8.8,Claude command development patterns
+nextjs-server-components,TheBushidoCollective/han,https://github.com/TheBushidoCollective/han,45,N/A,Next.js server components patterns
+senior-computer-vision,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,44,8.9,Senior computer vision engineering
+product-manager-toolkit,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,44,8.9,Product management tools and frameworks
+cto-advisor,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,44,8.9,CTO advisory patterns and frameworks
+ceo-advisor,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,44,8.9,CEO advisory patterns and frameworks
+nextjs-app-router,TheBushidoCollective/han,https://github.com/TheBushidoCollective/han,44,N/A,Next.js App Router implementation
+ai-elements,vercel/ai-elements,https://github.com/vercel/ai-elements,43,10.0,AI UI elements for Vercel applications
+svelte-code-writer,sveltejs/mcp,https://github.com/sveltejs/mcp,43,9.6,Svelte component code generation
+motion,jezweb/claude-skills,https://github.com/jezweb/claude-skills,43,9.7,Animation and motion design patterns
+markitdown,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,43,10.0,Markdown document processing
+react-native-best-practices,callstackincubator/agent-skills,https://github.com/callstackincubator/agent-skills,43,8.7,React Native development best practices
+ai-sdk-core,jezweb/claude-skills,https://github.com/jezweb/claude-skills,42,9.7,Vercel AI SDK core integration
+Plugin Structure,anthropics/claude-code,https://github.com/anthropics/claude-code,42,8.8,Claude plugin structure patterns
+Plugin Settings,anthropics/claude-code,https://github.com/anthropics/claude-code,42,8.8,Claude plugin settings management
+tanstack-query-best-practices,DeckardGer/tanstack-agent-skills,https://github.com/DeckardGer/tanstack-agent-skills,42,N/A,TanStack Query best practices
+github-actions-templates,wshobson/agents,https://github.com/wshobson/agents,41,9.5,GitHub Actions CI/CD templates
+embedding-strategies,wshobson/agents,https://github.com/wshobson/agents,41,9.5,Vector embedding strategies for AI
+react-email,resend/react-email,https://github.com/resend/react-email,41,9.5,React Email component development
+authjs-skills,gocallum/nextjs16-agent-skills,https://github.com/gocallum/nextjs16-agent-skills,41,N/A,Auth.js authentication integration
+flutter,alinaqi/claude-bootstrap,https://github.com/alinaqi/claude-bootstrap,41,8.7,Flutter mobile app development patterns
+using-superpowers,obra/superpowers,https://github.com/obra/superpowers,40,9.5,Using obra superpowers framework
+nano-banana-prompting,nikiforovall/claude-code-rules,https://github.com/nikiforovall/claude-code-rules,40,10.0,Nano banana prompting techniques
+vani-async-client-only,itsjavi/vani,https://github.com/itsjavi/vani,40,9.3,Async client-only patterns for Vani
+SEO Optimizer,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,40,10.0,SEO optimization strategies and tools
+marketing-strategy-pmm,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,40,8.9,Product marketing management strategies
+backend-patterns,affaan-m/everything-claude-code,https://github.com/affaan-m/everything-claude-code,40,9.4,General backend development patterns
+redis-js,upstash/redis-js,https://github.com/upstash/redis-js,39,8.5,Redis JavaScript client patterns
+executing-plans,obra/superpowers,https://github.com/obra/superpowers,39,9.5,Plan execution workflows
+zustand-state-management,jezweb/claude-skills,https://github.com/jezweb/claude-skills,39,9.7,Zustand state management patterns
+shadcn-ui,existential-birds/beagle,https://github.com/existential-birds/beagle,39,N/A,shadcn/ui component library integration
+polars,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,39,10.0,Polars data processing library patterns
+web-perf,cloudflare/skills,https://github.com/cloudflare/skills,39,8.8,Web performance optimization patterns
+quality-documentation-manager,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,39,8.9,Documentation quality management
+agile-product-owner,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,39,8.9,Agile product ownership practices
+better-auth,zircote/.claude,https://github.com/zircote/.claude,38,N/A,Better Auth authentication library integration
+Writing Hookify Rules,anthropics/claude-code,https://github.com/anthropics/claude-code,38,8.8,Claude hook rule writing patterns
+ui-ux-pro-max,VoTruongDanh/Sentiment,https://github.com/VoTruongDanh/Sentiment,38,N/A,Advanced UI/UX design patterns
+better-auth,vibery-studio/templates,https://github.com/vibery-studio/templates,37,N/A,Better Auth authentication library integration
+motion,onmax/nuxt-skills,https://github.com/onmax/nuxt-skills,37,9.6,Animation and motion design patterns
+component-refactoring,langgenius/dify,https://github.com/langgenius/dify,37,8.9,Component refactoring strategies
+langchain,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,37,10.0,LangChain AI framework integration
+information-security-manager-iso27001,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,37,8.9,ISO 27001 information security management
+capa-officer,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,37,8.9,Corrective and preventive action officer
+ui-web,alinaqi/claude-bootstrap,https://github.com/alinaqi/claude-bootstrap,37,8.7,Web UI development patterns
+typescript,alinaqi/claude-bootstrap,https://github.com/alinaqi/claude-bootstrap,37,8.7,TypeScript development patterns
+nextjs-data-fetching,TheBushidoCollective/han,https://github.com/TheBushidoCollective/han,37,N/A,Next.js data fetching patterns
+nextjs-data-fetching,JosiahSiegel/claude-plugin-marketplace,https://github.com/JosiahSiegel/claude-plugin-marketplace,37,N/A,Next.js data fetching patterns
+backtesting-frameworks,wshobson/agents,https://github.com/wshobson/agents,36,9.5,Financial backtesting framework patterns
+architecture-decision-records,wshobson/agents,https://github.com/wshobson/agents,36,9.5,Architecture decision record (ADR) templates
+react-patterns,giuseppe-trisciuoglio/developer-kit,https://github.com/giuseppe-trisciuoglio/developer-kit,36,7.5,React design patterns and best practices
+playwright-testing,fcakyon/claude-codex-settings,https://github.com/fcakyon/claude-codex-settings,36,9.4,Playwright E2E testing patterns
+senior-fullstack,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,36,10.0,Senior-level full-stack development patterns
+social-media-analyzer,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,36,8.9,Social media analysis tools
+risk-management-specialist,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,36,8.9,Risk management frameworks
+data-processor,xspoonai/spoon-core,https://github.com/xspoonai/spoon-core,35,4.7,Data processing pipeline patterns
+Convex Realtime,waynesutton/convexskills,https://github.com/waynesutton/convexskills,35,9.6,Convex realtime data patterns
+Convex Functions,waynesutton/convexskills,https://github.com/waynesutton/convexskills,35,9.6,Convex serverless function patterns
+subagent-driven-development,obra/superpowers,https://github.com/obra/superpowers,35,9.5,Subagent-driven development workflows
+requesting-code-review,obra/superpowers,https://github.com/obra/superpowers,35,9.5,Code review request workflows
+ai-sdk-ui,jezweb/claude-skills,https://github.com/jezweb/claude-skills,35,9.7,Vercel AI SDK UI components
+isms-audit-expert,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,35,8.9,Information security management system auditing
+DevOps & Deployment,ArieGoldkin/ai-agent-hub,https://github.com/ArieGoldkin/ai-agent-hub,35,N/A,DevOps and deployment automation
+data-storytelling,wshobson/agents,https://github.com/wshobson/agents,34,9.5,Data visualization and storytelling
+bash-defensive-patterns,wshobson/agents,https://github.com/wshobson/agents,34,9.5,Defensive bash scripting patterns
+tailwind-v4-shadcn,secondsky/claude-skills,https://github.com/secondsky/claude-skills,34,6.5,Tailwind v4 with shadcn/ui integration
+tailwind,pproenca/dot-skills,https://github.com/pproenca/dot-skills,34,N/A,No description available
+writing-skills,obra/superpowers,https://github.com/obra/superpowers,34,9.5,Writing improvement and content creation
+tauri,martinholovsky/claude-skills-generator,https://github.com/martinholovsky/claude-skills-generator,34,7.7,Tauri desktop app development
+commit,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,34,10.0,Git commit message generation
+java-coding-standards,affaan-m/everything-claude-code,https://github.com/affaan-m/everything-claude-code,34,9.4,Java coding standards and conventions
+prompt-engineering-patterns,wshobson/agents,https://github.com/wshobson/agents,33,9.5,Advanced prompt engineering patterns
+hybrid-search-implementation,wshobson/agents,https://github.com/wshobson/agents,33,9.5,Hybrid search (vector + keyword) implementation
+vercel-react-best-practices,polarsource/polar,https://github.com/polarsource/polar,33,9.1,Best practices for React apps deployed on Vercel
+nestjs,pluginagentmarketplace/custom-plugin-nodejs,https://github.com/pluginagentmarketplace/custom-plugin-nodejs,33,N/A,NestJS backend framework patterns
+peekaboo,openclaw/openclaw,https://github.com/openclaw/openclaw,33,7.8,Peekaboo visibility patterns
+aws-cloud,jpoutrin/product-forge,https://github.com/jpoutrin/product-forge,33,N/A,AWS cloud infrastructure patterns
+gdpr-dsgvo-expert,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,33,8.9,GDPR/DSGVO compliance expertise
+claude-code-expert,zot24/skills,https://github.com/zot24/skills,32,N/A,Claude Code expert patterns
+anti-reversing-techniques,wshobson/agents,https://github.com/wshobson/agents,32,9.5,Software anti-reversing techniques
+accessibility-compliance,wshobson/agents,https://github.com/wshobson/agents,32,9.5,Web accessibility compliance patterns
+constant-time-analysis,trailofbits/skills,https://github.com/trailofbits/skills,32,9.2,Constant-time algorithm analysis
+tailwind,tartinerlabs/skills,https://github.com/tartinerlabs/skills,32,7.5,No description available
+python,siviter-xyz/dot-agent,https://github.com/siviter-xyz/dot-agent,32,N/A,Python development patterns
+dispatching-parallel-agents,obra/superpowers,https://github.com/obra/superpowers,32,9.5,Parallel agent dispatching patterns
+api-expert,martinholovsky/claude-skills-generator,https://github.com/martinholovsky/claude-skills-generator,32,7.7,API design and development expertise
+3d-visualizer,daffy0208/ai-dev-standards,https://github.com/daffy0208/ai-dev-standards,32,3.9,3D visualization development
+fda-consultant-specialist,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,32,8.9,FDA regulatory consulting expertise
+gog,openclaw/openclaw,https://github.com/openclaw/openclaw,31,7.8,GOG platform integration patterns
+using-git-worktrees,obra/superpowers,https://github.com/obra/superpowers,31,9.5,Git worktree workflow patterns
+tailwindcss-development,laravel/boost,https://github.com/laravel/boost,31,9.5,TailwindCSS development patterns for Laravel
+go,grafana/loki,https://github.com/grafana/loki,31,9.7,Go language development patterns
+auth-patterns,davepoon/claude-code-subagents-collection,https://github.com/davepoon/claude-code-subagents-collection,31,9.5,Authentication pattern collection
+agents-sdk,cloudflare/skills,https://github.com/cloudflare/skills,31,8.8,Cloudflare Agents SDK integration
+ms365-tenant-manager,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,31,8.9,Microsoft 365 tenant management
+marketing-demand-acquisition,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,31,8.9,Marketing demand acquisition strategies
+react-native,alinaqi/claude-bootstrap,https://github.com/alinaqi/claude-bootstrap,31,8.7,React Native development patterns
+android-kotlin,alinaqi/claude-bootstrap,https://github.com/alinaqi/claude-bootstrap,31,8.7,Android Kotlin development patterns
+threejs-animation,CloudAI-X/threejs-skills,https://github.com/CloudAI-X/threejs-skills,31,N/A,Three.js 3D animation patterns
+design-system-patterns,wshobson/agents,https://github.com/wshobson/agents,30,9.5,Design system architecture patterns
+tanstack-query,secondsky/claude-skills,https://github.com/secondsky/claude-skills,30,6.5,TanStack Query data fetching patterns
+openrouter,rawveg/skillsforge-marketplace,https://github.com/rawveg/skillsforge-marketplace,30,9.0,OpenRouter AI model routing
+vueuse,onmax/nuxt-skills,https://github.com/onmax/nuxt-skills,30,9.6,VueUse composables integration
+typescript,martinholovsky/claude-skills-generator,https://github.com/martinholovsky/claude-skills-generator,30,7.7,TypeScript development patterns
+fastapi,martinholovsky/claude-skills-generator,https://github.com/martinholovsky/claude-skills-generator,30,7.7,No description available
+company-product-context,lofcz/llmtornado,https://github.com/lofcz/llmtornado,30,9.5,Company and product context management
+qdrant-vector-search,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,30,10.0,Qdrant vector search integration
+devops-iac-engineer,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,30,10.0,DevOps Infrastructure as Code engineering
+app-router,davepoon/claude-code-subagents-collection,https://github.com/davepoon/claude-code-subagents-collection,30,9.5,Next.js App Router subagent patterns
+product-strategist,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,30,8.9,Product strategy frameworks
+better-auth-ts,NaimalArain13/Hackathon-II_The-Evolution-of-Todo,https://github.com/NaimalArain13/Hackathon-II_The-Evolution-of-Todo,30,N/A,Better Auth TypeScript integration
+nuxt-content,onmax/nuxt-skills,https://github.com/onmax/nuxt-skills,29,9.6,Nuxt Content module patterns
+ui-styling,mrgoonie/claudekit-skills,https://github.com/mrgoonie/claudekit-skills,29,N/A,UI styling patterns and techniques
+gh-cli,github/awesome-copilot,https://github.com/github/awesome-copilot,29,8.2,GitHub CLI automation patterns
+tailwind-v4,existential-birds/beagle,https://github.com/existential-birds/beagle,29,N/A,No description available
+vueuse-functions,antfu/skills,https://github.com/antfu/skills,29,9.9,VueUse utility functions
+senior-secops,alirezarezvani/claude-skills,https://github.com/alirezarezvani/claude-skills,29,8.9,Senior security operations practices
+database-migration,wshobson/agents,https://github.com/wshobson/agents,28,9.5,Database migration strategies
+verification-before-completion,obra/superpowers,https://github.com/obra/superpowers,28,9.5,Verification workflows before task completion
+dotnet-dependency,nikiforovall/claude-code-rules,https://github.com/nikiforovall/claude-code-rules,28,10.0,.NET dependency management patterns
+shadcn-code-review,existential-birds/beagle,https://github.com/existential-birds/beagle,28,N/A,shadcn/ui code review patterns
+senior-backend,davila7/claude-code-templates,https://github.com/davila7/claude-code-templates,28,10.0,Senior-level backend engineering patterns
+prisma-patterns,ashchupliak/dream-team,https://github.com/ashchupliak/dream-team,28,5.8,Prisma ORM design patterns
+vitepress,antfu/skills,https://github.com/antfu/skills,28,9.9,VitePress documentation site patterns
+zod-4,Gentleman-Programming/Gentleman-Skills,https://github.com/Gentleman-Programming/Gentleman-Skills,28,N/A,Zod v4 schema validation patterns
