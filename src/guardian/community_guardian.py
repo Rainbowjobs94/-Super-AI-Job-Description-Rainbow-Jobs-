@@ -129,7 +129,12 @@ class CommunityGuardian:
     def save_report(self, report, filename="latest_report.json"):
         """Save a report to the data directory."""
         DATA_DIR.mkdir(parents=True, exist_ok=True)
-        report_path = DATA_DIR / filename
+
+        # Security: Prevent path traversal by resolving the path and checking it's within DATA_DIR
+        report_path = (DATA_DIR / filename).resolve()
+        if not report_path.is_relative_to(DATA_DIR.resolve()):
+            raise ValueError(f"Invalid filename: {filename}. Path traversal detected.")
+
         with open(report_path, "w") as f:
             json.dump(report, f, indent=2)
         return str(report_path)
