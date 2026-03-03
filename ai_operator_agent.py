@@ -16,6 +16,7 @@ from datetime import datetime
 from typing import Dict, List, Optional, Any
 from enum import Enum
 from dataclasses import dataclass, field
+from src.guardian.community_guardian import PriorityLevel
 
 
 class OperationalMode(Enum):
@@ -25,14 +26,6 @@ class OperationalMode(Enum):
     NARRATIVE_DEVELOPER = "narrative_developer"
     COMMUNITY_GUARDIAN = "community_guardian"
     STANDBY = "standby"
-
-
-class PriorityLevel(Enum):
-    """Decision priority levels"""
-    CRITICAL = 1  # User safety, content integrity
-    HIGH = 2      # Engagement optimization
-    MEDIUM = 3    # Creative excellence
-    LOW = 4       # Technical performance
 
 
 class CommunicationStyle(Enum):

@@ -9,7 +9,17 @@ import json
 import os
 import zipfile
 from datetime import datetime, timezone
+from enum import Enum
 from pathlib import Path
+
+
+class PriorityLevel(Enum):
+    """Decision priority levels"""
+    CRITICAL = 1  # User safety, content integrity
+    HIGH = 2      # Engagement optimization
+    MEDIUM = 3    # Creative excellence
+    LOW = 4       # Technical performance
+
 
 CONFIG_DIR = Path(__file__).resolve().parent.parent.parent / "config"
 DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
