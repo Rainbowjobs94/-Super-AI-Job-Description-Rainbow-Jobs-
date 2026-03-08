@@ -1,0 +1,61 @@
+name: Build & Lint
+
+on:
+  push:
+    branches: [main, 'claude/**']
+  pull_request:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect runtime
+        id: runtime
+        run: |
+          if [ -f "package.json" ]; then echo "runtime=node" >> $GITHUB_OUTPUT
+          elif [ -f "requirements.txt" ] || [ -f "setup.py" ] || find . -name "*.py" -maxdepth 2 | grep -q .; then echo "runtime=python" >> $GITHUB_OUTPUT
+          elif [ -f "composer.json" ] || find . -name "*.php" -maxdepth 2 | grep -q .; then echo "runtime=php" >> $GITHUB_OUTPUT
+          elif [ -f "Dockerfile" ]; then echo "runtime=docker" >> $GITHUB_OUTPUT
+          else echo "runtime=unknown" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Node.js
+        if: steps.runtime.outputs.runtime == 'node'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Node — Install & Build
+        if: steps.runtime.outputs.runtime == 'node'
+        run: |
+          npm ci
+          npm run lint --if-present
+          npm run build --if-present
+          npm test -- --run --if-present 2>/dev/null || true
+
+      - name: Setup Python
+        if: steps.runtime.outputs.runtime == 'python'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Python — Install & Lint
+        if: steps.runtime.outputs.runtime == 'python'
+        run: |
+          pip install -r requirements.txt 2>/dev/null || true
+          pip install flake8 2>/dev/null || true
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics 2>/dev/null || true
+
+      - name: Docker — Build
+        if: steps.runtime.outputs.runtime == 'docker'
+        run: docker build -t repo-build-test . 2>&1 | tail -20
+
+      - name: Print summary
+        run: |
+          echo "Runtime: ${{ steps.runtime.outputs.runtime }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"

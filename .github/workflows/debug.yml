@@ -1,0 +1,80 @@
+name: Debug
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to debug'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+          - development
+      verbose:
+        description: 'Verbose output'
+        type: boolean
+        default: false
+
+jobs:
+  debug:
+    name: Debug Run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: System info
+        run: |
+          echo "=== System ==="
+          uname -a
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Triggered by: ${{ github.actor }}"
+          echo "Environment: ${{ inputs.environment }}"
+          echo ""
+
+      - name: Detect & print project info
+        run: |
+          echo "=== Project files ==="
+          ls -la
+          if [ -f "package.json" ]; then
+            echo "--- package.json scripts ---"
+            cat package.json | python3 -c "import sys,json; d=json.load(sys.stdin); [print(k,':',v) for k,v in d.get('scripts',{}).items()]" 2>/dev/null || cat package.json | grep '"scripts"' -A 20
+            echo ""
+            echo "--- Dependencies ---"
+            npm list --depth=0 2>/dev/null || true
+          fi
+          if [ -f "requirements.txt" ]; then
+            echo "--- Python requirements ---"
+            cat requirements.txt
+          fi
+          if [ -f "Dockerfile" ]; then
+            echo "--- Dockerfile ---"
+            cat Dockerfile
+          fi
+
+      - name: Node — Debug build
+        if: hashFiles('package.json') != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Node — Install & build (debug)
+        if: hashFiles('package.json') != ''
+        run: |
+          npm ci
+          npm run build 2>&1 || true
+          if [ -d "dist" ]; then
+            echo "=== dist/ contents ==="
+            find dist/ -name "*.js" | head -20
+            du -sh dist/
+          fi
+
+      - name: Python — Debug run
+        if: hashFiles('requirements.txt') != ''
+        run: |
+          pip install -r requirements.txt 2>/dev/null || true
+          echo "=== Python files ==="
+          find . -name "*.py" -maxdepth 3 | head -20

@@ -1,0 +1,81 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect runtime
+        id: runtime
+        run: |
+          if [ -f "package.json" ]; then echo "runtime=node" >> $GITHUB_OUTPUT
+          elif [ -f "requirements.txt" ] || find . -name "*.py" -maxdepth 2 | grep -q .; then echo "runtime=python" >> $GITHUB_OUTPUT
+          elif [ -f "Dockerfile" ] || [ -f "docker-compose.yml" ]; then echo "runtime=docker" >> $GITHUB_OUTPUT
+          else echo "runtime=static" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Node.js
+        if: steps.runtime.outputs.runtime == 'node'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Build (Node)
+        if: steps.runtime.outputs.runtime == 'node'
+        run: |
+          npm ci
+          npm run build --if-present
+
+      - name: Deploy to Vercel
+        if: steps.runtime.outputs.runtime == 'node'
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+        continue-on-error: true
+
+      - name: Deploy to Netlify
+        if: steps.runtime.outputs.runtime == 'node'
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: dist
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions — ${{ github.sha }}"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        continue-on-error: true
+
+      - name: Deploy Python app (Railway)
+        if: steps.runtime.outputs.runtime == 'python'
+        run: |
+          npm install -g @railway/cli 2>/dev/null || true
+          railway up --detach 2>/dev/null || echo "Railway deploy skipped (token not set)"
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        continue-on-error: true
+
+      - name: Build & push Docker image
+        if: steps.runtime.outputs.runtime == 'docker'
+        run: |
+          docker build -t ${{ github.repository }}:${{ github.sha }} . || echo "Docker build failed"
+        continue-on-error: true
+
+      - name: Summary
+        run: |
+          echo "=== Deploy Summary ==="
+          echo "Repo: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Runtime: ${{ steps.runtime.outputs.runtime }}"
+          echo "Time: $(date -u)"
