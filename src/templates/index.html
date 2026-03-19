@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Operator Hub</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #34495e;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .workspace {
+            display: flex;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+        .editor-container {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #ddd;
+            background-color: white;
+        }
+        .chat-container {
+            width: 300px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
+        }
+        .chat-input-area {
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input-area input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .chat-input-area button {
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+        }
+        .file-item {
+            padding: 8px 0;
+            cursor: pointer;
+            word-break: break-all;
+            color: #ecf0f1;
+        }
+        .file-item:hover {
+            color: #3498db;
+        }
+        textarea#editor {
+            flex-grow: 1;
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            font-family: monospace;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+        }
+        .editor-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-save { background-color: #2ecc71; color: white; }
+        .btn-upload { background-color: #9b59b6; color: white; width: 100%; margin-top: 20px; }
+        .upload-section { margin-top: auto; padding-top: 20px; border-top: 1px solid #455a64; }
+
+        .message { margin-bottom: 15px; padding: 10px; border-radius: 5px; }
+        .message.user { background-color: #e1f5fe; align-self: flex-end; }
+        .message.ai { background-color: #f1f8e9; align-self: flex-start; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Repository Files</h3>
+        <ul class="file-list" id="fileList">
+            <!-- Files will be loaded here -->
+        </ul>
+        <div class="upload-section">
+            <h4>Upload File</h4>
+            <input type="file" id="fileUpload" style="display: none;">
+            <input type="text" id="uploadPath" placeholder="Target path (optional)" style="width: 100%; padding: 5px; margin-bottom: 10px; box-sizing: border-box;">
+            <button class="btn-upload" onclick="document.getElementById('fileUpload').click()">Select & Upload</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h2>AI Operator Hub</h2>
+            <span id="currentFile">No file selected</span>
+        </div>
+
+        <div class="workspace">
+            <div class="editor-container">
+                <textarea id="editor" placeholder="Select a file to edit..."></textarea>
+                <div class="editor-actions">
+                    <button class="btn-save" id="saveBtn" disabled>Save File</button>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message ai">Hello! I am Physical-23, your Community Guardian AI. How can I help you manage the repository today?</div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" placeholder="Type a message...">
+                    <button id="sendBtn">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chat Functionality
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        function addMessage(text, sender) {
+            const div = document.createElement('div');
+            div.className = `message ${sender}`;
+            div.textContent = text;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            addMessage(text, 'user');
+            chatInput.value = '';
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    addMessage(data.response, 'ai');
+                } else {
+                    addMessage('Error: ' + data.message, 'ai');
+                }
+            } catch (error) {
+                addMessage('Failed to connect to AI operator.', 'ai');
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // File Management Functionality
+        const fileList = document.getElementById('fileList');
+        const editor = document.getElementById('editor');
+        const saveBtn = document.getElementById('saveBtn');
+        const currentFileSpan = document.getElementById('currentFile');
+        const fileUpload = document.getElementById('fileUpload');
+        const uploadPath = document.getElementById('uploadPath');
+        let currentPath = null;
+
+        async function loadFiles() {
+            try {
+                const response = await fetch('/api/files');
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    fileList.innerHTML = '';
+
+                    // Sort files by path for better display
+                    data.files.sort((a, b) => a.path.localeCompare(b.path));
+
+                    data.files.forEach(file => {
+                        const li = document.createElement('li');
+                        li.className = 'file-item';
+                        li.textContent = file.path;
+                        li.onclick = () => loadFileContent(file.path);
+                        fileList.appendChild(li);
+                    });
+                }
+            } catch (error) {
+                console.error('Failed to load files:', error);
+            }
+        }
+
+        async function loadFileContent(path) {
+            try {
+                const response = await fetch(`/api/files/read?path=${encodeURIComponent(path)}`);
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    currentPath = path;
+                    editor.value = data.content;
+                    currentFileSpan.textContent = path;
+                    saveBtn.disabled = false;
+                } else {
+                    alert('Error reading file: ' + data.message);
+                }
+            } catch (error) {
+                alert('Failed to load file content.');
+            }
+        }
+
+        async function saveFile() {
+            if (!currentPath) return;
+
+            saveBtn.textContent = 'Saving...';
+            saveBtn.disabled = true;
+
+            try {
+                const response = await fetch('/api/files/write', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        path: currentPath,
+                        content: editor.value
+                    })
+                });
+
+                const data = await response.json();
+                if (data.status === 'success') {
+                    alert('File saved successfully!');
+                } else {
+                    alert('Error saving file: ' + data.message);
+                }
+            } catch (error) {
+                alert('Failed to save file.');
+            } finally {
+                saveBtn.textContent = 'Save File';
+                saveBtn.disabled = false;
+            }
+        }
+
+        // Upload functionality
+        fileUpload.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const targetPath = uploadPath.value.trim() || file.name;
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('path', targetPath);
+
+            try {
+                const response = await fetch('/api/files/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                if (data.status === 'success') {
+                    alert(`Uploaded successfully to ${data.path}`);
+                    uploadPath.value = '';
+                    loadFiles(); // Refresh file list
+                } else {
+                    alert('Upload failed: ' + data.message);
+                }
+            } catch (error) {
+                alert('Upload request failed.');
+            }
+
+            // Reset input
+            fileUpload.value = '';
+        });
+
+        saveBtn.addEventListener('click', saveFile);
+
+        // Initial load
+        window.addEventListener('load', loadFiles);
+    </script>
+</body>
+</html>
