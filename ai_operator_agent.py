@@ -13,7 +13,7 @@ A comprehensive AI agent system integrating:
 import json
 import time
 from datetime import datetime
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from enum import Enum
 from dataclasses import dataclass, field
 from src.guardian.community_guardian import PriorityLevel
