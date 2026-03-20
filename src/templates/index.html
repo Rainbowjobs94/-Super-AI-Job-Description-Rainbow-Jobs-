@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Operator Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        #chat-container {
+            width: 40%;
+            border-right: 1px solid #ccc;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+        }
+        #chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ccc;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .user-message {
+            background-color: #007bff;
+            color: #fff;
+            align-self: flex-end;
+            margin-left: 20%;
+        }
+        .ai-message {
+            background-color: #e9ecef;
+            color: #000;
+            align-self: flex-start;
+            margin-right: 20%;
+        }
+        #chat-input-container {
+            display: flex;
+            padding: 10px;
+        }
+        #chat-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        #chat-send {
+            padding: 10px 15px;
+            margin-left: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #workspace-container {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+        }
+        #file-browser {
+            height: 30%;
+            border-bottom: 1px solid #ccc;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #fafafa;
+        }
+        #file-editor-container {
+            height: 70%;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+        #file-path {
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+        #file-editor {
+            flex-grow: 1;
+            padding: 10px;
+            font-family: monospace;
+            border: 1px solid #ccc;
+            resize: none;
+        }
+        #editor-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 8px 15px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .btn-primary { background-color: #007bff; color: white; }
+        .file-item {
+            cursor: pointer;
+            padding: 5px;
+        }
+        .file-item:hover {
+            background-color: #e2e2e2;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="chat-container">
+        <h3 style="text-align: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 10px;">Guardian AI Chat</h3>
+        <div id="chat-messages"></div>
+        <div id="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Type a message to AI Guardian...">
+            <button id="chat-send">Send</button>
+        </div>
+    </div>
+
+    <div id="workspace-container">
+        <div id="file-browser">
+            <h4>Files</h4>
+            <div id="file-list">Loading files...</div>
+        </div>
+        <div id="file-editor-container">
+            <input type="text" id="file-path" placeholder="Select a file or enter path to create new (e.g. src/new_file.py)">
+            <textarea id="file-editor" placeholder="File content goes here..."></textarea>
+            <div id="editor-actions">
+                <button id="save-file" class="btn btn-primary">Save File</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chat Logic
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+
+        function appendMessage(text, isUser) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
+            msgDiv.textContent = text;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            appendMessage(message, true);
+            chatInput.value = '';
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
+                const data = await response.json();
+                if (data.response) {
+                    appendMessage(data.response, false);
+                } else if (data.error) {
+                    appendMessage(`Error: ${data.error}`, false);
+                }
+            } catch (err) {
+                appendMessage(`Error: ${err.message}`, false);
+            }
+        }
+
+        chatSend.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // File Management Logic
+        const fileList = document.getElementById('file-list');
+        const filePathInput = document.getElementById('file-path');
+        const fileEditor = document.getElementById('file-editor');
+        const saveFileBtn = document.getElementById('save-file');
+
+        async function loadFileList() {
+            try {
+                const response = await fetch('/api/files');
+                const data = await response.json();
+
+                if (data.files) {
+                    fileList.innerHTML = '';
+                    data.files.forEach(file => {
+                        const div = document.createElement('div');
+                        div.className = 'file-item';
+                        div.textContent = '📄 ' + file;
+                        div.onclick = () => loadFile(file);
+                        fileList.appendChild(div);
+                    });
+                }
+            } catch (err) {
+                fileList.innerHTML = `Error loading files: ${err.message}`;
+            }
+        }
+
+        async function loadFile(path) {
+            try {
+                const response = await fetch(`/api/files/${encodeURIComponent(path)}`);
+                const data = await response.json();
+
+                if (response.ok && data.content !== undefined) {
+                    filePathInput.value = path;
+                    fileEditor.value = data.content;
+                } else {
+                    alert(`Error loading file: ${data.error || 'Unknown error'}`);
+                }
+            } catch (err) {
+                alert(`Error loading file: ${err.message}`);
+            }
+        }
+
+        async function saveFile() {
+            const path = filePathInput.value.trim();
+            const content = fileEditor.value;
+
+            if (!path) {
+                alert('Please enter a file path');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/files/${encodeURIComponent(path)}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content })
+                });
+
+                const data = await response.json();
+                if (response.ok && data.success) {
+                    alert('File saved successfully!');
+                    loadFileList(); // Refresh the list in case it's a new file
+                } else {
+                    alert(`Error saving file: ${data.error || 'Unknown error'}`);
+                }
+            } catch (err) {
+                alert(`Error saving file: ${err.message}`);
+            }
+        }
+
+        saveFileBtn.addEventListener('click', saveFile);
+
+        // Initial load
+        loadFileList();
+        appendMessage('Hello, I am Physical-23, your Community Guardian AI. How can I help you today?', false);
+    </script>
+</body>
+</html>
