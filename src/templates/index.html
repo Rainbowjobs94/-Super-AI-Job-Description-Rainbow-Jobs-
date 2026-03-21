@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Operator Agent Hub (Physical-23)</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        h1, h2, h3 { color: #333; }
+        .container { display: flex; flex-direction: row; gap: 20px; }
+        .column { flex: 1; border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
+        .chat-box { height: 300px; border: 1px solid #ccc; padding: 10px; overflow-y: scroll; margin-bottom: 10px; }
+        .chat-message { margin-bottom: 10px; }
+        .user-message { color: blue; }
+        .ai-message { color: green; }
+        textarea { width: 100%; height: 300px; font-family: monospace; }
+        button { padding: 8px 15px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        input[type="text"] { width: calc(100% - 80px); padding: 8px; }
+    </style>
+</head>
+<body>
+
+    <h1>AI Operator Agent Hub - Physical-23</h1>
+
+    <div class="container">
+        <!-- Dashboard Section -->
+        <div class="column">
+            <h2>Agent Status</h2>
+            {% if status %}
+                <p><strong>Agent ID:</strong> {{ status.agent_id }}</p>
+                <p><strong>Status:</strong> {{ status.status }}</p>
+                <p><strong>Mode:</strong> {{ status.current_mode }}</p>
+                <p><strong>Health Score:</strong> {{ status.community_health }}</p>
+            {% else %}
+                <p>Status data not available.</p>
+            {% endif %}
+
+            <h2>File Upload</h2>
+            <form id="uploadForm">
+                <input type="file" id="fileInput" name="file">
+                <button type="submit">Upload</button>
+            </form>
+            <p id="uploadResult"></p>
+        </div>
+
+        <!-- Chat Section -->
+        <div class="column">
+            <h2>Chat with Agent</h2>
+            <div class="chat-box" id="chatBox"></div>
+            <form id="chatForm">
+                <input type="text" id="chatInput" placeholder="Type a message..." required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+
+        <!-- File Management Section -->
+        <div class="column">
+            <h2>File Management</h2>
+            <select id="fileSelector">
+                <option value="">Select a file...</option>
+                {% for f in files %}
+                    <option value="{{ f }}">{{ f }}</option>
+                {% endfor %}
+            </select>
+            <button onclick="loadFile()">Load</button>
+
+            <h3 id="currentFileName"></h3>
+            <textarea id="fileEditor" placeholder="Select a file to edit its contents..."></textarea>
+            <br><br>
+            <button onclick="saveFile()">Save Changes</button>
+            <p id="saveResult"></p>
+        </div>
+    </div>
+
+    <script>
+        // Chat Interaction
+        document.getElementById('chatForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = document.getElementById('chatInput');
+            const message = input.value;
+            const chatBox = document.getElementById('chatBox');
+
+            // Safe message creation
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'chat-message';
+            const authorSpan = document.createElement('span');
+            authorSpan.className = 'user-message';
+            authorSpan.textContent = 'You: ';
+            msgDiv.appendChild(authorSpan);
+            msgDiv.appendChild(document.createTextNode(message));
+            chatBox.appendChild(msgDiv);
+
+            input.value = '';
+
+            fetch('/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: message })
+            })
+            .then(res => res.json())
+            .then(data => {
+                const responseDiv = document.createElement('div');
+                responseDiv.className = 'chat-message';
+                const aiSpan = document.createElement('span');
+                aiSpan.className = 'ai-message';
+                aiSpan.textContent = 'Agent: ';
+                responseDiv.appendChild(aiSpan);
+                responseDiv.appendChild(document.createTextNode(data.response));
+                chatBox.appendChild(responseDiv);
+
+                chatBox.scrollTop = chatBox.scrollHeight;
+            });
+        });
+
+        // File Upload
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput.files.length === 0) return;
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                const result = document.getElementById('uploadResult');
+                if (data.success) {
+                    result.style.color = 'green';
+                    result.textContent = data.success;
+                } else {
+                    result.style.color = 'red';
+                    result.textContent = data.error;
+                }
+            });
+        });
+
+        // File Loading
+        function loadFile() {
+            const filepath = document.getElementById('fileSelector').value;
+            if (!filepath) return;
+
+            fetch(`/files/${encodeURIComponent(filepath)}`)
+            .then(res => {
+                if (!res.ok) throw new Error('File not found or access denied');
+                return res.json();
+            })
+            .then(data => {
+                document.getElementById('currentFileName').textContent = `Editing: ${filepath}`;
+                document.getElementById('fileEditor').value = data.content;
+            })
+            .catch(err => alert(err.message));
+        }
+
+        // File Saving
+        function saveFile() {
+            const filepath = document.getElementById('fileSelector').value;
+            if (!filepath) return;
+
+            const content = document.getElementById('fileEditor').value;
+
+            fetch(`/files/${encodeURIComponent(filepath)}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: content })
+            })
+            .then(res => res.json())
+            .then(data => {
+                const result = document.getElementById('saveResult');
+                if (data.success) {
+                    result.style.color = 'green';
+                    result.textContent = data.success;
+                    setTimeout(() => result.textContent = '', 3000);
+                } else {
+                    result.style.color = 'red';
+                    result.textContent = data.error;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
