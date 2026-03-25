@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Operator Hub Space</title>
+    <style>
+        body { font-family: sans-serif; margin: 2rem; background-color: #f4f4f9; color: #333; }
+        h1 { color: #2c3e50; }
+        .container { display: flex; gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .panel { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); flex: 1; }
+        .chat-box { height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 1rem; margin-bottom: 1rem; border-radius: 4px; background: #fafafa; }
+        .message { margin-bottom: 0.5rem; }
+        .user-message { color: #0066cc; font-weight: bold; }
+        .ai-message { color: #e67e22; font-weight: bold; }
+        .input-group { display: flex; gap: 0.5rem; }
+        input[type="text"] { flex: 1; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 0.5rem 1rem; background-color: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #2980b9; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 0.5rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+        #file-input { margin-bottom: 1rem; }
+        .error { color: red; margin-top: 0.5rem; }
+        .success { color: green; margin-top: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Chat Panel -->
+        <div class="panel">
+            <h2>AI Operator Chat</h2>
+            <div class="chat-box" id="chat-messages">
+                <div class="message"><span class="ai-message">AI:</span> System online. How can I assist you today?</div>
+            </div>
+            <div class="input-group">
+                <input type="text" id="chat-input" placeholder="Type your message...">
+                <button id="send-btn">Send</button>
+            </div>
+        </div>
+
+        <!-- File Management Panel -->
+        <div class="panel">
+            <h2>File Management</h2>
+            <div>
+                <input type="file" id="file-input">
+                <button id="upload-btn">Upload File</button>
+                <div id="upload-status"></div>
+            </div>
+            <h3 style="margin-top: 2rem;">Uploaded Files</h3>
+            <ul id="file-list">
+                <li>Loading files...</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Safe DOM manipulation, no 'var'
+
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const fileInput = document.getElementById('file-input');
+        const uploadBtn = document.getElementById('upload-btn');
+        const uploadStatus = document.getElementById('upload-status');
+        const fileList = document.getElementById('file-list');
+
+        function appendMessage(sender, text, isUser) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message';
+
+            const senderSpan = document.createElement('span');
+            senderSpan.className = isUser ? 'user-message' : 'ai-message';
+            senderSpan.textContent = sender + ': ';
+
+            const textNode = document.createTextNode(text);
+
+            msgDiv.appendChild(senderSpan);
+            msgDiv.appendChild(textNode);
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            appendMessage('You', text, true);
+            chatInput.value = '';
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    appendMessage('AI', data.response, false);
+                } else {
+                    appendMessage('System', 'Error communicating with AI operator.', false);
+                }
+            } catch (error) {
+                console.error('Chat error:', error);
+                appendMessage('System', 'Connection error.', false);
+            }
+        }
+
+        async function uploadFile() {
+            const file = fileInput.files[0];
+            if (!file) {
+                uploadStatus.textContent = 'Please select a file first.';
+                uploadStatus.className = 'error';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                uploadStatus.textContent = 'Uploading...';
+                uploadStatus.className = '';
+
+                const response = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    uploadStatus.textContent = data.message;
+                    uploadStatus.className = 'success';
+                    fileInput.value = ''; // Clear input
+                    fetchFiles(); // Refresh list
+                } else {
+                    uploadStatus.textContent = data.error || 'Upload failed.';
+                    uploadStatus.className = 'error';
+                }
+            } catch (error) {
+                console.error('Upload error:', error);
+                uploadStatus.textContent = 'Connection error during upload.';
+                uploadStatus.className = 'error';
+            }
+        }
+
+        async function fetchFiles() {
+            try {
+                const response = await fetch('/api/files');
+                if (response.ok) {
+                    const data = await response.json();
+                    fileList.innerHTML = ''; // Clear list safely before appending
+
+                    if (data.files.length === 0) {
+                        const li = document.createElement('li');
+                        li.textContent = 'No files uploaded yet.';
+                        fileList.appendChild(li);
+                        return;
+                    }
+
+                    data.files.forEach(file => {
+                        const li = document.createElement('li');
+
+                        const nameSpan = document.createElement('span');
+                        nameSpan.textContent = file.name;
+
+                        const sizeSpan = document.createElement('span');
+                        sizeSpan.textContent = Math.round(file.size / 1024) + ' KB';
+                        sizeSpan.style.color = '#7f8c8d';
+
+                        li.appendChild(nameSpan);
+                        li.appendChild(sizeSpan);
+                        fileList.appendChild(li);
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching files:', error);
+                fileList.innerHTML = '';
+                const li = document.createElement('li');
+                li.textContent = 'Error loading files.';
+                fileList.appendChild(li);
+            }
+        }
+
+        // Event Listeners
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+        uploadBtn.addEventListener('click', uploadFile);
+
+        // Initial fetch
+        fetchFiles();
+    </script>
+</body>
+</html>
