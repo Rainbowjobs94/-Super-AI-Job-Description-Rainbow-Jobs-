@@ -27,7 +27,11 @@ DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
 
 def load_config(filename):
     """Load a JSON configuration file."""
-    config_path = CONFIG_DIR / filename
+    # Security: Prevent path traversal by resolving the path and checking it's within CONFIG_DIR
+    config_path = (CONFIG_DIR / filename).resolve()
+    if not config_path.is_relative_to(CONFIG_DIR.resolve()):
+        raise ValueError(f"Invalid filename: {filename}. Path traversal detected.")
+
     with open(config_path, "r") as f:
         return json.load(f)
 

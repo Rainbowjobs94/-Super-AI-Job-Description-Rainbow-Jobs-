@@ -151,5 +151,23 @@ class TestCommunityGuardian(unittest.TestCase):
         unknown_actions = guardian.get_platform_actions("unknown")
         self.assertEqual(unknown_actions, [])
 
+    def test_load_config_path_traversal(self):
+        """Test that load_config correctly blocks path traversal attempts."""
+        from src.guardian.community_guardian import load_config
+
+        # Test with a path that attempts to go outside CONFIG_DIR
+        traversal_filenames = [
+            "../secret.json",
+            "../../etc/passwd",
+            "/etc/passwd",
+            "config/../../secret.json"
+        ]
+
+        for filename in traversal_filenames:
+            with self.subTest(filename=filename):
+                with self.assertRaises(ValueError) as cm:
+                    load_config(filename)
+                self.assertIn("Path traversal detected", str(cm.exception))
+
 if __name__ == '__main__':
     unittest.main()
