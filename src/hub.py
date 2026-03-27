@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request, jsonify
+from werkzeug.utils import secure_filename
 from pathlib import Path
+from src.guardian.community_guardian import CommunityGuardian
 
 app = Flask(__name__)
+guardian_instance = CommunityGuardian()
 
 # Base directory is the project root
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -88,10 +91,14 @@ def upload_file():
         return jsonify({'status': 'error', 'message': 'No file part'}), 400
 
     file = request.files['file']
-    filepath = request.form.get('path', file.filename)
-
     if file.filename == '':
         return jsonify({'status': 'error', 'message': 'No selected file'}), 400
+
+    provided_path = request.form.get('path', '').strip()
+    if provided_path:
+        filepath = provided_path
+    else:
+        filepath = secure_filename(file.filename)
 
     try:
         target_path = (BASE_DIR / filepath).resolve()
@@ -111,10 +118,21 @@ def chat():
     if not data or 'message' not in data:
         return jsonify({'status': 'error', 'message': 'Missing message'}), 400
 
-    user_message = data['message']
+    user_message = data['message'].lower()
 
-    # Mock AI response for now
-    ai_response = f"I am Physical-23, the Community Guardian. I received your message: '{user_message}'"
+    if 'status' in user_message or 'health' in user_message:
+        report = guardian_instance.generate_status_report()
+        health = report['community_health']
+        ai_response = f"Community Health is currently {health['health_score']} ({health['health_status']}). We have {health['active_streams']} active streams across {', '.join(health['active_platforms'])}."
+    elif 'report' in user_message:
+        report = guardian_instance.generate_status_report()
+        saved_path = guardian_instance.save_report(report)
+        ai_response = f"I have generated and saved a new status report to {saved_path}."
+    elif 'archive' in user_message or 'build' in user_message:
+        archive_path = guardian_instance.build_repo_archive()
+        ai_response = f"I have built the AiRainbowRepo archive. You can find it at {archive_path}."
+    else:
+        ai_response = f"I am Physical-23, the Community Guardian. I can provide a 'status' update, generate a 'report', or 'build' the repo archive. I received your message: '{data['message']}'"
 
     return jsonify({
         'status': 'success',
