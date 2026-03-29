@@ -96,7 +96,8 @@ def upload_file():
 
     provided_path = request.form.get('path', '').strip()
     if provided_path:
-        filepath = provided_path
+        p = Path(provided_path)
+        filepath = str(p.parent / secure_filename(p.name)) if str(p.parent) != '.' else secure_filename(p.name)
     else:
         filepath = secure_filename(file.filename)
 
@@ -140,4 +141,4 @@ def chat():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=False, port=5000)
