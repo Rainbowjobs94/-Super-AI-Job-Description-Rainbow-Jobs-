@@ -2,9 +2,11 @@ from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 from pathlib import Path
 from src.guardian.community_guardian import CommunityGuardian
+from src.github_integration import GitHubIntegration, GitHubAPIError
 
 app = Flask(__name__)
 guardian_instance = CommunityGuardian()
+github_client = GitHubIntegration()
 
 # Base directory is the project root
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -138,6 +140,42 @@ def chat():
         'status': 'success',
         'response': ai_response
     })
+
+
+@app.route('/api/repo/tree', methods=['GET'])
+def repo_tree():
+    """List files/directories in the GitHub repository at an optional path."""
+    path = request.args.get('path', '')
+    try:
+        entries = github_client.get_repo_tree(path)
+        return jsonify({'status': 'success', 'entries': entries})
+    except GitHubAPIError as exc:
+        return jsonify({'status': 'error', 'message': str(exc)}), 502
+
+
+@app.route('/api/repo/file', methods=['GET'])
+def repo_file():
+    """Return the text content of a file in the GitHub repository."""
+    path = request.args.get('path', '')
+    if not path:
+        return jsonify({'status': 'error', 'message': 'Missing path parameter'}), 400
+    try:
+        content = github_client.get_file_content(path)
+        return jsonify({'status': 'success', 'path': path, 'content': content})
+    except GitHubAPIError as exc:
+        return jsonify({'status': 'error', 'message': str(exc)}), 502
+
+
+@app.route('/api/repo/all-files', methods=['GET'])
+def repo_all_files():
+    """Return a flat list of every file in the GitHub repository (recursive)."""
+    try:
+        tree = github_client.get_flat_tree()
+        files = [item for item in tree if item['type'] == 'blob']
+        return jsonify({'status': 'success', 'files': files})
+    except GitHubAPIError as exc:
+        return jsonify({'status': 'error', 'message': str(exc)}), 502
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
