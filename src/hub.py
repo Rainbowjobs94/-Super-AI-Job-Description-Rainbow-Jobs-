@@ -9,9 +9,18 @@ guardian_instance = CommunityGuardian()
 # Base directory is the project root
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Allowlist of safe uploadable file extensions
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'md', 'json', 'py', 'csv'}
+
+
+def allowed_file(filename: str) -> bool:
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/api/files', methods=['GET'])
 def list_files():
@@ -21,7 +30,6 @@ def list_files():
             # Skip hidden files and directories
             if any(part.startswith('.') for part in path.parts):
                 continue
-            # Skip __pycache__ and binary/build artifacts if needed
             if '__pycache__' in path.parts:
                 continue
             if path.is_file():
@@ -37,6 +45,7 @@ def list_files():
         return jsonify({'status': 'success', 'files': files})
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
+
 
 @app.route('/api/files/read', methods=['GET'])
 def read_file():
@@ -61,6 +70,7 @@ def read_file():
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
+
 @app.route('/api/files/write', methods=['POST'])
 def write_file():
     data = request.json
@@ -77,13 +87,12 @@ def write_file():
         if not target_path.is_relative_to(BASE_DIR):
             return jsonify({'status': 'error', 'message': 'Invalid file path'}), 403
 
-        # Ensure parent directories exist
         target_path.parent.mkdir(parents=True, exist_ok=True)
-
         target_path.write_text(content, encoding='utf-8')
         return jsonify({'status': 'success', 'message': 'File saved successfully'})
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
+
 
 @app.route('/api/files/upload', methods=['POST'])
 def upload_file():
@@ -93,6 +102,9 @@ def upload_file():
     file = request.files['file']
     if file.filename == '':
         return jsonify({'status': 'error', 'message': 'No selected file'}), 400
+
+    if not allowed_file(file.filename):
+        return jsonify({'status': 'error', 'message': 'File type not allowed'}), 400
 
     provided_path = request.form.get('path', '').strip()
     if provided_path:
@@ -111,6 +123,7 @@ def upload_file():
         return jsonify({'status': 'success', 'message': 'File uploaded successfully', 'path': str(target_path.relative_to(BASE_DIR))})
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
+
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
@@ -139,5 +152,6 @@ def chat():
         'response': ai_response
     })
 
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(host='127.0.0.1', port=5000, debug=False)
