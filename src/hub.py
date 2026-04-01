@@ -96,7 +96,16 @@ def upload_file():
 
     provided_path = request.form.get('path', '').strip()
     if provided_path:
-        filepath = provided_path
+        sanitized_path = provided_path
+        while '../' in sanitized_path or '..\\' in sanitized_path:
+            sanitized_path = sanitized_path.replace('../', '').replace('..\\', '')
+        sanitized_path = sanitized_path.lstrip('/\\')
+        p = Path(sanitized_path)
+        safe_filename = secure_filename(p.name)
+        if str(p.parent) != '.':
+            filepath = str(p.parent / safe_filename)
+        else:
+            filepath = safe_filename
     else:
         filepath = secure_filename(file.filename)
 
@@ -140,4 +149,4 @@ def chat():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=False, port=5000)

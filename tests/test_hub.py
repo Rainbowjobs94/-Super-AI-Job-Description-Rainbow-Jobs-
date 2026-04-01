@@ -81,5 +81,48 @@ class TestHubFiles(unittest.TestCase):
         self.assertEqual(data['status'], 'error')
         self.assertEqual(data['message'], 'Invalid file path')
 
+
+    def test_upload_file_path_traversal(self):
+        import io
+        import os
+        response = self.client.post(
+            '/api/files/upload',
+            data={
+                'file': (io.BytesIO(b"test"), 'test.txt'),
+                'path': '../../foo/bar/test.txt'
+            },
+            content_type='multipart/form-data'
+        )
+        data = json.loads(response.data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(data['status'], 'success')
+        self.assertEqual(data['path'], 'foo/bar/test.txt')
+        # Cleanup
+        from src.hub import BASE_DIR
+        import shutil
+        if (BASE_DIR / 'foo').exists():
+            shutil.rmtree(BASE_DIR / 'foo')
+
+    def test_upload_file_success(self):
+        import io
+        import os
+        response = self.client.post(
+            '/api/files/upload',
+            data={
+                'file': (io.BytesIO(b"test"), 'test.txt'),
+                'path': 'foo bar/test.txt'
+            },
+            content_type='multipart/form-data'
+        )
+        data = json.loads(response.data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(data['status'], 'success')
+        self.assertEqual(data['path'], 'foo bar/test.txt')
+        # Cleanup
+        from src.hub import BASE_DIR
+        import shutil
+        if (BASE_DIR / 'foo bar').exists():
+            shutil.rmtree(BASE_DIR / 'foo bar')
+
 if __name__ == '__main__':
     unittest.main()
