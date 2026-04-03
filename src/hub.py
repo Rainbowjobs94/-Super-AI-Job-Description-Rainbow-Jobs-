@@ -9,6 +9,8 @@ guardian_instance = CommunityGuardian()
 # Base directory is the project root
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -45,6 +47,7 @@ def read_file():
         return jsonify({'status': 'error', 'message': 'Missing path parameter'}), 400
 
     try:
+        # Resolve the path and explicitly check if it's within BASE_DIR
         target_path = (BASE_DIR / filepath).resolve()
 
         # Security check: ensure path is within BASE_DIR
@@ -71,6 +74,7 @@ def write_file():
     content = data['content']
 
     try:
+        # Resolve the path and explicitly check if it's within BASE_DIR
         target_path = (BASE_DIR / filepath).resolve()
 
         # Security check: ensure path is within BASE_DIR
@@ -96,7 +100,8 @@ def upload_file():
 
     provided_path = request.form.get('path', '').strip()
     if provided_path:
-        filepath = provided_path
+        # Apply secure_filename only to the base filename to preserve directory structure intent
+        filepath = str(Path(provided_path) / secure_filename(file.filename))
     else:
         filepath = secure_filename(file.filename)
 
@@ -140,4 +145,4 @@ def chat():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=False, port=5000)
