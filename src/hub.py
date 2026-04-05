@@ -95,10 +95,13 @@ def upload_file():
         return jsonify({'status': 'error', 'message': 'No selected file'}), 400
 
     provided_path = request.form.get('path', '').strip()
-    if provided_path:
-        filepath = provided_path
+
+    p = Path(provided_path) if provided_path else Path(file.filename)
+    safe_name = secure_filename(p.name)
+    if str(p.parent) != '.':
+        filepath = str(p.parent / safe_name)
     else:
-        filepath = secure_filename(file.filename)
+        filepath = safe_name
 
     try:
         target_path = (BASE_DIR / filepath).resolve()
