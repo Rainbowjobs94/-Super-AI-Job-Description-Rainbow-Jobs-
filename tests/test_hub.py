@@ -1,5 +1,6 @@
 import unittest
 import json
+import io
 from src.hub import app
 
 class TestHubChat(unittest.TestCase):
@@ -80,6 +81,33 @@ class TestHubFiles(unittest.TestCase):
         self.assertEqual(response.status_code, 403)
         self.assertEqual(data['status'], 'error')
         self.assertEqual(data['message'], 'Invalid file path')
+
+
+    def test_upload_file_standard(self):
+        response = self.client.post(
+            '/api/files/upload',
+            data={
+                'file': (io.BytesIO(b"test content"), 'test.txt')
+            },
+            content_type='multipart/form-data'
+        )
+        data = json.loads(response.data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(data['status'], 'success')
+
+    def test_upload_file_custom_path(self):
+        response = self.client.post(
+            '/api/files/upload',
+            data={
+                'file': (io.BytesIO(b"test content"), 'test.txt'),
+                'path': 'my folder/test file.txt'
+            },
+            content_type='multipart/form-data'
+        )
+        data = json.loads(response.data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(data['status'], 'success')
+        self.assertTrue('my folder/test_file.txt' in data['path'])
 
 if __name__ == '__main__':
     unittest.main()
