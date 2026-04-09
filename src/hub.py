@@ -96,12 +96,14 @@ def upload_file():
 
     provided_path = request.form.get('path', '').strip()
     if provided_path:
-        filepath = provided_path
+        path_obj = Path(provided_path)
+        safe_name = path_obj.name
+        target_path = (BASE_DIR / path_obj.parent / safe_name).resolve()
     else:
         filepath = secure_filename(file.filename)
+        target_path = (BASE_DIR / filepath).resolve()
 
     try:
-        target_path = (BASE_DIR / filepath).resolve()
 
         if not target_path.is_relative_to(BASE_DIR):
             return jsonify({'status': 'error', 'message': 'Invalid file path'}), 403
@@ -140,4 +142,4 @@ def chat():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=False, port=5000)

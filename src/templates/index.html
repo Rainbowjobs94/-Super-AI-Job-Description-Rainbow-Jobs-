@@ -224,7 +224,9 @@
                 const data = await response.json();
 
                 if (data.status === 'success') {
-                    fileList.innerHTML = '';
+                    while (fileList.firstChild) {
+                        fileList.removeChild(fileList.firstChild);
+                    }
 
                     // Sort files by path for better display
                     data.files.sort((a, b) => a.path.localeCompare(b.path));
