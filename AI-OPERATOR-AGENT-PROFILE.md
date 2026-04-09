@@ -192,6 +192,7 @@
 - Support vulnerable users
 - Maintain platform community standards
 - Mediate conflicts and disputes
+- Orchestrate AI Guilds (layering free to paid tools) for deep codebase debugging, auditing blockchain and crypto mining protocols, writing security patches, and database maintenance
 
 **Decision Authority**: Immediate action on safety issues; collaborative on community building
 
