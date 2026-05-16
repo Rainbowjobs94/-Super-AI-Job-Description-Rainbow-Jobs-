@@ -4,7 +4,7 @@ Community Guardian Agent (Physical-23) for multi-platform community management.
 
 ## Overview
 
-This project implements a Community Guardian agent that monitors and manages community health across multiple platforms. The agent tracks content, enforces community guidelines, and identifies trends to maintain a healthy community environment.
+This project implements a Community Guardian agent that monitors and manages community health across multiple platforms, while also acting as an AI Guild Orchestrator. The agent tracks content, enforces community guidelines, and identifies trends to maintain a healthy community environment. Additionally, it coordinates specialized AI guilds (layering free then paid tools) to collaboratively debug code repositories, audit and improve blockchain and crypto mining protocols, apply security patches, and optimize databases.
 
 ## Agent Configuration
 
