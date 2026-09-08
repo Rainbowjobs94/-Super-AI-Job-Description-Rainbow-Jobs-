@@ -35,6 +35,35 @@
             justify-content: space-between;
             align-items: center;
         }
+        .tabs {
+            display: flex;
+            gap: 4px;
+            padding: 10px 20px 0;
+            background-color: #ecf0f1;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab-btn {
+            padding: 8px 18px;
+            background-color: #bdc3c7;
+            color: #2c3e50;
+            border: none;
+            border-radius: 4px 4px 0 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .tab-btn.active {
+            background-color: white;
+            border-bottom: 2px solid white;
+            color: #2c3e50;
+        }
+        .tab-panel {
+            display: none;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+        .tab-panel.active {
+            display: flex;
+        }
         .workspace {
             display: flex;
             flex-grow: 1;
@@ -123,6 +152,70 @@
         .message { margin-bottom: 15px; padding: 10px; border-radius: 5px; }
         .message.user { background-color: #e1f5fe; align-self: flex-end; }
         .message.ai { background-color: #f1f8e9; align-self: flex-start; }
+
+        /* GitHub Repo panel */
+        .repo-panel {
+            flex-grow: 1;
+            display: flex;
+            overflow: hidden;
+        }
+        .repo-tree {
+            width: 280px;
+            background-color: #1e2a35;
+            color: #ecf0f1;
+            padding: 12px;
+            overflow-y: auto;
+            font-size: 13px;
+        }
+        .repo-tree h4 {
+            margin: 0 0 10px 0;
+            color: #3498db;
+        }
+        .repo-tree-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .repo-tree-item {
+            padding: 5px 4px;
+            cursor: pointer;
+            border-radius: 3px;
+            word-break: break-all;
+        }
+        .repo-tree-item:hover { background-color: #2c3e50; }
+        .repo-tree-item.dir { color: #f39c12; }
+        .repo-tree-item.file { color: #ecf0f1; }
+        .repo-viewer {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            overflow: hidden;
+        }
+        .repo-viewer-path {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+        }
+        textarea#repoEditor {
+            flex-grow: 1;
+            width: 100%;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 13px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+            background-color: #fdfdfd;
+        }
+        .repo-breadcrumb {
+            font-size: 12px;
+            margin-bottom: 8px;
+            color: #3498db;
+            cursor: pointer;
+        }
+        .repo-breadcrumb span:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -145,28 +238,68 @@
             <span id="currentFile">No file selected</span>
         </div>
 
-        <div class="workspace">
-            <div class="editor-container">
-                <textarea id="editor" placeholder="Select a file to edit..."></textarea>
-                <div class="editor-actions">
-                    <button class="btn-save" id="saveBtn" disabled>Save File</button>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('editor')">Local Editor</button>
+            <button class="tab-btn" onclick="switchTab('repo')">GitHub Repo</button>
+        </div>
+
+        <!-- Local Editor Tab -->
+        <div class="tab-panel active" id="tab-editor">
+            <div class="workspace">
+                <div class="editor-container">
+                    <textarea id="editor" placeholder="Select a file to edit..."></textarea>
+                    <div class="editor-actions">
+                        <button class="btn-save" id="saveBtn" disabled>Save File</button>
+                    </div>
+                </div>
+
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message ai">Hello! I am Physical-23, your Community Guardian AI. How can I help you manage the repository today?</div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chatInput" placeholder="Type a message...">
+                        <button id="sendBtn">Send</button>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="chat-container">
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message ai">Hello! I am Physical-23, your Community Guardian AI. How can I help you manage the repository today?</div>
+        <!-- GitHub Repo Tab -->
+        <div class="tab-panel" id="tab-repo">
+            <div class="repo-panel">
+                <div class="repo-tree">
+                    <h4>📄 Open Source Code</h4>
+                    <div class="repo-breadcrumb" id="repoBreadcrumb">
+                    <span onclick="loadRepoTree('')">🏠 root</span>
+                    </div>
+                    <ul class="repo-tree-list" id="repoTreeList">
+                        <li style="color:#7f8c8d; padding:5px 0;">Loading…</li>
+                    </ul>
                 </div>
-                <div class="chat-input-area">
-                    <input type="text" id="chatInput" placeholder="Type a message...">
-                    <button id="sendBtn">Send</button>
+                <div class="repo-viewer">
+                    <div class="repo-viewer-path" id="repoViewerPath">Select a file to view its source code.</div>
+                    <textarea id="repoEditor" readonly placeholder="File content will appear here…"></textarea>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Chat Functionality
+        // ── Tab Switching ──────────────────────────────────────────────────────
+        function switchTab(name) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + name).classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                if (b.textContent.toLowerCase().includes(name === 'editor' ? 'local' : 'github')) {
+                    b.classList.add('active');
+                }
+            });
+            if (name === 'repo') loadRepoTree('');
+        }
+
+        // ── Chat Functionality ─────────────────────────────────────────────────
         const chatMessages = document.getElementById('chatMessages');
         const chatInput = document.getElementById('chatInput');
         const sendBtn = document.getElementById('sendBtn');
@@ -209,7 +342,7 @@
             if (e.key === 'Enter') sendMessage();
         });
 
-        // File Management Functionality
+        // ── Local File Management ──────────────────────────────────────────────
         const fileList = document.getElementById('fileList');
         const editor = document.getElementById('editor');
         const saveBtn = document.getElementById('saveBtn');
@@ -324,7 +457,108 @@
 
         saveBtn.addEventListener('click', saveFile);
 
-        // Initial load
+        // ── GitHub Repo Browser ────────────────────────────────────────────────
+        const repoTreeList = document.getElementById('repoTreeList');
+        const repoEditor = document.getElementById('repoEditor');
+        const repoViewerPath = document.getElementById('repoViewerPath');
+        const repoBreadcrumb = document.getElementById('repoBreadcrumb');
+        let repoPathStack = [];
+
+        async function loadRepoTree(path) {
+            repoTreeList.innerHTML = '<li style="color:#7f8c8d; padding:5px 0;">Loading…</li>';
+
+            try {
+                const response = await fetch(`/api/repo/tree?path=${encodeURIComponent(path)}`);
+                const data = await response.json();
+
+                if (data.status !== 'success') {
+                    repoTreeList.innerHTML = `<li style="color:#e74c3c; padding:5px 0;">Error: ${data.message}</li>`;
+                    return;
+                }
+
+                repoTreeList.innerHTML = '';
+
+                // Back navigation
+                if (path) {
+                    const backLi = document.createElement('li');
+                    backLi.className = 'repo-tree-item dir';
+                    backLi.textContent = '← ..';
+                    const parentPath = path.includes('/')
+                        ? path.substring(0, path.lastIndexOf('/'))
+                        : '';
+                    backLi.onclick = () => loadRepoTree(parentPath);
+                    repoTreeList.appendChild(backLi);
+                }
+
+                // Sort: dirs first, then files
+                const sorted = [...data.entries].sort((a, b) => {
+                    if (a.type !== b.type) return a.type === 'dir' ? -1 : 1;
+                    return a.name.localeCompare(b.name);
+                });
+
+                sorted.forEach(entry => {
+                    const li = document.createElement('li');
+                    li.className = `repo-tree-item ${entry.type}`;
+                    li.textContent = (entry.type === 'dir' ? '📁 ' : '📄 ') + entry.name;
+                    if (entry.type === 'dir') {
+                        li.onclick = () => loadRepoTree(entry.path);
+                    } else {
+                        li.onclick = () => loadRepoFile(entry.path);
+                    }
+                    repoTreeList.appendChild(li);
+                });
+
+                // Update breadcrumb
+                updateBreadcrumb(path);
+
+            } catch (error) {
+                repoTreeList.innerHTML = '<li style="color:#e74c3c; padding:5px 0;">Failed to connect to GitHub API.</li>';
+            }
+        }
+
+        async function loadRepoFile(path) {
+            repoViewerPath.textContent = `Loading ${path}…`;
+            repoEditor.value = '';
+
+            try {
+                const response = await fetch(`/api/repo/file?path=${encodeURIComponent(path)}`);
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    repoEditor.value = data.content;
+                    repoViewerPath.textContent = path;
+                } else {
+                    repoViewerPath.textContent = `Error: ${data.message}`;
+                }
+            } catch (error) {
+                repoViewerPath.textContent = 'Failed to load file.';
+            }
+        }
+
+        function updateBreadcrumb(path) {
+            repoBreadcrumb.innerHTML = '';
+            const rootSpan = document.createElement('span');
+            rootSpan.textContent = '🏠 root';
+            rootSpan.onclick = () => loadRepoTree('');
+            repoBreadcrumb.appendChild(rootSpan);
+
+            if (path) {
+                const parts = path.split('/');
+                let accumulated = '';
+                parts.forEach((part, i) => {
+                    accumulated += (i > 0 ? '/' : '') + part;
+                    const sep = document.createTextNode(' / ');
+                    repoBreadcrumb.appendChild(sep);
+                    const span = document.createElement('span');
+                    span.textContent = part;
+                    const capPath = accumulated;
+                    span.onclick = () => loadRepoTree(capPath);
+                    repoBreadcrumb.appendChild(span);
+                });
+            }
+        }
+
+        // ── Initial load ───────────────────────────────────────────────────────
         window.addEventListener('load', loadFiles);
     </script>
 </body>
