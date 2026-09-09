@@ -146,7 +146,6 @@ class Physical23Agent:
         # Initialize monitoring systems
         print("Activating monitoring systems...")
         self._initialize_stream_monitoring()
-        self._initialize_engagement_tracking()
         activation_report['systems_initialized'].append('monitoring_systems')
 
         # Start learning systems
@@ -622,11 +621,6 @@ class Physical23Agent:
     def _initialize_stream_monitoring(self) -> None:
         """Initialize stream monitoring systems"""
         print("   Stream monitoring active")
-
-
-    def _initialize_engagement_tracking(self) -> None:
-        """Initialize engagement tracking"""
-        print("   Engagement tracking active")
 
 
     def _initialize_learning_systems(self) -> None:
