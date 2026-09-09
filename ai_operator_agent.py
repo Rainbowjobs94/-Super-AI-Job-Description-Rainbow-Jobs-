@@ -16,7 +16,7 @@ from datetime import datetime
 from typing import Dict, List, Any
 from enum import Enum
 from dataclasses import dataclass, field
-from src.guardian.community_guardian import PriorityLevel
+from src.guardian.community_guardian import PriorityLevel, load_platform_config
 
 
 class OperationalMode(Enum):
@@ -94,12 +94,10 @@ class Physical23Agent:
         self.communication_style = CommunicationStyle.PROFESSIONAL
 
         # Platform connections
+        self.platform_config = self._load_platform_config()
         self.connected_platforms = {
-            'twitch': False,
-            'facebook': False,
-            'instagram': False,
-            'youtube': False,
-            'ltf': False
+            p: False for p, cfg in self.platform_config.items()
+            if cfg.get('enabled', False)
         }
 
         # Data stores
@@ -598,6 +596,23 @@ class Physical23Agent:
 
 
     # ==================== HELPER METHODS ====================
+
+    def _load_platform_config(self) -> Dict[str, Any]:
+        """Load platform configuration from file"""
+        try:
+            config = load_platform_config()
+            return config.get("platforms", {})
+        except Exception as e:
+            print(f"   Warning: Could not load platform configuration file: {e}")
+            # Fallback to hardcoded configuration
+            return {
+                "twitch": {"enabled": True},
+                "facebook": {"enabled": True},
+                "instagram": {"enabled": True},
+                "youtube": {"enabled": True},
+                "ltf": {"enabled": True}
+            }
+
 
     def _connect_platform(self, platform: str) -> bool:
         """Simulate platform connection"""
