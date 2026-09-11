@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import patch
+from datetime import datetime, timezone
 from src.guardian.community_guardian import CommunityGuardian
 
 class TestCommunityGuardian(unittest.TestCase):
@@ -150,6 +151,68 @@ class TestCommunityGuardian(unittest.TestCase):
 
         unknown_actions = guardian.get_platform_actions("unknown")
         self.assertEqual(unknown_actions, [])
+
+    @patch('src.guardian.community_guardian.load_agent_config')
+    @patch('src.guardian.community_guardian.load_platform_config')
+    @patch('src.guardian.community_guardian.load_community_rules')
+    @patch('src.guardian.community_guardian.datetime')
+    def test_check_community_health(self, mock_datetime, mock_rules, mock_platforms, mock_agent):
+        mock_agent.return_value = self.mock_agent_config
+        mock_platforms.return_value = self.mock_platform_config
+        mock_rules.return_value = self.mock_community_rules
+
+        fixed_now = datetime(2026, 2, 19, 12, 0, 0, tzinfo=timezone.utc)
+        mock_datetime.now.return_value = fixed_now
+
+        guardian = CommunityGuardian()
+        health_report = guardian.check_community_health()
+
+        self.assertEqual(health_report["agent_id"], "Test-Agent")
+        self.assertEqual(health_report["timestamp"], fixed_now.isoformat())
+        self.assertEqual(health_report["health_score"], 0.75)
+        self.assertEqual(health_report["health_status"], "healthy")
+        self.assertEqual(health_report["active_platforms"], ["twitch", "instagram"])
+        self.assertEqual(health_report["active_streams"], 1)
+        self.assertEqual(health_report["content_library_size"], 10)
+        self.assertEqual(health_report["narrative_elements"], 5)
+        self.assertEqual(health_report["identified_trends"], 2)
+
+    @patch('src.guardian.community_guardian.load_agent_config')
+    @patch('src.guardian.community_guardian.load_platform_config')
+    @patch('src.guardian.community_guardian.load_community_rules')
+    @patch('src.guardian.community_guardian.datetime')
+    def test_generate_status_report(self, mock_datetime, mock_rules, mock_platforms, mock_agent):
+        mock_agent.return_value = self.mock_agent_config
+        mock_platforms.return_value = self.mock_platform_config
+        mock_rules.return_value = self.mock_community_rules
+
+        fixed_now = datetime(2026, 2, 19, 12, 0, 0, tzinfo=timezone.utc)
+        mock_datetime.now.return_value = fixed_now
+
+        guardian = CommunityGuardian()
+        report = guardian.generate_status_report()
+
+        self.assertEqual(report["report_type"], "community_guardian_status")
+        self.assertEqual(report["generated_at"], fixed_now.isoformat())
+
+        # Check agent nested dictionary
+        self.assertEqual(report["agent"]["id"], "Test-Agent")
+        self.assertEqual(report["agent"]["version"], "1.0")
+        self.assertEqual(report["agent"]["mode"], "community_guardian")
+        self.assertEqual(report["agent"]["status"], "active")
+
+        # Check community_health nested dictionary (already tested via test_check_community_health)
+        self.assertEqual(report["community_health"]["agent_id"], "Test-Agent")
+
+        # Check platform_details
+        self.assertIn("twitch", report["platform_details"])
+        self.assertIn("instagram", report["platform_details"])
+        self.assertNotIn("facebook", report["platform_details"])
+        self.assertEqual(report["platform_details"]["twitch"]["actions"], ["action1", "action2"])
+
+        # Check rules count
+        self.assertEqual(report["rules_count"], 3)
+        self.assertEqual(report["critical_rules"], 2)
 
     def test_load_config_path_traversal(self):
         """Test that load_config correctly blocks path traversal attempts."""
