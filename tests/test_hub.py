@@ -46,6 +46,22 @@ class TestHubFiles(unittest.TestCase):
         file_paths = [f['path'] for f in data['files']]
         self.assertIn('src/hub.py', file_paths)
 
+
+    def test_upload_file_path_sanitization(self):
+        import io
+        response = self.client.post(
+            '/api/files/upload',
+            data={
+                'file': (io.BytesIO(b"test content"), "test file!.txt"),
+                'path': 'some folder/test file!.txt'
+            },
+            content_type='multipart/form-data'
+        )
+        data = json.loads(response.data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(data['status'], 'success')
+        self.assertEqual(data['path'], 'some folder/test_file.txt')
+
     def test_read_file_success(self):
         response = self.client.get('/api/files/read?path=src/hub.py')
         data = json.loads(response.data)
