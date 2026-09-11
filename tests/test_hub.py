@@ -81,5 +81,22 @@ class TestHubFiles(unittest.TestCase):
         self.assertEqual(data['status'], 'error')
         self.assertEqual(data['message'], 'Invalid file path')
 
+
+    def test_upload_file_path_sanitization(self):
+        import io
+        data = {
+            'file': (io.BytesIO(b"test upload content"), 'test.txt'),
+            'path': '../../upload_dir/nested/../../../'
+        }
+        response = self.client.post(
+            '/api/files/upload',
+            data=data,
+            content_type='multipart/form-data'
+        )
+        data_json = json.loads(response.data)
+        self.assertEqual(response.status_code, 403)
+        self.assertEqual(data_json['status'], 'error')
+        self.assertEqual(data_json['message'], 'Invalid file path')
+
 if __name__ == '__main__':
     unittest.main()
