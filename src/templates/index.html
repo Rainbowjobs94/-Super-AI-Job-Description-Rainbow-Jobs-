@@ -249,6 +249,8 @@
                 <div class="editor-container">
                     <textarea id="editor" placeholder="Select a file to edit..."></textarea>
                     <div class="editor-actions">
+                        <button class="btn-save" style="background-color: #27ae60;" onclick="buildArchive()">Build Archive</button>
+                        <button class="btn-save" style="background-color: #e74c3c;" id="fixBtn" disabled>Fix File</button>
                         <button class="btn-save" id="saveBtn" disabled>Save File</button>
                     </div>
                 </div>
@@ -300,6 +302,20 @@
         }
 
         // ── Chat Functionality ─────────────────────────────────────────────────
+        async function buildArchive() {
+            chatInput.value = 'build archive';
+            await sendMessage();
+        }
+
+        const fixBtn = document.getElementById('fixBtn');
+        if (fixBtn) {
+            fixBtn.addEventListener('click', async () => {
+                if (!currentPath) return;
+                chatInput.value = 'Please fix ' + currentPath;
+                await sendMessage();
+            });
+        }
+
         const chatMessages = document.getElementById('chatMessages');
         const chatInput = document.getElementById('chatInput');
         const sendBtn = document.getElementById('sendBtn');
@@ -385,6 +401,7 @@
                     editor.value = data.content;
                     currentFileSpan.textContent = path;
                     saveBtn.disabled = false;
+                    if (fixBtn) fixBtn.disabled = false;
                 } else {
                     alert('Error reading file: ' + data.message);
                 }

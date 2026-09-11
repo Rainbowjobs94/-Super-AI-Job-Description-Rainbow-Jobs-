@@ -11,84 +11,101 @@ github_client = GitHubIntegration()
 # Base directory is the project root
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Allowed file extensions for write/upload operations
+ALLOWED_EXTENSIONS = {'txt', 'json', 'md', 'py', 'html', 'js', 'css', 'yml', 'yaml', 'sol', 'csv', 'png', 'jpg', 'jpeg', 'gif'}
+
+
+def allowed_file(filename: str) -> bool:
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def _get_safe_path(filepath: str) -> Path:
+    """Validate and resolve file path within BASE_DIR to prevent path traversal."""
+    filepath = filepath.lstrip('/\\')
+    path_obj = Path(filepath)
+    if path_obj.is_absolute():
+        try:
+            path_obj = path_obj.relative_to(path_obj.anchor)
+        except ValueError:
+            raise ValueError('Invalid file path')
+
+    target_path = (BASE_DIR / path_obj).resolve()
+    if not target_path.is_relative_to(BASE_DIR):
+        raise ValueError('Invalid file path')
+    return target_path
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
 @app.route('/api/files', methods=['GET'])
 def list_files():
+    """List files in the project workspace."""
+    files = []
     try:
-        files = []
-        for path in BASE_DIR.rglob('*'):
-            # Skip hidden files and directories
-            if any(part.startswith('.') for part in path.parts):
-                continue
-            # Skip __pycache__ and binary/build artifacts if needed
-            if '__pycache__' in path.parts:
-                continue
-            if path.is_file():
-                try:
-                    rel_path = path.relative_to(BASE_DIR)
-                    files.append({
-                        'name': path.name,
-                        'path': str(rel_path),
-                        'type': 'file'
-                    })
-                except ValueError:
-                    pass
+        for p in BASE_DIR.rglob('*'):
+            if p.is_file() and not any(part.startswith('.') or part in ['venv', '__pycache__'] for part in p.parts):
+                rel_path = p.relative_to(BASE_DIR)
+                files.append({
+                    'name': p.name,
+                    'path': str(rel_path),
+                    'type': 'file'
+                })
         return jsonify({'status': 'success', 'files': files})
-    except Exception as e:
+    except OSError as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
+
 
 @app.route('/api/files/read', methods=['GET'])
 def read_file():
-    filepath = request.args.get('path')
+    """Read content of a specified file."""
+    filepath = request.args.get('path', '')
     if not filepath:
         return jsonify({'status': 'error', 'message': 'Missing path parameter'}), 400
 
     try:
-        target_path = (BASE_DIR / filepath).resolve()
-
-        # Security check: ensure path is within BASE_DIR
-        if not target_path.is_relative_to(BASE_DIR):
-            return jsonify({'status': 'error', 'message': 'Invalid file path'}), 403
-
-        if not target_path.exists() or not target_path.is_file():
+        target_path = _get_safe_path(filepath)
+        if not target_path.exists():
             return jsonify({'status': 'error', 'message': 'File not found'}), 404
 
-        content = target_path.read_text(encoding='utf-8')
+        with open(target_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+
         return jsonify({'status': 'success', 'content': content})
-    except UnicodeDecodeError:
-        return jsonify({'status': 'error', 'message': 'File is not a text file'}), 400
-    except Exception as e:
+    except ValueError as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 403
+    except OSError as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
+
 
 @app.route('/api/files/write', methods=['POST'])
 def write_file():
-    data = request.json
+    """Write content to a specified file."""
+    data = request.get_json()
     if not data or 'path' not in data or 'content' not in data:
         return jsonify({'status': 'error', 'message': 'Missing path or content'}), 400
 
-    filepath = data['path']
-    content = data['content']
-
     try:
-        target_path = (BASE_DIR / filepath).resolve()
+        target_path = _get_safe_path(data['path'])
+        if not allowed_file(target_path.name):
+            return jsonify({'status': 'error', 'message': 'File type not allowed'}), 400
 
-        # Security check: ensure path is within BASE_DIR
-        if not target_path.is_relative_to(BASE_DIR):
-            return jsonify({'status': 'error', 'message': 'Invalid file path'}), 403
-
-        # Ensure parent directories exist
         target_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(target_path, 'w', encoding='utf-8') as f:
+            f.write(data['content'])
 
-        target_path.write_text(content, encoding='utf-8')
         return jsonify({'status': 'success', 'message': 'File saved successfully'})
-    except Exception as e:
+    except ValueError as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 403
+    except OSError as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
+
 
 @app.route('/api/files/upload', methods=['POST'])
 def upload_file():
+    """Handle file upload and save to workspace."""
     if 'file' not in request.files:
         return jsonify({'status': 'error', 'message': 'No file part'}), 400
 
@@ -103,34 +120,34 @@ def upload_file():
         filepath = secure_filename(file.filename)
 
     try:
-        target_path = (BASE_DIR / filepath).resolve()
-
-        if not target_path.is_relative_to(BASE_DIR):
-            return jsonify({'status': 'error', 'message': 'Invalid file path'}), 403
+        target_path = _get_safe_path(filepath)
+        if not allowed_file(target_path.name):
+            return jsonify({'status': 'error', 'message': 'File type not allowed'}), 400
 
         target_path.parent.mkdir(parents=True, exist_ok=True)
-        file.save(str(target_path))
-        return jsonify({'status': 'success', 'message': 'File uploaded successfully', 'path': str(target_path.relative_to(BASE_DIR))})
-    except Exception as e:
+        file.save(target_path)
+        return jsonify({'status': 'success', 'path': str(target_path.relative_to(BASE_DIR))})
+    except ValueError as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 403
+    except OSError as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
+
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
-    data = request.json
+    """Simple chat endpoint interacting with Physical-23 Community Guardian."""
+    data = request.get_json()
     if not data or 'message' not in data:
         return jsonify({'status': 'error', 'message': 'Missing message'}), 400
 
-    user_message = data['message'].lower()
-
-    if 'status' in user_message or 'health' in user_message:
+    user_msg = data['message'].lower()
+    if 'status' in user_msg or 'health' in user_msg:
         report = guardian_instance.generate_status_report()
-        health = report['community_health']
-        ai_response = f"Community Health is currently {health['health_score']} ({health['health_status']}). We have {health['active_streams']} active streams across {', '.join(health['active_platforms'])}."
-    elif 'report' in user_message:
-        report = guardian_instance.generate_status_report()
-        saved_path = guardian_instance.save_report(report)
-        ai_response = f"I have generated and saved a new status report to {saved_path}."
-    elif 'archive' in user_message or 'build' in user_message:
+        ai_response = f"Community Guardian Status: Mode={report['agent']['mode']}, Health Score={report['community_health']['score']} ({report['community_health']['status']}). Active Platforms: {', '.join(report['platform_details']['active_platforms'])}"
+    elif 'report' in user_msg:
+        report_path = guardian_instance.save_report()
+        ai_response = f"Generated new community status report at: {report_path}"
+    elif 'build' in user_msg or 'archive' in user_msg:
         archive_path = guardian_instance.build_repo_archive()
         ai_response = f"I have built the AiRainbowRepo archive. You can find it at {archive_path}."
     else:
@@ -178,4 +195,4 @@ def repo_all_files():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=False, port=5000)
