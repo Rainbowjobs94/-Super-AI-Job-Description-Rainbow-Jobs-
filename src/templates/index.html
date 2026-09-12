@@ -229,6 +229,7 @@
             <input type="file" id="fileUpload" style="display: none;">
             <input type="text" id="uploadPath" placeholder="Target path (optional)" style="width: 100%; padding: 5px; margin-bottom: 10px; box-sizing: border-box;">
             <button class="btn-upload" onclick="document.getElementById('fileUpload').click()">Select & Upload</button>
+            <button class="btn-upload" style="background-color: #f39c12; margin-top: 10px;" onclick="buildArchive()">Build Archive</button>
         </div>
     </div>
 
@@ -249,6 +250,7 @@
                 <div class="editor-container">
                     <textarea id="editor" placeholder="Select a file to edit..."></textarea>
                     <div class="editor-actions">
+                            <button class="btn-save" style="background-color: #e74c3c;" id="fixBtn" disabled>Fix File</button>
                         <button class="btn-save" id="saveBtn" disabled>Save File</button>
                     </div>
                 </div>
@@ -286,6 +288,20 @@
     </div>
 
     <script>
+        async function buildArchive() {
+            chatInput.value = 'build archive';
+            await sendMessage();
+        }
+
+        const fixBtn = document.getElementById('fixBtn');
+        if (fixBtn) {
+            fixBtn.addEventListener('click', async () => {
+                if (!currentPath) return;
+                chatInput.value = 'Please fix ' + currentPath;
+                await sendMessage();
+            });
+        }
+
         // ── Tab Switching ──────────────────────────────────────────────────────
         function switchTab(name) {
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -357,7 +373,7 @@
                 const data = await response.json();
 
                 if (data.status === 'success') {
-                    fileList.innerHTML = '';
+                    while (fileList.firstChild) { fileList.removeChild(fileList.firstChild); }
 
                     // Sort files by path for better display
                     data.files.sort((a, b) => a.path.localeCompare(b.path));
@@ -385,6 +401,7 @@
                     editor.value = data.content;
                     currentFileSpan.textContent = path;
                     saveBtn.disabled = false;
+                    document.getElementById('fixBtn').disabled = false;
                 } else {
                     alert('Error reading file: ' + data.message);
                 }
