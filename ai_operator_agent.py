@@ -83,6 +83,9 @@ class Physical23Agent:
     and community engagement capabilities.
     """
 
+    # Moderation parameters
+    HARMFUL_KEYWORDS = ['spam', 'hate', 'abuse']
+
     def __init__(self, agent_id: str = "Physical-23"):
         self.agent_id = agent_id
         self.version = "1.0"
@@ -263,14 +266,13 @@ class Physical23Agent:
         }
 
         # Basic content checks (in production, use ML models)
-        harmful_keywords = ['spam', 'hate', 'abuse']
         comment_lower = comment.lower()
 
-        for keyword in harmful_keywords:
-            if keyword in comment_lower:
-                moderation_result['action'] = 'flag'
-                moderation_result['flags'].append(keyword)
-                moderation_result['confidence'] = 0.85
+        flags = [k for k in self.HARMFUL_KEYWORDS if k in comment_lower]
+        if flags:
+            moderation_result['action'] = 'flag'
+            moderation_result['flags'] = flags
+            moderation_result['confidence'] = 0.85
 
         if moderation_result['action'] == 'flag':
             print(f"Content flagged in {stream_id}: {moderation_result['flags']}")
