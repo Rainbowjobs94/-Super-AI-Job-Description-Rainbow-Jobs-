@@ -109,7 +109,6 @@ class Physical23Agent:
         self.community_health_score: float = 0.75
 
         # Learning systems
-        self.performance_history: List[Dict[str, Any]] = []
         self.trend_database: List[Dict[str, Any]] = []
 
         print(f"[{self.agent_id}] Agent initialized at {self.initialization_time}")
@@ -535,18 +534,6 @@ class Physical23Agent:
 
     # ==================== LEARNING & ADAPTATION ====================
 
-    def record_performance_data(self, event_type: str, data: Dict[str, Any]) -> None:
-        """Record performance data for learning"""
-        performance_record = {
-            'timestamp': datetime.now().isoformat(),
-            'event_type': event_type,
-            'data': data,
-            'mode': self.current_mode.value
-        }
-
-        self.performance_history.append(performance_record)
-
-
     def identify_trends(self) -> List[Dict[str, Any]]:
         """Identify emerging trends from data"""
         print("\nIdentifying trends...")
@@ -664,7 +651,6 @@ class Physical23Agent:
             'content_library_size': len(self.content_library),
             'narrative_elements': len(self.narrative_elements),
             'community_health': self.community_health_score,
-            'performance_records': len(self.performance_history),
             'identified_trends': len(self.trend_database)
         }
 
@@ -690,7 +676,6 @@ class Physical23Agent:
         print(f"  Content Library: {report['content_library_size']} items")
         print(f"  Narrative Elements: {report['narrative_elements']}")
         print(f"  Community Health: {report['community_health']:.0%}")
-        print(f"  Performance Records: {report['performance_records']}")
         print(f"  Trend Database: {report['identified_trends']} trends")
         print(f"{'='*60}\n")
 
