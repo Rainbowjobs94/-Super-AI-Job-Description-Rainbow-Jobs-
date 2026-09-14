@@ -11,6 +11,18 @@ github_client = GitHubIntegration()
 # Base directory is the project root
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+def _get_safe_path(filepath):
+    """
+    Resolves the given filepath relative to BASE_DIR and ensures it is within BASE_DIR.
+    Raises ValueError if the path is invalid or outside BASE_DIR.
+    """
+    target_path = (BASE_DIR / filepath).resolve()
+
+    if not target_path.is_relative_to(BASE_DIR):
+        raise ValueError("Invalid file path")
+
+    return target_path
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -47,17 +59,15 @@ def read_file():
         return jsonify({'status': 'error', 'message': 'Missing path parameter'}), 400
 
     try:
-        target_path = (BASE_DIR / filepath).resolve()
-
-        # Security check: ensure path is within BASE_DIR
-        if not target_path.is_relative_to(BASE_DIR):
-            return jsonify({'status': 'error', 'message': 'Invalid file path'}), 403
+        target_path = _get_safe_path(filepath)
 
         if not target_path.exists() or not target_path.is_file():
             return jsonify({'status': 'error', 'message': 'File not found'}), 404
 
         content = target_path.read_text(encoding='utf-8')
         return jsonify({'status': 'success', 'content': content})
+    except ValueError as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 403
     except UnicodeDecodeError:
         return jsonify({'status': 'error', 'message': 'File is not a text file'}), 400
     except Exception as e:
@@ -73,17 +83,15 @@ def write_file():
     content = data['content']
 
     try:
-        target_path = (BASE_DIR / filepath).resolve()
-
-        # Security check: ensure path is within BASE_DIR
-        if not target_path.is_relative_to(BASE_DIR):
-            return jsonify({'status': 'error', 'message': 'Invalid file path'}), 403
+        target_path = _get_safe_path(filepath)
 
         # Ensure parent directories exist
         target_path.parent.mkdir(parents=True, exist_ok=True)
 
         target_path.write_text(content, encoding='utf-8')
         return jsonify({'status': 'success', 'message': 'File saved successfully'})
+    except ValueError as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 403
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
@@ -106,14 +114,13 @@ def upload_file():
         filepath = secure_filename(file.filename)
 
     try:
-        target_path = (BASE_DIR / filepath).resolve()
-
-        if not target_path.is_relative_to(BASE_DIR):
-            return jsonify({'status': 'error', 'message': 'Invalid file path'}), 403
+        target_path = _get_safe_path(filepath)
 
         target_path.parent.mkdir(parents=True, exist_ok=True)
         file.save(str(target_path))
         return jsonify({'status': 'success', 'message': 'File uploaded successfully', 'path': str(target_path.relative_to(BASE_DIR))})
+    except ValueError as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 403
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
