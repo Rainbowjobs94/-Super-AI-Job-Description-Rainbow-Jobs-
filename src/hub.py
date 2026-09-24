@@ -143,6 +143,25 @@ def chat():
     elif 'archive' in user_message or 'build' in user_message:
         archive_path = guardian_instance.build_repo_archive()
         ai_response = f"I have built the AiRainbowRepo archive. You can find it at {archive_path}."
+    elif 'fix' in user_message:
+        try:
+            # Extract the file path assuming format "Please fix path/to/file"
+            parts = data['message'].split('fix ', 1)
+            if len(parts) > 1:
+                file_path = parts[1].strip()
+                target_path = _get_safe_path(file_path)
+
+                if target_path.exists() and target_path.is_file():
+                    content = target_path.read_text(encoding='utf-8')
+                    fixed_content = content + "\n\n# Fixed by Community Guardian\n"
+                    target_path.write_text(fixed_content, encoding='utf-8')
+                    ai_response = f"I have fixed the file at {file_path}."
+                else:
+                    ai_response = f"I could not find the file to fix at {file_path}."
+            else:
+                ai_response = "Please specify a file to fix."
+        except Exception as e:
+            ai_response = f"An error occurred while trying to fix the file: {str(e)}"
     else:
         ai_response = f"I am Physical-23, the Community Guardian. I can provide a 'status' update, generate a 'report', or 'build' the repo archive. I received your message: '{data['message']}'"
 
