@@ -30,6 +30,31 @@ class TestHubChat(unittest.TestCase):
         self.assertEqual(data['status'], 'error')
         self.assertEqual(data['message'], 'Missing message')
 
+    def test_chat_endpoint_fix_file(self):
+        # Create a temporary file with trailing whitespace
+        import os
+        test_file = 'test_fix.txt'
+        with open(test_file, 'w') as f:
+            f.write('line 1 \nline 2\t\nline 3  ')
+
+        try:
+            response = self.client.post(
+                '/api/chat',
+                data=json.dumps({'message': f'Please fix {test_file}'}),
+                content_type='application/json'
+            )
+            data = json.loads(response.data)
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(data['status'], 'success')
+            self.assertIn(f"I have fixed {test_file}", data['response'])
+
+            with open(test_file, 'r') as f:
+                content = f.read()
+            self.assertEqual(content, 'line 1\nline 2\nline 3\n')
+        finally:
+            if os.path.exists(test_file):
+                os.remove(test_file)
+
 class TestHubFiles(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True

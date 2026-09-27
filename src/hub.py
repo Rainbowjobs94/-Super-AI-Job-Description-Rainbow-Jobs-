@@ -143,6 +143,44 @@ def chat():
     elif 'archive' in user_message or 'build' in user_message:
         archive_path = guardian_instance.build_repo_archive()
         ai_response = f"I have built the AiRainbowRepo archive. You can find it at {archive_path}."
+    elif 'fix' in user_message:
+        try:
+            # Extract filepath from "please fix <filepath>"
+            # Find the index of "fix" and take the rest of the string as the path
+            fix_index = user_message.find('fix')
+            if fix_index != -1:
+                # Get the part after "fix" and strip whitespace
+                filepath = user_message[fix_index + 3:].strip()
+                if filepath:
+                    # Retrieve the exact casing from the original message if possible
+                    # We can use the lowercased filepath to find the original in the raw message
+                    orig_fix_index = data['message'].lower().find('fix')
+                    if orig_fix_index != -1:
+                        filepath = data['message'][orig_fix_index + 3:].strip()
+
+                    target_path = _get_safe_path(filepath)
+
+                    if target_path.exists() and target_path.is_file():
+                        # Read, strip trailing whitespace from each line, and write back
+                        content = target_path.read_text(encoding='utf-8')
+                        fixed_content = '\n'.join(line.rstrip() for line in content.splitlines())
+                        # Always ensure file ends with a newline
+                        if not fixed_content.endswith('\n'):
+                            fixed_content += '\n'
+                        target_path.write_text(fixed_content, encoding='utf-8')
+                        ai_response = f"I have fixed {filepath} by removing trailing whitespace."
+                    else:
+                        ai_response = f"Could not fix {filepath}: File not found."
+                else:
+                    ai_response = "Please specify a file to fix."
+            else:
+                ai_response = "Please specify a file to fix."
+        except ValueError as e:
+            ai_response = f"Error fixing file: {str(e)}"
+        except UnicodeDecodeError:
+            ai_response = f"Could not fix {filepath}: Not a text file."
+        except Exception as e:
+             ai_response = f"Error fixing file: {str(e)}"
     else:
         ai_response = f"I am Physical-23, the Community Guardian. I can provide a 'status' update, generate a 'report', or 'build' the repo archive. I received your message: '{data['message']}'"
 
