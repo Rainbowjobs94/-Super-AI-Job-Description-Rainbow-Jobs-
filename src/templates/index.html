@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Operator Hub</title>
+    <title>IA Guardian Hab — Legacy workspace</title>
+    <script src="/static/legacy-auth.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -489,7 +490,7 @@
                 const data = await response.json();
 
                 if (data.status !== 'success') {
-                    repoTreeList.innerHTML = `<li style="color:#e74c3c; padding:5px 0;">Error: ${data.message}</li>`;
+                    repoTreeList.textContent = `Error: ${data.message}`;
                     return;
                 }
 

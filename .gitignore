@@ -12,3 +12,7 @@ data/content_library.json
 data/AiRainbowRepo/
 data/AiRainbowRepo-*.zip
 *.log
+data/hab/
+data/transfer-preview/
+attached_assets/
+exports/
