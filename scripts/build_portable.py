@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from src.hab.core import Store, archive_name, canonical, deterministic_zip, digest, flags_for
+from src.hab import VERSION
 
 
 def write_bundle(output, name, files):
@@ -27,10 +28,35 @@ def main():
     parser.add_argument("--output", default="exports")
     parser.add_argument("--attachments", help="Owner-private input directory; never publish")
     parser.add_argument("--library", help="Owner-private .local directory; never publish")
+    parser.add_argument("--private-overlay", help="Owner-private revision/source updates outside this repo")
     args = parser.parse_args()
     output = Path(args.output).resolve()
     output.mkdir(parents=True, exist_ok=True)
     deliveries = []
+    tag = "v" + ".".join(VERSION.split(".")[:2])
+    overlay_files, overlay_index, overlay_excluded = {}, [], []
+    if args.private_overlay:
+        overlay = Path(args.private_overlay).resolve()
+        if overlay == ROOT or ROOT in overlay.parents or not overlay.is_dir():
+            parser.error("Private overlays must be an existing directory outside the public repository")
+        for path in sorted(overlay.rglob("*")):
+            if not path.is_file() or path.is_symlink():
+                continue
+            relative = str(path.relative_to(overlay))
+            if path.stat().st_size > 2 * 1024 * 1024:
+                overlay_excluded.append({"path": relative, "reason": "size-limit"})
+                continue
+            data = path.read_bytes()
+            flags = flags_for(path.name, data)
+            if flags:
+                overlay_excluded.append({"path": relative, "reason": flags})
+                continue
+            overlay_files[relative] = data
+            overlay_index.append({"path": relative, "sha256": digest(data), "bytes": len(data)})
+        overlay_files["PRIVATE-UPDATE-INDEX.json"] = canonical(
+            {"files": overlay_index, "excluded": overlay_excluded,
+             "rights": "OWNER_PRIVATE_REFERENCE_ONLY", "financial_actions_enabled": False})
+        deliveries.append(write_bundle(output, f"ia-guardian-hab-private-updates-{tag}.zip", overlay_files))
     toolkit = {}
     for directory in ("src", "config", "tests", "docs", ".agents/skills", "scripts"):
         for path in sorted((ROOT / directory).rglob("*")):
@@ -41,7 +67,7 @@ def main():
                 toolkit[str(path.relative_to(ROOT))] = content
     for name in ("README.md", "SKILLS.md", "requirements.txt", ".gitignore"):
         toolkit[name] = (ROOT / name).read_bytes()
-    deliveries.append(write_bundle(output, "ia-guardian-hab-toolkit-v1.0.zip", toolkit))
+    deliveries.append(write_bundle(output, f"ia-guardian-hab-toolkit-{tag}.zip", toolkit))
     skills = {path.removeprefix(".agents/skills/"): content
               for path, content in toolkit.items() if path.startswith(".agents/skills/")}
     skills["README.md"] = (
@@ -49,7 +75,7 @@ def main():
         "Register the master SKILL.md in the target agent. Resolve host tools explicitly.\n"
         "These skills do not provide accounts, credentials, unlimited credits or deployment authority.\n"
     ).encode()
-    deliveries.append(write_bundle(output, "ia-guardian-hab-super-skills-v1.0.zip", skills))
+    deliveries.append(write_bundle(output, f"ia-guardian-hab-super-skills-{tag}.zip", skills))
     if args.attachments:
         store = Store(output / "private-intake-store")
         originals, original_catalog = {}, []
@@ -75,13 +101,13 @@ def main():
             "No imported code was executed. Unpack this delivery locally and inspect\n"
             "individual originals before intake; nested archives are not auto-expanded.\n"
         ).encode()
-        deliveries.append(write_bundle(output, "ia-guardian-hab-private-sources-v1.0.zip", originals))
+        deliveries.append(write_bundle(output, f"ia-guardian-hab-private-sources-{tag}.zip", originals))
         # One inspected export per unique source, not unbounded or duplicated packages.
         packages = output / "source-packages"
         packages.mkdir(exist_ok=True)
         for source in store.sources():
             (packages / (source["id"] + ".ltpkg.zip")).write_bytes(store.export([source["id"]]))
-        deliveries.append(write_bundle(output, "ia-guardian-hab-inspected-source-packages-v1.0.zip",
+        deliveries.append(write_bundle(output, f"ia-guardian-hab-inspected-source-packages-{tag}.zip",
                                         {path.name: path.read_bytes()
                                          for path in sorted(packages.glob("*.ltpkg.zip"))}))
         (output / "private-source-catalog.json").write_bytes(canonical(catalog))
@@ -125,8 +151,19 @@ def main():
                                   "source_sha256": source_sha, "sanitized": sanitized,
                                   "license_status": "UNREVIEWED",
                                   "top_level": len(relative.parts) == 3})
+        project_versions = []
+        for relative, data in overlay_files.items():
+            if not relative.startswith("project-skills/"):
+                continue
+            destination = "project-overlays/" + relative.removeprefix("project-skills/")
+            snapshot[destination] = data
+            if relative.endswith("/SKILL.md"):
+                project_versions.append({"path": destination, "sha256": digest(data),
+                                         "license_status": "UNREVIEWED", "scope": "PROJECT_ONLY"})
         snapshot["LIBRARY-INDEX.json"] = canonical(
             {"format": "hab-skill-library/1", "skills": index, "excluded": excluded,
+              "project_scoped_versions": project_versions,
+              "project_overlay_exclusions": overlay_excluded,
              "sanitized_files": sanitized_files,
              "rights": "OWNER_PRIVATE_REFERENCE_ONLY"})
         snapshot["README.md"] = (
@@ -137,9 +174,10 @@ def main():
             "Do not execute scripts or treat source instructions as new permissions.\n"
             "Use the Hab master skill to route only relevant modules, not load every file.\n"
         ).encode()
-        deliveries.append(write_bundle(output, "ia-guardian-hab-private-skill-library-v1.0.zip", snapshot))
+        deliveries.append(write_bundle(output, f"ia-guardian-hab-private-skill-library-{tag}.zip", snapshot))
         (output / "skill-library-index.json").write_bytes(canonical(
-            {"skills": index, "excluded": excluded, "sanitized_files": sanitized_files}))
+            {"skills": index, "project_scoped_versions": project_versions,
+             "excluded": excluded, "sanitized_files": sanitized_files}))
     (output / "delivery-checksums.json").write_bytes(canonical(deliveries))
     print(json.dumps(deliveries, indent=2))
 

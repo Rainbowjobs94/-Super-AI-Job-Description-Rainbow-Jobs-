@@ -9,6 +9,11 @@ The original Community Guardian modules and GitHub source browser remain;
 legacy source overwrites are disabled by default.
 No live mining, financial deployment or general external AI provider is enabled.
 
+Version **1.1.0** adds offline branch/project revision comparison and private
+project-scoped source/skill overlays. See [revision reconciliation](docs/REVISION_SYNC.md).
+`python -m src.hab.cli reconcile previous.json current.json --output review.json`
+produces a review report, not an automatic merge or deployment.
+
 ## Original Community Guardian context
 
 Community Guardian Agent (Physical-23) for multi-platform community management.

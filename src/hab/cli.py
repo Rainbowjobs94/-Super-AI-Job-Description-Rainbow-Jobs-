@@ -3,6 +3,7 @@ import argparse
 import json
 from pathlib import Path
 from .core import Store, apply_merge, plan_merge, rollback_merge, proof_record
+from .revisions import compare_revisions, read_snapshot
 
 
 def main():
@@ -31,7 +32,21 @@ def main():
     proof.add_argument("--acknowledgement", required=True)
     proof.add_argument("--consent", required=True)
     proof.add_argument("--output", required=True)
+    reconcile = commands.add_parser("reconcile")
+    reconcile.add_argument("previous")
+    reconcile.add_argument("current")
+    reconcile.add_argument("--max-age-hours", type=float, default=24)
+    reconcile.add_argument("--output", help="Create a new review report; never overwrite an existing file")
     args = parser.parse_args()
+    if args.command == "reconcile":
+        result = compare_revisions(read_snapshot(args.previous), read_snapshot(args.current),
+                                   max_age_hours=args.max_age_hours)
+        rendered = json.dumps(result, indent=2)
+        if args.output:
+            with Path(args.output).open("x", encoding="utf-8") as stream:
+                stream.write(rendered)
+        print(rendered)
+        return
     store = Store(args.store)
     if args.command == "ingest":
         result = [store.ingest(Path(f).name, Path(f).read_bytes()) for f in args.files]

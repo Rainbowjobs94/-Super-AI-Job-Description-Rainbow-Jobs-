@@ -14,6 +14,7 @@ user records unless a reviewed change explicitly replaces them.
 
 Read `references/domains.md` for routing and `references/choices.md` when a
 decision affects features, cost, rights, privacy or settlement.
+Read `references/revision-sync.md` for refreshes and cross-project reconciliation.
 Default companion skills: hab-source-transfer, hab-protocol-review,
 hab-agent-handoff and hab-resource-planner. Load only the one(s) needed.
 
@@ -36,6 +37,9 @@ hab-agent-handoff and hab-resource-planner. Load only the one(s) needed.
 - Reuse `src/hab/core.py` and `python -m src.hab.cli`, not a second archive engine.
 - Intake: `python -m src.hab.cli ingest <files>`.
 - Catalog: `python -m src.hab.cli catalog`.
+- Revision review: `python -m src.hab.cli reconcile previous.json current.json`.
+  Compare actual branch/project hashes; never equate pushed timestamps with
+  default-branch updates. Preserve newer project-local release and activation holds.
 - Export: `python -m src.hab.cli export <source-id> --output bundle.zip`.
 - Merge: explicit source/destination mapping → plan → review exact plan hash →
   local apply → tests → record outcome. Overwrites require separate conflict approval.

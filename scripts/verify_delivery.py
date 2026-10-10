@@ -38,7 +38,9 @@ def main():
             manifest = json.loads(archive.read("MANIFEST.ltpkg.json"))
             for name, sha in manifest["files"].items():
                 assert digest(archive.read(name)) == sha
-    toolkit = root / "ia-guardian-hab-toolkit-v1.0.zip"
+    toolkits = list(root.glob("ia-guardian-hab-toolkit-v*.zip"))
+    assert len(toolkits) == 1, "Use a fresh delivery directory for each toolkit revision"
+    toolkit = toolkits[0]
     with zipfile.ZipFile(toolkit) as archive:
         assert "tests/test_hab.py" in archive.namelist()
         assert not any("profile.md" in name or "AI-OPERATOR-AGENT-PROFILE" in name

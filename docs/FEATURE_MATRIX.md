@@ -1,12 +1,13 @@
 # Release scope and comparisons
 
-| Requested area | v1.0 delivered | Deferred / disabled | Useful path now |
+| Requested area | v1.1 delivered | Deferred / disabled | Useful path now |
 |---|---|---|---|
 | Hab identity | Branded UI and master skill | GitHub slug unchanged | Existing repository history retained |
 | Archive everything | Content-addressed intake, originals, member manifests | Infinite/million ZIP generation | One package per unique source, deterministic rebuilds |
 | Pictures/documents | Original bytes and hashes preserved | OCR, PDF visual interpretation engine | Use host document/image tools with reviewed sources |
 | Code/services/contracts | Stored, inspectable, exportable | Automatic execution of arbitrary uploaded code | Owner reviews mappings and runs relevant tests |
 | Project transfers | Mapping, preview, approved apply, rollback | Autonomous cross-project writes | Explicit local owner-controlled sync |
+| Revision refresh | Bounded offline hash/timestamp comparisons; private source overlays | Background fetching, automatic rebasing or merging | Compare default/feature/project snapshots; review changed or unavailable sources |
 | Feature/task descriptions | Manual evidence-tagged registry | Full automatic feature inference | Agent reads selected source with recorded evidence |
 | Duplicate code | Source/object SHA-256 dedup, aliases | Semantic equivalence guarantees | Compare hashes then review differences |
 | Duplicate deployments | Candidate chain/address/role uniqueness | Live factory/pool/wallet indexing | Read-only deployment reconciliation before chain writes |

@@ -1,9 +1,29 @@
-# IA Guardian Hab 1.0 — verification and release holds
+# IA Guardian Hab 1.1 — verification and release holds
+
+## Current refresh
+
+- **81 local unittest tests passed**, including nine new revision-comparison
+  tests; source/scripts/tests passed `compileall`.
+- Revision comparison is offline and metadata-only. It does not change sources,
+  synchronize provider credentials or certify deployed state.
+- Private project overlays are packaged separately from the public toolkit.
+  They retain source-specific proposal, release and activation boundaries.
+- Six selected project skills and their 18 references/templates were copied
+  byte-for-byte and their 24 SHA-256 hashes matched the source export inventory.
+  A seventh project-scoped skill version is included separately.
+- The original uploaded-source packages remain preserved; a revision refresh
+  does not imply every referenced application was copied, tested or installed.
+- The four v1.1 delivery ZIPs passed CRC, unique-entry and per-file SHA-256
+  verification. All five original v1.0 delivery archive hashes remain unchanged.
+- No new browser/runtime, production, chain, contract-test or economic
+  verification was performed in this refresh. The browser hold below remains.
+
+## Historical v1.0 checks and accounting
 
 Date: 2026-10-09. Base GitHub main:
 `5aa3103db6c95ee80dced6ee4dd2d1be1c8077c9`.
 
-## Checks performed
+## Checks performed for v1.0
 
 - Python unittest: **72 tests passed**, including original community/content/
   GitHub tests and new archive, auth, integrity, merge, rollback, registry,

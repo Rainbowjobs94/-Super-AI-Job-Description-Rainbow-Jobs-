@@ -1,4 +1,9 @@
-# IA Guardian Hab 1.0 — operator and portable toolkit
+# IA Guardian Hab 1.1 — operator and portable toolkit
+
+For current branch/project inventory comparison, use the offline `reconcile`
+command described in [revision synchronization](REVISION_SYNC.md). Private
+source and project-skill overlays are separate owner-only deliveries. They do
+not automatically update a Replit checkout or install a source application.
 
 This release upgrades the existing Flask hub and ships the same core as a
 Python CLI. It is a tested local source-management control plane, not a complete

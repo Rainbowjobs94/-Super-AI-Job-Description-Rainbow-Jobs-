@@ -4,6 +4,9 @@ Master skill: `.agents/skills/ia-guardian-hab/SKILL.md`.
 CLI: `python -m src.hab.cli --help`.
 Tests: `python -m unittest discover -s tests -v`.
 Guide: `docs/HAB_GUIDE.md`.
+Revision refresh: `docs/REVISION_SYNC.md` and the master's `references/revision-sync.md`.
+Owner-private project skill overlays preserve their source scopes and references;
+they do not replace the installed host's permissions or global skill definitions.
 Historical commands below are not verified commands for this Flask release.
 
 ## Dev
