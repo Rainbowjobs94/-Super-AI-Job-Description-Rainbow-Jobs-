@@ -1,0 +1,401 @@
+{
+  "schema": "hab-source-intake/1",
+  "source_url": "https://github.com/diegosouzapw/OmniRoute",
+  "canonical_repo": "diegosouzapw/OmniRoute",
+  "commit": "7510677f2f8f5317f1947284dab650d01333915d",
+  "default_branch_observed": "release/v3.8.52",
+  "package_version_observed": "3.8.52",
+  "retrieved_at": "2026-10-10T07:03:58.886Z",
+  "license": "MIT",
+  "license_path": "LICENSE",
+  "third_party_notice_path": "THIRD_PARTY_NOTICES.md",
+  "status": "SELECTED_SOURCE_SNAPSHOT_VERIFIED",
+  "full_repository_snapshot": false,
+  "whole_repository_tree_scan_complete": false,
+  "whole_repository_tree_read_failure": "connector response exceeded 1,000,000-byte limit",
+  "selected_skills_subtree_complete": true,
+  "selected_skill_files": 46,
+  "selected_skills_subtree_files": 52,
+  "total_selected_source_files": 59,
+  "files_read": [
+    "README.md",
+    "LICENSE",
+    "package.json",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "SECURITY.md",
+    "THIRD_PARTY_NOTICES.md",
+    "skills/ (52 selected blobs)"
+  ],
+  "activation": "NOT_INSTALLED",
+  "provider_calls_enabled": false,
+  "automatic_paid_fallback": false,
+  "external_provider_spend_budget": 0,
+  "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+  "excluded_sensitive_paths": [
+    "actual .env files",
+    "credential databases",
+    "private keys",
+    "provider tokens",
+    "user histories"
+  ],
+  "capabilities_status": "UPSTREAM_DOCUMENTED_NOT_RUNTIME_VERIFIED",
+  "node_engine_observed": ">=22.22.2 <23 || >=24.0.0 <27",
+  "cost_limit": "No guaranteed free quota or Replit credit reduction; eligible accounts, provider terms and actual usage must be reviewed separately",
+  "source_files": [
+    {
+      "bytes": 137865,
+      "git_blob_sha1": "6b7e687bb65248be233091bd072566ac78ecfda3",
+      "path": "README.md",
+      "sha256": "ebbae29bac77cac65b3549185c4ec9ea5096ce902b05ec16a9cfd4c4a6c1d67d"
+    },
+    {
+      "bytes": 1069,
+      "git_blob_sha1": "b5c9f58d06b1cef61ebf96f580d90c3dba5e1dac",
+      "path": "LICENSE",
+      "sha256": "5f3caa52b2c2ce5dfb40c85404a370d23b6dc3e26a1447d17dc7e56f773b91de"
+    },
+    {
+      "bytes": 37338,
+      "git_blob_sha1": "eb7ce1bf49d0ed0c7ca446d0d8c21b0756052cce",
+      "path": "package.json",
+      "sha256": "d5918c56f0bcdf23fc8aa246d4a0e9b57a5e04dfa4eea9f876ed907c19626334"
+    },
+    {
+      "bytes": 65997,
+      "git_blob_sha1": "85c2a7d4a398966f02918166f6a8b799e65c86f9",
+      "path": "AGENTS.md",
+      "sha256": "11f594633e5da430218e0daa714db66a88395ff6e0876d123383094d8a73c354"
+    },
+    {
+      "bytes": 4360,
+      "git_blob_sha1": "fb76678e0cff8700a59f3551f2d6a65a4646e105",
+      "path": "CLAUDE.md",
+      "sha256": "b90b22873977a250f16576a05ee3eae11b4a6be0882674d3d368985032201a88"
+    },
+    {
+      "bytes": 15387,
+      "git_blob_sha1": "259dd6c073a406e77006958256593f745e42ab4a",
+      "path": "SECURITY.md",
+      "sha256": "66fac7b0f9f34ac357594dd3c394616281d5c0cb31ffaf96d2722ea277a3971d"
+    },
+    {
+      "bytes": 17202,
+      "git_blob_sha1": "6188ef860ed54bbb4c5f696b1681bf337004384f",
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "17b296424841266ce12d47019b69373e8f243c03264f5bce48d13543c264db90"
+    },
+    {
+      "bytes": 14784,
+      "git_blob_sha1": "1f8ef68bb186971965a11573277caea8d445ff26",
+      "path": "skills/README.md",
+      "sha256": "7a836fa7cfedb4e749b2e5aa740fe7996aa0d3c92cdc55afcff66b6e1da9f83c"
+    },
+    {
+      "bytes": 1692,
+      "git_blob_sha1": "e75b993606b4c6f7b182f82cd714d3d82963f015",
+      "path": "skills/cli-a2a/SKILL.md",
+      "sha256": "0a19e329dae2a4ba0186110adc7273d50aa8fe4fbe6ec6d6affb440bc48db5a0"
+    },
+    {
+      "bytes": 3791,
+      "git_blob_sha1": "e1dccfed63b03487acfd56defe4b614670866383",
+      "path": "skills/cli-backup-sync/SKILL.md",
+      "sha256": "8d93e5c2816896796b552f58e4ea1f946d095775d7468d4e2acc0f431a991d27"
+    },
+    {
+      "bytes": 2260,
+      "git_blob_sha1": "8b0d4d1a8cbd0e2371fcec3e72d585a1358a2d07",
+      "path": "skills/cli-batches/SKILL.md",
+      "sha256": "e33f6b80d2747e51f853427352c74ce7a77f12511a12bd2d69c42303b25f50ed"
+    },
+    {
+      "bytes": 1377,
+      "git_blob_sha1": "5ccce0d2411085aa9363b60ebe60022fc33f3848",
+      "path": "skills/cli-chat/SKILL.md",
+      "sha256": "f10cc2b18169e7d8dabfa0c5eba5d540046936cad6754ca31b37368e1eff9385"
+    },
+    {
+      "bytes": 2084,
+      "git_blob_sha1": "3c1d6d2d26e1aba835bd4cdfbf70e2e51e1821ff",
+      "path": "skills/cli-compression/SKILL.md",
+      "sha256": "9e095519b1f0718a8f12a24e7add0dbbdfdc72562c72c3defa4ad0b0e8f1b97f"
+    },
+    {
+      "bytes": 4666,
+      "git_blob_sha1": "a0d6acc6ca6e9254cdf25795ec1aac81567d260e",
+      "path": "skills/cli-contexts/SKILL.md",
+      "sha256": "37bb29812150e9351b57856b0db9288e5c06ca424c87845ee5ddd708777f2868"
+    },
+    {
+      "bytes": 2772,
+      "git_blob_sha1": "bf27154c2fa5d9b63602da8fed5cbaa607c78c48",
+      "path": "skills/cli-cost-usage/SKILL.md",
+      "sha256": "352d93689291fb418bb892657e94ed5e9e530907430984c40147d3fd64d75b30"
+    },
+    {
+      "bytes": 5291,
+      "git_blob_sha1": "20cf4f40c8b84918c00ae712f3c37831dff2c356",
+      "path": "skills/cli-eval/SKILL.md",
+      "sha256": "0ae594b757f7af22934ce6f69e7612393a06393ae9dc13347ac6c244d7319c8b"
+    },
+    {
+      "bytes": 1307,
+      "git_blob_sha1": "97a7a28a2f9d0be225b68831093a1508b0806cd3",
+      "path": "skills/cli-health/SKILL.md",
+      "sha256": "c0909091fb2807b9c53d3bb2685793cbce609df988afc1f6203dad11b751aa3f"
+    },
+    {
+      "bytes": 2483,
+      "git_blob_sha1": "f7e02aadfea6ff491af243c04461957b32bc3d9d",
+      "path": "skills/cli-keys/SKILL.md",
+      "sha256": "509eca0858a8e85ccdafd13de600852f7d2edceff044fc8214ab716f468d32e6"
+    },
+    {
+      "bytes": 1217,
+      "git_blob_sha1": "5bc6a9a720bfe70176d3e57b02b5071ee666ee46",
+      "path": "skills/cli-mcp/SKILL.md",
+      "sha256": "0e66b0ff74d161b0f50de8fb625b2682f25af1d4fe3b0bfb482dd33387103589"
+    },
+    {
+      "bytes": 2214,
+      "git_blob_sha1": "0105c3e0e7ae77357b3d4be565fc197d2d978ca2",
+      "path": "skills/cli-models/SKILL.md",
+      "sha256": "e30f639190f605a65a27fe4ce90760483dd2a4f0af31b6865f259b31a2d6c7c0"
+    },
+    {
+      "bytes": 4195,
+      "git_blob_sha1": "b1ed512f60727a048cc8d2ec2509198bf9a83d8c",
+      "path": "skills/cli-plugins-skills/SKILL.md",
+      "sha256": "a3a42c34d49831917366d6c1473db0eff446469b48b75ab497dda1c079ef6bcb"
+    },
+    {
+      "bytes": 2932,
+      "git_blob_sha1": "4b3d115db39b7ffec5ed3de686d5ca8d6b276827",
+      "path": "skills/cli-policy-audit/SKILL.md",
+      "sha256": "6dce35c2ccaf83abb30c82c55216fc353f77036196f6171cb06aa36e00599fec"
+    },
+    {
+      "bytes": 8633,
+      "git_blob_sha1": "c3c5b87e850ca41dabca5d2e14b6861a215e52b8",
+      "path": "skills/cli-providers/SKILL.md",
+      "sha256": "4fe6d5acd122b5078ff6584bbe7cc99ac87fcd9f8da3b39ad79360e8ae041078"
+    },
+    {
+      "bytes": 2495,
+      "git_blob_sha1": "28dcd780089915d05a80dbe147ff9d104d9b2ddb",
+      "path": "skills/cli-resilience/SKILL.md",
+      "sha256": "8d8e69b53f32517b634e35143e1a1b8996bdf9ac32e6ca5b48cde5642f13ad24"
+    },
+    {
+      "bytes": 1368,
+      "git_blob_sha1": "3ce451b46e85d684c9ad442042661e09343a9d29",
+      "path": "skills/cli-routing/SKILL.md",
+      "sha256": "baee339081241a6632dfac27eeb5ba27e9412fe89c179c8f6a536fa0b79a3365"
+    },
+    {
+      "bytes": 10303,
+      "git_blob_sha1": "a8a3c167eda920276b0a19067870304917b0f3ba",
+      "path": "skills/cli-serve/SKILL.md",
+      "sha256": "ed15d344e6f6c44482c706c32271d5ff91c535186cf7990cd773591a24b2084e"
+    },
+    {
+      "bytes": 3155,
+      "git_blob_sha1": "11697d2367f88c973b2e28d837675a33dbabe53c",
+      "path": "skills/cli-setup/SKILL.md",
+      "sha256": "54f1115fc410772d70868cf2a7ab9e3bf087f0d4a7a9a64dfca9acb302b4a84d"
+    },
+    {
+      "bytes": 8476,
+      "git_blob_sha1": "ec3e36c37b888a158007b18f5a85a8fad68666af",
+      "path": "skills/cli-skill-collector/SKILL.md",
+      "sha256": "0b1c2d892d92df7d9cdf32d5e98d5a0c67439ac0a5ea45a237eb4a87dc70ca40"
+    },
+    {
+      "bytes": 1355,
+      "git_blob_sha1": "4d7388bb7b727a74b77164bec748c390f591e708",
+      "path": "skills/cli-tunnel/SKILL.md",
+      "sha256": "47396f604441cd4e53663b24a9ed0e0b6ebd2c0bfa0ee91449e9d3e2f34c2ad5"
+    },
+    {
+      "bytes": 2760,
+      "git_blob_sha1": "3d895db52fcb166f6a9d4d6115c3ebf945f4fd07",
+      "path": "skills/config-codex-cli/SKILL.md",
+      "sha256": "2a85801bb36355c3a49b4e547ab8b8beef8e377b13ab770c3117c0eb46478806"
+    },
+    {
+      "bytes": 3184,
+      "git_blob_sha1": "52bc1be3489e127d41b60de0a4cbf94f0403fd63",
+      "path": "skills/omni-agents-a2a/SKILL.md",
+      "sha256": "35f942f1af9f225902a2cae2b878c6d533a278b5977a14ba82a08fc19075ff81"
+    },
+    {
+      "bytes": 5756,
+      "git_blob_sha1": "5d4a2326e5628bfbc7ebe8a8a612d445d5d22c73",
+      "path": "skills/omni-api-keys/SKILL.md",
+      "sha256": "5c71b8e407b3ee1a70fa2444758419949a5eb27e4d861736705e4b1de689e37c"
+    },
+    {
+      "bytes": 7456,
+      "git_blob_sha1": "817a0c449406fc8599877cb037aa66f17b0c7739",
+      "path": "skills/omni-auth/SKILL.md",
+      "sha256": "1ad35200460ce6102f84d23b69d8fc034abe2cd1d98678250ac357fc13a036d0"
+    },
+    {
+      "bytes": 1185,
+      "git_blob_sha1": "a7b8fd67d16ef40dd952d12ff283d06530ab0381",
+      "path": "skills/omni-budget/SKILL.md",
+      "sha256": "865f885dc76d82af97bcead5aa75c06f905442ed2cd6bfead42ff46b5e979671"
+    },
+    {
+      "bytes": 2122,
+      "git_blob_sha1": "49e5c50bf26703fdab7bf3ecd13f84ac5e544607",
+      "path": "skills/omni-cache/SKILL.md",
+      "sha256": "b7f2005ed8fd99c19b561bcd2506d85a5c48a8a1eb394f2693962b6a4ead8222"
+    },
+    {
+      "bytes": 8139,
+      "git_blob_sha1": "ef2ac60575e87d4933c096dd0d662353e4d6e67f",
+      "path": "skills/omni-cli-tools/SKILL.md",
+      "sha256": "2280e3c1b36de7458511f17d192682858733243074f1e46a39c4a2aba2f5eaac"
+    },
+    {
+      "bytes": 23384,
+      "git_blob_sha1": "8a712edb4aa7b9feddf15834175fa81465361517",
+      "path": "skills/omni-cli-tools/references/endpoints.md",
+      "sha256": "46d969b0cdded90b59af1adfd55df79defb6c058ceb97824b059e66db3d9c6b5"
+    },
+    {
+      "bytes": 8575,
+      "git_blob_sha1": "e18068989dff9f32ee5afbddf31e81ab57454dc3",
+      "path": "skills/omni-combos-routing/SKILL.md",
+      "sha256": "056c87fad4dc43e97ab35ecc9be322be2c87adf3403599a734a44eb92c70aa79"
+    },
+    {
+      "bytes": 6481,
+      "git_blob_sha1": "6ffaa80554cd3b7055d69260281925377078df2a",
+      "path": "skills/omni-compression/SKILL.md",
+      "sha256": "3c42d5a6ea78dc2083be6c3fc15bba6de7bb0a79fbc2500a01569ff3e2a8af5a"
+    },
+    {
+      "bytes": 2478,
+      "git_blob_sha1": "4feee73225efaa2df1c1c6787f46f7e2abcb9801",
+      "path": "skills/omni-context-rtk/SKILL.md",
+      "sha256": "f4f3220edb12e3e04471206b6effb2147ab024a833a4856db9e5803cefd8abd4"
+    },
+    {
+      "bytes": 1589,
+      "git_blob_sha1": "f67fad7f1e766cdeea2747bc87c4fb68232d981b",
+      "path": "skills/omni-db-backups/SKILL.md",
+      "sha256": "c67b29535cd5cce69ece6545b8dd1b6336b5cda55e99547ac4ee7d8d83ff16f8"
+    },
+    {
+      "bytes": 1287,
+      "git_blob_sha1": "e4dc612b5073f2121122201ee2b70dc16f9c0040",
+      "path": "skills/omni-github-skills/SKILL.md",
+      "sha256": "6cdd1be9e6f2fd8c4ebec5f7808d399dde1010735c571916e1ae9a9326ac4ba4"
+    },
+    {
+      "bytes": 21925,
+      "git_blob_sha1": "d74822d371655b7ce41ac386753f780e47bfefac",
+      "path": "skills/omni-inference/SKILL.md",
+      "sha256": "b514ba16852bad53b62e843a1d73156688f25c5144b690e122c0ea66795855e6"
+    },
+    {
+      "bytes": 42205,
+      "git_blob_sha1": "812f7ee81e063d07108fa86a6c3a0fbfc75287f9",
+      "path": "skills/omni-inference/references/endpoints.md",
+      "sha256": "f0cddc9e6d2151750b4b38b1030f66d738b7008209e41c0e796b7c686d9c479e"
+    },
+    {
+      "bytes": 5233,
+      "git_blob_sha1": "48495ab0dc1d1926f41aea539d87169286d21435",
+      "path": "skills/omni-mcp/SKILL.md",
+      "sha256": "ce983a05c1aa1639d89a0732f2843f653439e07904d5213850ea70c08bea513c"
+    },
+    {
+      "bytes": 2363,
+      "git_blob_sha1": "3bc909584fab47dfe2970c087655a44757a69c55",
+      "path": "skills/omni-models/SKILL.md",
+      "sha256": "138039d9777fc5a763300dda3729737ae00a0a53790d42ad867ea4c126607806"
+    },
+    {
+      "bytes": 9661,
+      "git_blob_sha1": "2384841c1dfc9860340cee7b8a777257ded00cad",
+      "path": "skills/omni-providers/SKILL.md",
+      "sha256": "67e978fe38777ee18dd6fe3fc2f8aff225643ffaf77fb12ac5dffa2e715e9211"
+    },
+    {
+      "bytes": 25398,
+      "git_blob_sha1": "9365c48f1ab86b5d8cac5431fd866779fb400a8a",
+      "path": "skills/omni-providers/references/endpoints.md",
+      "sha256": "dba65d83140a2bc7e4f8d9029979ec8966a517153aead1f9793ae8142f1fc069"
+    },
+    {
+      "bytes": 825,
+      "git_blob_sha1": "ea6860effe444011ae094d57386b544ca489aeb2",
+      "path": "skills/omni-proxies/SKILL.md",
+      "sha256": "d94d0dbd85ebc0feda69446b12bb65ad467fd1bde7f331fb8ffa6e2b24009ed1"
+    },
+    {
+      "bytes": 4844,
+      "git_blob_sha1": "788e4e629373a8a49e8bbe92758fb4c85775257b",
+      "path": "skills/omni-resilience/SKILL.md",
+      "sha256": "680c0585aad67f7b67bd58673bb63a8be5365cd86177e9df0df4a7f09529b15a"
+    },
+    {
+      "bytes": 14305,
+      "git_blob_sha1": "ff7f8dab86b26ea709fa1863acc0b0c507232179",
+      "path": "skills/omni-settings/SKILL.md",
+      "sha256": "404ced7430d5d3116c2d00609e47ed43b2e5fb853bc85e3198d5cf071b7e8d0a"
+    },
+    {
+      "bytes": 41289,
+      "git_blob_sha1": "0b0045674a08403007e0f532d6bed5ef2015116f",
+      "path": "skills/omni-settings/references/endpoints.md",
+      "sha256": "2661a0abf7185749371992f4136a139e7fca838cdc61f42aec44c976df124d94"
+    },
+    {
+      "bytes": 3163,
+      "git_blob_sha1": "d44131977fd25d289440755d5126a5aefb5a742b",
+      "path": "skills/omni-sync-cloud/SKILL.md",
+      "sha256": "dfeaba11fd4b136272787705dbb3a68ca198b4f891eebf705e681c4d5d8ccd5b"
+    },
+    {
+      "bytes": 833,
+      "git_blob_sha1": "19cc2725a64568f1d972c2f61c67f14d57a62aad",
+      "path": "skills/omni-tunnels/SKILL.md",
+      "sha256": "53576f475424a4b2fe0674dacd61ef94774f78bdb3c2797666897ea09948bd80"
+    },
+    {
+      "bytes": 8138,
+      "git_blob_sha1": "14d010eb62f8125ac39f65dc845b67df4d5932ff",
+      "path": "skills/omni-usage-logs/SKILL.md",
+      "sha256": "fea1ad907306942a061ea735f56d788bef4a2a68a0baa886219e40efe3e3d8e2"
+    },
+    {
+      "bytes": 6820,
+      "git_blob_sha1": "08ac27341d9b579b6c6eaf5d80f6ace58637694e",
+      "path": "skills/omni-version-manager/SKILL.md",
+      "sha256": "2a63c2a6d33e6013e8e56487395aa43bfa3e9872ca4fc0c6a67c4e47ebeaea24"
+    },
+    {
+      "bytes": 27144,
+      "git_blob_sha1": "6c8e5a421a8e2477ac05422c4ed956516de55778",
+      "path": "skills/omni-version-manager/references/endpoints.md",
+      "sha256": "598b24b5d72497a31e734187f2b8ca6b006438f49b249305f44db692afc87fbb"
+    },
+    {
+      "bytes": 2392,
+      "git_blob_sha1": "8b1d137ad7a858ad724b8462f4593792fbe058fe",
+      "path": "skills/omni-webhooks/SKILL.md",
+      "sha256": "4d36bf2039b136bb75812afd17c2ed449d4526a330012878adb2bdcc7761caa4"
+    },
+    {
+      "bytes": 7421,
+      "git_blob_sha1": "b2edd3b7d5d0c9d1adf7031752f04092e27757e0",
+      "path": "skills/ponytail/SKILL.md",
+      "sha256": "cb36c9f060acc1e03dcb530670da06c945eba32caecc839b2ecb943c29fa6c81"
+    }
+  ]
+}
