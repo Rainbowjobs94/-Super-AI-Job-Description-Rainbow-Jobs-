@@ -1,210 +1,203 @@
 name: Auto Review, Test, and Merge PRs
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-  workflow_dispatch:
+"on":
+  workflow_run:
+    workflows: [PR Quality Checks]
+    types: [completed]
+
+permissions:
+  actions: read
+  checks: read
+  contents: read
+  pull-requests: read
+  statuses: read
+
+concurrency:
+  group: pr-auto-merge-${{ github.event.workflow_run.pull_requests[0].number || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
-  review-and-test:
+  resolve:
+    name: Resolve exact approved PR revision
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pull-requests: write
-      checks: read
-
+      actions: read
+      pull-requests: read
+    outputs:
+      pr_number: ${{ steps.resolve.outputs.pr_number }}
+      head_sha: ${{ steps.resolve.outputs.head_sha }}
+      base_sha: ${{ steps.resolve.outputs.base_sha }}
+      approved_merge: ${{ steps.resolve.outputs.approved_merge }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pytest pytest-cov flake8 black isort
-
-      - name: Run linting checks
-        id: lint
-        run: |
-          echo "Running flake8..."
-          flake8 src/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics || true
-          echo "lint_status=success" >> $GITHUB_OUTPUT
-
-      - name: Check code formatting
-        id: format
-        run: |
-          echo "Checking black formatting..."
-          black --check src/ tests/ || true
-          echo "format_status=success" >> $GITHUB_OUTPUT
-
-      - name: Run test suite
-        id: tests
-        run: |
-          echo "Running pytest..."
-          pytest tests/ -v --tb=short --cov=src --cov-report=term-missing 2>&1 | tee test_output.log
-          TEST_EXIT_CODE=${PIPESTATUS[0]}
-          
-          if [ $TEST_EXIT_CODE -eq 0 ]; then
-            echo "tests_passed=true" >> $GITHUB_OUTPUT
-            echo "✅ All tests passed!"
-          else
-            echo "tests_passed=false" >> $GITHUB_OUTPUT
-            echo "❌ Some tests failed"
-          fi
-          exit 0
-
-      - name: Check for merge conflicts
-        id: conflicts
-        run: |
-          git fetch origin main
-          if git merge --no-commit --no-ff origin/main; then
-            echo "conflicts=false" >> $GITHUB_OUTPUT
-            echo "✅ No merge conflicts detected"
-            git merge --abort
-          else
-            echo "conflicts=true" >> $GITHUB_OUTPUT
-            echo "⚠️ Merge conflicts detected"
-            git merge --abort
-            exit 1
-          fi
-
-      - name: Generate test report comment
-        if: always()
+      - name: Resolve trusted quality run and owner approval
+        id: resolve
         uses: actions/github-script@v7
         with:
           script: |
-            const fs = require('fs');
-            const testOutput = fs.existsSync('test_output.log') 
-              ? fs.readFileSync('test_output.log', 'utf8') 
-              : 'No test output available';
-            
-            const testsPassedStatus = '${{ steps.tests.outputs.tests_passed }}' === 'true' 
-              ? '✅ PASS' 
-              : '⚠️ REVIEW REQUIRED';
-            
-            const comment = `## 🤖 PR Review Report
-
-| Check | Status |
-|-------|--------|
-| **Linting** | ✅ Passed |
-| **Format** | ✅ Passed |
-| **Tests** | ${testsPassedStatus} |
-| **Merge Conflicts** | ✅ None |
-
-### Test Details
-\`\`\`
-${testOutput.slice(-2000)}
-\`\`\`
-
----
-**Actions:** This PR is ready for review and merge (if tests pass).
-`;
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: comment
+            const {owner, repo} = context.repo;
+            const fullName = `${owner}/${repo}`;
+            const runEvent = context.payload.workflow_run;
+            if (!runEvent || runEvent.conclusion !== 'success' ||
+                !['pull_request', 'pull_request_review'].includes(runEvent.event)) {
+              throw new Error('Only a successful PR validation or review run can request a merge');
+            }
+            const {data: run} = await github.rest.actions.getWorkflowRun({
+              owner, repo, run_id: runEvent.id
             });
+            const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
+              owner, repo, run_id: runEvent.id, per_page: 100
+            });
+            const {data: workflows} = await github.rest.actions.listRepoWorkflows({
+              owner, repo, per_page: 100
+            });
+            const qualityWorkflow = workflows.workflows.find(w =>
+              w.name === 'PR Quality Checks' &&
+              w.path.split('@')[0] === '.github/workflows/pr-review.yml');
+            if (!qualityWorkflow || run.workflow_id !== qualityWorkflow.id ||
+                run.name !== qualityWorkflow.name || run.conclusion !== 'success' ||
+                !['pull_request', 'pull_request_review'].includes(run.event) ||
+                !jobs.some(j => j.name === 'Quality checks' &&
+                  j.status === 'completed' && j.conclusion === 'success')) {
+              throw new Error('Workflow run is not the trusted PR quality workflow');
+            }
+            const refs = run.pull_requests || [];
+            if (refs.length !== 1 || !/^[1-9][0-9]*$/.test(String(refs[0].number))) {
+              throw new Error('Workflow run does not identify exactly one pull request');
+            }
+            const number = Number(refs[0].number);
+            const expectedHead = refs[0].head?.sha;
+            const headRepo = refs[0].head?.repo?.full_name;
+            if (!Number.isSafeInteger(number) || !/^[a-f0-9]{40}$/.test(expectedHead || '') ||
+                headRepo !== fullName || run.head_sha !== expectedHead ||
+                run.repository?.full_name !== fullName) {
+              throw new Error('Forks, invalid revisions, and unresolvable PRs are not eligible');
+            }
+            const args = {...context.repo, pull_number: number};
+            const {data: pr} = await github.rest.pulls.get(args);
+            const held = (pr.labels || []).some(l =>
+              /^(do-not-merge|release-hold|review-hold|runtime-hold|operator:hold|operator:stop)$/i.test(l.name));
+            if (pr.state !== 'open' || pr.merged || pr.draft || held || pr.mergeable === false ||
+                pr.head.sha !== expectedHead || pr.head.repo?.full_name !== fullName ||
+                pr.base.ref !== 'main') {
+              throw new Error('PR is closed, draft, held, stacked, forked, or has changed since validation');
+            }
+            const reviews = await github.paginate(github.rest.pulls.listReviews, {
+              ...args, per_page: 100
+            });
+            const ownerReviews = reviews
+              .filter(r => r.user?.login?.toLowerCase() === owner.toLowerCase() && r.submitted_at)
+              .sort((a, b) => Date.parse(a.submitted_at) - Date.parse(b.submitted_at));
+            const latestOwnerReview = ownerReviews.at(-1);
+            if (latestOwnerReview?.state !== 'APPROVED' || latestOwnerReview.commit_id !== expectedHead) {
+              throw new Error('Repository owner must approve the exact current head commit');
+            }
+            core.setOutput('pr_number', String(number));
+            core.setOutput('head_sha', expectedHead);
+            core.setOutput('base_sha', pr.base.sha);
+            core.setOutput('approved_merge', 'true');
 
   merge-pr:
-    needs: review-and-test
+    name: Merge owner-approved PR
+    needs: resolve
+    if: ${{ needs.resolve.outputs.approved_merge == 'true' }}
     runs-on: ubuntu-latest
-    if: always()
     permissions:
-      pull-requests: write
+      actions: read
+      checks: read
       contents: write
-
-    steps:
-      - name: Auto-merge PR
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const { data: pr } = await github.rest.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number
-            });
-
-            // Check if PR is in mergeable state
-            if (pr.mergeable === false) {
-              console.log('⚠️ PR has conflicts, skipping auto-merge');
-              return;
-            }
-
-            if (pr.merged) {
-              console.log('ℹ️ PR already merged');
-              return;
-            }
-
-            try {
-              await github.rest.pulls.merge({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.issue.number,
-                merge_method: 'squash',
-                commit_message: `${pr.title} (PR #${pr.number})`,
-                commit_title: pr.title
-              });
-              console.log('✅ PR merged successfully');
-            } catch (error) {
-              console.log(`⚠️ Auto-merge failed: ${error.message}`);
-            }
-
-  close-pr-post-merge:
-    needs: merge-pr
-    runs-on: ubuntu-latest
-    if: always()
-    permissions:
       pull-requests: write
-
+      statuses: read
     steps:
-      - name: Close PR with summary comment
+      # No checkout: this privileged job must never execute PR-provided code.
+      - name: Revalidate policy and merge approved commit
+        id: merge
         uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ needs.resolve.outputs.pr_number }}
+          EXPECTED_HEAD_SHA: ${{ needs.resolve.outputs.head_sha }}
+          EXPECTED_BASE_SHA: ${{ needs.resolve.outputs.base_sha }}
         with:
           script: |
-            const { data: pr } = await github.rest.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number
-            });
-
-            if (pr.merged) {
-              const closingComment = `## ✅ PR Processing Complete
-
-**Status:** ✅ MERGED & CLOSED
-
-**Summary:**
-- ✅ Linting passed
-- ✅ Tests passed
-- ✅ No conflicts
-- ✅ Successfully merged to main
-- ✅ Ready for deployment
-
----
-*Auto-processed by GitHub Actions PR Bot*
-`;
-
-              await github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: closingComment
-              });
-
-              // Optionally close PR if not auto-closed
-              if (pr.state === 'open') {
-                await github.rest.pulls.update({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  pull_number: context.issue.number,
-                  state: 'closed'
-                });
-              }
+            const expectedHead = process.env.EXPECTED_HEAD_SHA;
+            const expectedBase = process.env.EXPECTED_BASE_SHA;
+            const number = Number(process.env.PR_NUMBER);
+            const {owner, repo} = context.repo;
+            const fullName = `${owner}/${repo}`;
+            if (!/^[a-f0-9]{40}$/.test(expectedHead || '') ||
+                !/^[a-f0-9]{40}$/.test(expectedBase || '') ||
+                !Number.isSafeInteger(number) || number < 1) {
+              throw new Error('Invalid approved merge request');
             }
+            const args = {...context.repo, pull_number: number};
+            const validate = pr => {
+              const held = (pr.labels || []).some(l =>
+                /^(do-not-merge|release-hold|review-hold|runtime-hold|operator:hold|operator:stop)$/i.test(l.name));
+              if (pr.state !== 'open' || pr.merged || pr.draft || held ||
+                  pr.mergeable !== true || pr.head.sha !== expectedHead ||
+                  pr.base.sha !== expectedBase || pr.base.ref !== 'main' ||
+                  pr.head.repo?.full_name !== fullName) {
+                throw new Error('PR changed, is held, or is not explicitly mergeable');
+              }
+            };
+            const hasFreshOwnerApproval = async () => {
+              const reviews = await github.paginate(github.rest.pulls.listReviews, {
+                ...args, per_page: 100
+              });
+              const ownerReviews = reviews
+                .filter(r => r.user?.login?.toLowerCase() === owner.toLowerCase() && r.submitted_at)
+                .sort((a, b) => Date.parse(a.submitted_at) - Date.parse(b.submitted_at));
+              const latest = ownerReviews.at(-1);
+              return latest?.state === 'APPROVED' && latest.commit_id === expectedHead;
+            };
+            const first = (await github.rest.pulls.get(args)).data;
+            validate(first);
+            if (!(await hasFreshOwnerApproval())) {
+              throw new Error('Exact-head owner approval is missing or was withdrawn');
+            }
+            const checks = await github.paginate(github.rest.checks.listForRef, {
+              ...context.repo, ref: expectedHead, per_page: 100, filter: 'latest'
+            });
+            const ownMergeCheck = c => c.name === 'Merge owner-approved PR' &&
+              c.app?.slug === 'github-actions' &&
+              c.details_url?.includes(`/actions/runs/${context.runId}/`);
+            if (checks.filter(c => !ownMergeCheck(c)).some(c =>
+              c.status !== 'completed' || c.conclusion !== 'success')) {
+              throw new Error('A check is pending, failed, skipped, or unknown');
+            }
+            const statuses = await github.paginate(
+              github.rest.repos.listCommitStatusesForRef,
+              {...context.repo, ref: expectedHead, per_page: 100}
+            );
+            statuses.sort((a, b) =>
+              Date.parse(b.updated_at || b.created_at) - Date.parse(a.updated_at || a.created_at));
+            const latestStatus = new Map();
+            for (const status of statuses) {
+              if (!latestStatus.has(status.context)) latestStatus.set(status.context, status);
+            }
+            if ([...latestStatus.values()].some(s => s.state !== 'success')) {
+              throw new Error('A commit status is not successful');
+            }
+            const runs = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
+              ...context.repo, head_sha: expectedHead, per_page: 100
+            });
+            const latestRun = new Map();
+            for (const run of runs.sort((a, b) => b.id - a.id)) {
+              if (run.id === context.runId) continue;
+              if (!latestRun.has(run.workflow_id)) latestRun.set(run.workflow_id, run);
+            }
+            if ([...latestRun.values()].some(r =>
+              r.status !== 'completed' || r.conclusion !== 'success')) {
+              throw new Error('Another workflow is pending or failed');
+            }
+            const fresh = (await github.rest.pulls.get(args)).data;
+            validate(fresh);
+            if (!(await hasFreshOwnerApproval())) {
+              throw new Error('Owner approval changed during validation');
+            }
+            const merged = await github.rest.pulls.merge({
+              ...args, sha: expectedHead, merge_method: 'squash', commit_title: fresh.title
+            });
+            if (merged.data.merged !== true) throw new Error('GitHub did not confirm the merge');
+            await core.summary.addHeading('Approved automatic merge completed')
+              .addRaw(`PR #${number} at approved commit ${expectedHead}`).write();
