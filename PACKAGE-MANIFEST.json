@@ -1,0 +1,335 @@
+{
+  "schema": "hab-package/1",
+  "version": "1.3",
+  "kind": "shareable-authored-skills",
+  "activation": "NOT_INSTALLED",
+  "provider_calls": "DISABLED",
+  "financial_actions": "DISABLED",
+  "entries": [
+    {
+      "path": ".agents/skills/hab-agent-collectives/SKILL.md",
+      "sha256": "23bdb3a32dfb34b54cb17e5125e892d791908a5602623b59785d4c9b3e59eb6c",
+      "bytes": 2000
+    },
+    {
+      "path": ".agents/skills/hab-agent-handoff/SKILL.md",
+      "sha256": "4f58702f3b56318a06612d5ea746a5222d507b73b6910406bcd9932edb4e2c6e",
+      "bytes": 1026
+    },
+    {
+      "path": ".agents/skills/hab-agent-manus/SKILL.md",
+      "sha256": "1b7c35547ecbd97447035675adf9b771c29d75051822269a24fc25ebc9e7f1ff",
+      "bytes": 1907
+    },
+    {
+      "path": ".agents/skills/hab-agent-monica/SKILL.md",
+      "sha256": "729430d810abfeb71fbf5bf2ee855864f04a670966d04b154b13977844ed268b",
+      "bytes": 1943
+    },
+    {
+      "path": ".agents/skills/hab-agent-universal/SKILL.md",
+      "sha256": "f0444bbe1e7b1cbe9aa10bce06793165fd98a447416028b980ee6f7ddd642816",
+      "bytes": 2630
+    },
+    {
+      "path": ".agents/skills/hab-agent-universal/references/result-contract.md",
+      "sha256": "6e9a2499f9a6b21d97364a274c256dc43a4388ddbce8363be6f7c73f31c528ae",
+      "bytes": 989
+    },
+    {
+      "path": ".agents/skills/hab-agent-you-com/SKILL.md",
+      "sha256": "dc7e6fa4f83efaa503314b37029481e766d3af807b9070bf051d606f7a501dc5",
+      "bytes": 1904
+    },
+    {
+      "path": ".agents/skills/hab-github-skill-intake/SKILL.md",
+      "sha256": "a1dedd3209fe584bcebac89e1e65d9f0ac953ba539e4f374dba95ca28cc02168",
+      "bytes": 2638
+    },
+    {
+      "path": ".agents/skills/hab-github-skill-intake/references/import-contract.md",
+      "sha256": "e868d0ebaa6fd92161fc0e41ccbc8b4fa54aaf473a16cc6081c1b069662edd1f",
+      "bytes": 1195
+    },
+    {
+      "path": ".agents/skills/hab-huggingface-research/SKILL.md",
+      "sha256": "13d3ddc70c5160d67bcb7cd29fd5180d39adc4b7cd59fc21e1e08f509e9085bf",
+      "bytes": 2133
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/SKILL.md",
+      "sha256": "67f12dacfae99d90137b09652b1aabafc965f9ed765431698967bde394682fa5",
+      "bytes": 2329
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/references/domain-workflows.md",
+      "sha256": "79829df3e3aed21cc4ec837494e6112ec4d9dff2914aa2e880dbe3bb58dad986",
+      "bytes": 1387
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/references/workflow-guide.md",
+      "sha256": "fe4b19d24d7261236c0b962837ed1256cf77032bf47fe90e672055c48b70950e",
+      "bytes": 2066
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/01-github-source-intake.json",
+      "sha256": "2eca1f5640b10669d377a8e33a773f55f473684ce16f8f0bbd44ad51229a493b",
+      "bytes": 4064
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/02-skill-wrapper-draft.json",
+      "sha256": "b0a10000ded6b3204255563152f0ee5574135c5d3e8b0647ce039ceb08d3e400",
+      "bytes": 4858
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/03-individual-agent-handoff.json",
+      "sha256": "6109edd346e5d621e7db36259c950a1bd3fc091f78047aa380b31330ed2e4c72",
+      "bytes": 4055
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/04-huggingface-research.json",
+      "sha256": "d9c7445ebd8bfc1421431cea88fa9c0ccc6671bbd869dbd563209b299b4eb9ba",
+      "bytes": 3978
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/05-human-review-queue.json",
+      "sha256": "411b7ed4593f6d40f909c048505c529199553566da0fae3978c44d56b895dee3",
+      "bytes": 3818
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/06-revision-check-preparation.json",
+      "sha256": "f26eb25d149007d66e85c2e58a65d7593eac06aed4617e921e597f097bef5579",
+      "bytes": 3944
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/07-credit-checkpoint-plan.json",
+      "sha256": "8ed144d1e8033126592d7ef831cb7224fe8fc352dc812b1fdda53a09cb9e50b1",
+      "bytes": 4025
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/08-deployment-review.json",
+      "sha256": "f8c173700b437b6607bd730c151ef01cd92f0592fd6a7c63454dd2e79f7c8aa7",
+      "bytes": 4399
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/09-environment-audit.json",
+      "sha256": "88ccf620d8da389cd2415b068243f57ba93afc55f63218254d724a3f45eaa928",
+      "bytes": 4507
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/10-research-evidence-brief.json",
+      "sha256": "e7436f01f6c7044b6ebf7a3d7f1024d24b3ea9c9238880f6028f40a18967f8de",
+      "bytes": 4561
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/11-ip-security-provenance.json",
+      "sha256": "34188a6045d0f922d6c61cba83b03fa562929dab57f69379c0b6fd46f8bed1ed",
+      "bytes": 4429
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/12-copyright-license-review.json",
+      "sha256": "4146d3bbea50994e3b3565d461bce64106e119d3868979faa895d885c516777b",
+      "bytes": 4426
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/13-trademark-search-brief.json",
+      "sha256": "557408fb6b51361018355661ee30fe2e8f3b0fad19299526f8db53e346b7316d",
+      "bytes": 4316
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/14-patent-prior-art-brief.json",
+      "sha256": "54cf30eb0b190499bafb8a5e1aa082f7593527d66c16c17a572937fd50f00f32",
+      "bytes": 4399
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/15-legal-compliance-matrix.json",
+      "sha256": "3bed3c6adfb1d87ca1d587fd866f267782ed5fa20b42d18dae8fa9868b113dc9",
+      "bytes": 4611
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/16-debugging-plan.json",
+      "sha256": "6a34ffadc6eedcde977803ed3aba43eb5489ec6e6fa2e28afe98bc944fd2406f",
+      "bytes": 4243
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/17-protocol-invariants-review.json",
+      "sha256": "3e19c6fe24b71b16ce77631ecd2b27a731fd251bc170bc017232f5c4a270f6a8",
+      "bytes": 4604
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/18-file-format-design.json",
+      "sha256": "58a9093d47d1d6df2ecebcf3ddaa3df5e8deaae4dcc9dcd62c416add11600ef4",
+      "bytes": 4891
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/19-role-access-matrix.json",
+      "sha256": "c6eb70ef1acd7ef25388061fbe99b41a65583c9d541f253c03ce8d7d81194713",
+      "bytes": 4365
+    },
+    {
+      "path": ".agents/skills/hab-n8n-control/workflows/20-market-analysis-trends.json",
+      "sha256": "157a82e2c484b94246e7341686099f58bafbb871d4034c1963cc43ff3bb701a7",
+      "bytes": 4872
+    },
+    {
+      "path": ".agents/skills/hab-protocol-review/SKILL.md",
+      "sha256": "3a437d7b6a02d79bd3aa3eb8f7628c603f8fd5cfe0153102129e2bef575bde8c",
+      "bytes": 1218
+    },
+    {
+      "path": ".agents/skills/hab-resource-planner/SKILL.md",
+      "sha256": "26d3b57160a3df4ee2631eaee6650c816957b32851cbed3193fcd53086182a44",
+      "bytes": 1178
+    },
+    {
+      "path": ".agents/skills/hab-secrets-wallets/SKILL.md",
+      "sha256": "9d32554bfa26df354bae2d610a3ee4565b301903e424da23650c065c992f6445",
+      "bytes": 2233
+    },
+    {
+      "path": ".agents/skills/hab-source-transfer/SKILL.md",
+      "sha256": "733c2cf04f082b071436a8bf610269ae0ed676cbd6da851f1c19d19fddc30a88",
+      "bytes": 1177
+    },
+    {
+      "path": ".agents/skills/hab-workflow-library/SKILL.md",
+      "sha256": "418ec4c6ffd6f33ea11704f6a6677e0e3ca7f1995ab3f33d07fda1bd54a52864",
+      "bytes": 2494
+    },
+    {
+      "path": ".agents/skills/hab-workflow-library/formats/README.md",
+      "sha256": "55f9a27916d4fe53cb571368089b22b2d8d58b9771adbc29119728b6ae33fa5b",
+      "bytes": 1363
+    },
+    {
+      "path": ".agents/skills/hab-workflow-library/formats/record-envelope.schema.json",
+      "sha256": "ffb63f2c4b1d5f1094ad699bc8f709aeb57706830cd41cfb1d0b2ddb5ab13dc8",
+      "bytes": 372
+    },
+    {
+      "path": ".agents/skills/hab-workflow-library/formats/sample.habflow",
+      "sha256": "013de8ce4db939a9d669fa726a9ef1d69eb94c7f138a33345ce0606aa319ed4b",
+      "bytes": 140
+    },
+    {
+      "path": ".agents/skills/hab-workflow-library/formats/sample.ltclaim",
+      "sha256": "0313f88d2b38dc080753cb55840f57eaf9046f027b749c7d7a3e18d77a902c23",
+      "bytes": 153
+    },
+    {
+      "path": ".agents/skills/hab-workflow-library/formats/sample.ltproto",
+      "sha256": "e3cfd17814cef2a98e8a75cd41f30a48d905025252f47b5953c842cb1eef0a89",
+      "bytes": 184
+    },
+    {
+      "path": ".agents/skills/hab-workflow-library/formats/sample.ltresearch",
+      "sha256": "d401a9ac3c35c9e2d0a4d27829375329a07a1c28fe5154f40043b982b6f2c6f1",
+      "bytes": 143
+    },
+    {
+      "path": ".agents/skills/hab-workflow-library/formats/sample.ltrole",
+      "sha256": "e77ad24ce6cef7c9f1a8ed5a5c6d14d28598f8d188835b69261f4891459a027f",
+      "bytes": 123
+    },
+    {
+      "path": ".agents/skills/hab-workflow-library/formats/sample.ltsource",
+      "sha256": "bddae49c155f60ab292f2402bbf84d0df924d68e22ee379d5289d296aeb9b557",
+      "bytes": 148
+    },
+    {
+      "path": ".agents/skills/hab-workflow-library/references/domain-playbooks.md",
+      "sha256": "b602a805370796d65ed64bd55a052792f4a339853f1dced6d9cc9179d9f99e40",
+      "bytes": 4611
+    },
+    {
+      "path": ".agents/skills/hab-workflow-library/scripts/test_records.py",
+      "sha256": "5d0c31f981448d409d99192cf80703d26e90f83305945390c5eb74d7b9dbeb1b",
+      "bytes": 2216
+    },
+    {
+      "path": ".agents/skills/hab-workflow-library/scripts/validate_records.py",
+      "sha256": "82732609111904d28d1982bf259387ad7315a351c4eaac4796dc70c7e0460d4c",
+      "bytes": 3460
+    },
+    {
+      "path": ".agents/skills/ia-guardian-hab/SKILL.md",
+      "sha256": "28457ccaf2c8c6dbbce16daa367add773c982c3a81b1f5b50e6e67c21225d388",
+      "bytes": 6680
+    },
+    {
+      "path": ".agents/skills/ia-guardian-hab/references/choices.md",
+      "sha256": "c59285b642b4879f9990b5b440a9500b4d37eb1d1a6546c330964c8b57b326f5",
+      "bytes": 1595
+    },
+    {
+      "path": ".agents/skills/ia-guardian-hab/references/domains.md",
+      "sha256": "3c98d7fb632dcf835663737a01efbeb84491de870ae0f01460b5a95cc6c1c230",
+      "bytes": 2310
+    },
+    {
+      "path": ".agents/skills/ia-guardian-hab/references/revision-sync.md",
+      "sha256": "4876810e1a74cf69b47cf00e117a8f6603af4d3952ad3a949e057916923b4fcc",
+      "bytes": 1160
+    },
+    {
+      "path": ".agents/skills/ia-guardian-hab/references/universal-skill-tree.md",
+      "sha256": "d44017faaedaf4f76d2e4c6cad979b3861f930fd679a0562bef6a7a2596ae4a0",
+      "bytes": 2328
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "eef8fad1627748ac7e43e8cf0a17ac4d4982af37c2b058f4ec8bb3ebc0b8ba7f",
+      "bytes": 1482
+    },
+    {
+      "path": "universal-v1.2/COPY-PASTE.md",
+      "sha256": "c3b44920fb3657376a687ff9c3b2a80fad729535a34f2c0ac2fb8ce41cdc3112",
+      "bytes": 1763
+    },
+    {
+      "path": "universal-v1.2/FEATURE-COMPARISONS.md",
+      "sha256": "62374c01a307c846c79c3bb635cb76d88f03f868898c92ec078ec290dd77fdb7",
+      "bytes": 2778
+    },
+    {
+      "path": "universal-v1.2/RESEARCH-NOTES.md",
+      "sha256": "4e2d722f4c3f4f78de37e331a944ea0af97c389aaee2eab47e97886b63b66756",
+      "bytes": 3100
+    },
+    {
+      "path": "universal-v1.2/START-HERE.md",
+      "sha256": "ccc73f2278b17863d6f85d934ddb4c56ae2f75c9c2da9341a7dc3ea08b466af0",
+      "bytes": 2285
+    },
+    {
+      "path": "universal-v1.2/build_workflows.py",
+      "sha256": "aae0fe086373df5a90df8bb38db994c0a76d0de50a61645a12165807e2499f35",
+      "bytes": 11449
+    },
+    {
+      "path": "universal-v1.2/test_workflows.cjs",
+      "sha256": "dde4a125b783a19b569b54ab4c370fedaef8dbe1c7271781b95dfa707123cdf1",
+      "bytes": 3713
+    },
+    {
+      "path": "universal-v1.3/START-HERE.md",
+      "sha256": "38c2d26119549f4b046d9cda24cd94514c80df640cc8aa03434584b29b07e5b3",
+      "bytes": 2437
+    },
+    {
+      "path": "universal-v1.3/WORKFLOW-MENU.md",
+      "sha256": "286284dfea2ae84e19f441504785eebe52a0a5b0d9ec43e9bc2d2dfeef669630",
+      "bytes": 2533
+    },
+    {
+      "path": "universal-v1.3/build_domain_workflows.py",
+      "sha256": "177271c5b75ee61dc5a53f210b640bb04198fcb655124ba96597b441528f001d",
+      "bytes": 16130
+    },
+    {
+      "path": "universal-v1.3/test_workflows.cjs",
+      "sha256": "deebe049885b51f51f8e322ba18e723684075d129f8dd725d3b4fee0785d1087",
+      "bytes": 3986
+    }
+  ]
+}

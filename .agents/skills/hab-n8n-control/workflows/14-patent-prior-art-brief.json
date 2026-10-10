@@ -1,0 +1,79 @@
+{
+  "name": "Hab v1.3 \u2014 Patent and prior-art research preparation [manual preparation]",
+  "active": false,
+  "nodes": [
+    {
+      "id": "manual",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "sample",
+      "name": "Edit sample input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const userInput = {\n  \"public_topic\": \"Public provenance-record workflows\",\n  \"jurisdiction\": \"UNSPECIFIED\",\n  \"data_classification\": \"public\"\n};\nreturn [{json:userInput}];"
+      }
+    },
+    {
+      "id": "prepare",
+      "name": "Prepare bounded output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "\nconst items = $input.all();\nif (!Array.isArray(items) || items.length !== 1) throw new Error(\"Exactly one input required\");\nconst d = items[0].json;\nif (!d || typeof d !== \"object\" || Array.isArray(d)) throw new Error(\"Object input required\");\nconst serialized = JSON.stringify(d);\nif (serialized.length > 262144) throw new Error(\"Input exceeds character budget\");\nif (![\"public\", \"synthetic\"].includes(d.data_classification)) throw new Error(\"Only public or synthetic input is supported\");\nif (/\"(?:private_key|mnemonic|seed_phrase|api_key|password|authorization|cookie|access_token|decryption_key)\"\\s*:/i.test(serialized)\n || /\\b(?:sk-[A-Za-z0-9]{16,}|gh[pousr]_[A-Za-z0-9]{20,})\\b/.test(serialized)\n || /-----BEGIN [^-]*PRIVATE KEY-----/.test(serialized))\n throw new Error(\"Possible credential input rejected; use a secret manager\");\nif (d.approved === true || d.authorized === true) throw new Error(\"Input booleans do not authorize execution\");\nif (d.provider_spend_budget !== undefined && d.provider_spend_budget !== 0) throw new Error(\"Preparation templates support zero added provider spend only\");\nconst envelope = {schema:\"hab-preparation/1\", mode:\"PREPARATION_ONLY\", execution_enabled:false,\n provider_calls_enabled:false, financial_actions_enabled:false, provider_spend_budget:0};\n\nfunction label(v, field, limit=500) {\n if (typeof v!==\"string\" || !v.trim() || v.length>limit) throw new Error(\"Invalid \"+field);\n return v;\n}\nfunction list(v, field, limit=20) {\n if (!Array.isArray(v) || !v.length || v.length>limit) throw new Error(\"Invalid \"+field);\n return [...new Set(v.map(x=>label(x,field,200)))];\n}\nconst extra = JSON.stringify(d);\nif (/\"(?:private[-_]?key|api[-_]?key|seed[-_]?phrase|access[-_]?token|decryption[-_]?key)\"\\s*:/i.test(extra))\n throw new Error(\"Credential field rejected\");\n\nconst topic=label(d.public_topic,\"public nonconfidential topic\",1000), jurisdiction=label(d.jurisdiction,\"jurisdiction\",100);\nreturn [{json:{...envelope,public_topic:topic,jurisdiction,\n checklist:[\"Review disclosure/confidentiality boundaries before research\",\"Search official patent databases and primary literature\",\"Record filing/priority dates, families, claims and legal status\",\"Map proposed elements to prior art without inventing claims\",\"Separate novelty, inventiveness and freedom-to-operate questions\",\"Route to patent counsel before disclosure/filing decisions\"],\n searches_performed:0,jurisdiction_hold:jurisdiction===\"UNSPECIFIED\",novelty_verified:false,freedom_to_operate:\"NOT_ESTABLISHED\",filing_enabled:false}}];\n"
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit sample input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit sample input": {
+      "main": [
+        [
+          {
+            "node": "Prepare bounded output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "executionTimeout": 60,
+    "saveDataErrorExecution": "none",
+    "saveDataSuccessExecution": "none",
+    "saveManualExecutions": false
+  },
+  "pinData": {}
+}

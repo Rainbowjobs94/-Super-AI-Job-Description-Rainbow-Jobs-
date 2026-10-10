@@ -1,0 +1,79 @@
+{
+  "name": "Hab v1.2 \u2014 Individual agent handoff [manual preparation]",
+  "active": false,
+  "nodes": [
+    {
+      "id": "manual",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "sample",
+      "name": "Edit sample input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const userInput = {\n  \"provider\": \"monica\",\n  \"goal\": \"Compare two public project documentation pages with citations.\",\n  \"data_classification\": \"public\"\n};\nreturn [{json:userInput}];"
+      }
+    },
+    {
+      "id": "prepare",
+      "name": "Prepare bounded output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "\nconst items = $input.all();\nif (!Array.isArray(items) || items.length !== 1) throw new Error(\"Exactly one input required\");\nconst d = items[0].json;\nif (!d || typeof d !== \"object\" || Array.isArray(d)) throw new Error(\"Object input required\");\nconst serialized = JSON.stringify(d);\nif (serialized.length > 262144) throw new Error(\"Input exceeds character budget\");\nif (![\"public\", \"synthetic\"].includes(d.data_classification)) throw new Error(\"Only public or synthetic input is supported\");\nif (/\"(?:private_key|mnemonic|seed_phrase|api_key|password|authorization|cookie|access_token|decryption_key)\"\\s*:/i.test(serialized)\n || /\\b(?:sk-[A-Za-z0-9]{16,}|gh[pousr]_[A-Za-z0-9]{20,})\\b/.test(serialized)\n || /-----BEGIN [^-]*PRIVATE KEY-----/.test(serialized))\n throw new Error(\"Possible credential input rejected; use a secret manager\");\nif (d.approved === true || d.authorized === true) throw new Error(\"Input booleans do not authorize execution\");\nif (d.provider_spend_budget !== undefined && d.provider_spend_budget !== 0) throw new Error(\"Preparation templates support zero added provider spend only\");\nconst envelope = {schema:\"hab-preparation/1\", mode:\"PREPARATION_ONLY\", execution_enabled:false,\n provider_calls_enabled:false, financial_actions_enabled:false, provider_spend_budget:0};\n\nconst providers=[\"monica\",\"manus\",\"you-com\",\"replit\",\"claude\",\"chatgpt\",\"codex\",\"gemini\",\"perplexity\",\"grok\",\"cursor\",\"other\"];\nif (!providers.includes(d.provider)) throw new Error(\"Unknown provider; review a new adapter separately\");\nif (typeof d.goal!==\"string\" || !d.goal.trim() || d.goal.length>2000) throw new Error(\"Bounded goal required\");\nconst packet = [\"Provider: \"+d.provider, \"Goal: \"+d.goal, \"Inputs: public/synthetic allowlist only.\",\n \"Return citations, assumptions, actual checks and blockers. Keep added provider spend zero.\",\n \"Do not publish, deploy, sign, mint, trade, handle custody, create accounts or spawn agents.\",\n \"Missing tools or permission: return the precise blocker and manual fallback.\"].join(\"\\n\");\nreturn [{json:{...envelope,provider:d.provider,manual_packet:packet,credential_status:\"NOT_CONFIGURED\",sharing_status:\"Requires owner review before remote use\"}}];\n"
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit sample input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit sample input": {
+      "main": [
+        [
+          {
+            "node": "Prepare bounded output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "executionTimeout": 60,
+    "saveDataErrorExecution": "none",
+    "saveDataSuccessExecution": "none",
+    "saveManualExecutions": false
+  },
+  "pinData": {}
+}
