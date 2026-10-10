@@ -40,3 +40,10 @@ All twenty remain inactive/manual/no-network. Confidential research uses
 synthetic or public metadata only in these templates; do not paste the research
 contents into saved execution inputs. A private-data workflow needs separately
 reviewed instance/storage controls before use.
+
+## Free-first workflow variants
+
+The additional workflows-free-first-v1.4/ copies retain the same twenty local
+preparation flows and append a Free-first/checkpoint planning node. Originals
+remain unchanged. The new node emits advisory mode metadata; it does not call
+an LLM, change a model selector, enable Power or grant execution authority.

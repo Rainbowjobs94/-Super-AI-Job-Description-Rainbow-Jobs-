@@ -1,0 +1,39 @@
+{
+  "repo": "slavakurilyak/awesome-ai-agents",
+  "url": "https://github.com/slavakurilyak/awesome-ai-agents",
+  "commit": "a32e86f60db8dd9556218403532264e0794822c4",
+  "tree": "e1fda8f99865829bf5635cb6673713fdb339bad6",
+  "license_spdx": "MIT",
+  "recursive": true,
+  "truncated": false,
+  "blob_bytes": 1139926,
+  "blob_count": 32,
+  "max_blob": 397565,
+  "download_allowed": true,
+  "status": "VERIFIED_TRACKED_SNAPSHOT",
+  "archive_sha256": "43a9bada206543413447931c9bb5593a02dd7eff76912c72421038a0cc9df85e",
+  "compressed_bytes": 217914,
+  "expanded_bytes": 1139926,
+  "verified_files": 32,
+  "lfs_pointer_paths": [],
+  "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+  "history_included": false,
+  "other_branches_included": false,
+  "releases_dependencies_remote_media_included": false,
+  "installation_enabled": false,
+  "execution_enabled": false,
+  "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "LICENSE",
+      "http_status": 200,
+      "sha256": "26e3e3f3091ebe9d3611ef77ba6ec5a0162a9300913ddb71475fa57eb9001efa"
+    },
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "eb79e97ba41c2eeae05cad3e151e77fad034918294aae66e10b93be53724be28"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "repo": "LuxAlgo/Vela-pinets",
+  "url": "https://github.com/LuxAlgo/Vela-pinets",
+  "commit": "34f2c79c3515b39f84348ace56c0b6d9e1e5d356",
+  "tree": "ec7cdecffd80ce61bb21495d9b4bd9e84d670f1f",
+  "license_spdx": "AGPL-3.0",
+  "recursive": true,
+  "truncated": false,
+  "blob_bytes": 1070255,
+  "blob_count": 66,
+  "max_blob": 318536,
+  "download_allowed": true,
+  "status": "VERIFIED_TRACKED_SNAPSHOT",
+  "archive_sha256": "0d27bbd1f0405b654f1afe3d2838d64760e6b2bae5277409609fbc00d68c15cb",
+  "compressed_bytes": 520993,
+  "expanded_bytes": 1070255,
+  "verified_files": 66,
+  "lfs_pointer_paths": [],
+  "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+  "history_included": false,
+  "other_branches_included": false,
+  "releases_dependencies_remote_media_included": false,
+  "installation_enabled": false,
+  "execution_enabled": false,
+  "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "LICENSE",
+      "http_status": 200,
+      "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+    },
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "4dad06b9357acfe6258718c90dda1329d35c76304f9f28aa381737571d75410e"
+    }
+  ]
+}

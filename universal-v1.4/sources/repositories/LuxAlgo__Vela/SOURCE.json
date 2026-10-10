@@ -1,0 +1,44 @@
+{
+  "repo": "LuxAlgo/Vela",
+  "url": "https://github.com/LuxAlgo/Vela",
+  "commit": "766a0f134935ac714871c5e89ba63940a245965f",
+  "tree": "2383188b76ade2bcd4dd4c63e9aadbe689d6d3ad",
+  "license_spdx": "Apache-2.0",
+  "recursive": true,
+  "truncated": false,
+  "blob_bytes": 8065751,
+  "blob_count": 619,
+  "max_blob": 1109550,
+  "download_allowed": true,
+  "status": "VERIFIED_TRACKED_SNAPSHOT",
+  "archive_sha256": "ec2ee8a33fa329dd63b68593d430f8621fc9d27992150417cc2c8e0051e7ac98",
+  "compressed_bytes": 4119472,
+  "expanded_bytes": 8065751,
+  "verified_files": 619,
+  "lfs_pointer_paths": [],
+  "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+  "history_included": false,
+  "other_branches_included": false,
+  "releases_dependencies_remote_media_included": false,
+  "installation_enabled": false,
+  "execution_enabled": false,
+  "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "LICENSE",
+      "http_status": 200,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "NOTICE",
+      "http_status": 200,
+      "sha256": "be6747b87ae46ab2063e4f2cb27d4042319e39cef076c68b98b02d1845dea138"
+    },
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "d86ffe8f7ca793c1311d4da095e777e0f80def8f974828f2cc6471d705d4347c"
+    }
+  ]
+}

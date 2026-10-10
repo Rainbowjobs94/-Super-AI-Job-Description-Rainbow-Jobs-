@@ -1,0 +1,44 @@
+{
+  "repo": "LuxAlgo/PineTS",
+  "url": "https://github.com/LuxAlgo/PineTS",
+  "commit": "c5e6b0efee7e42d78b42d96f14173f38be082551",
+  "tree": "b001537914021accd1662b872eed7e52b621e83b",
+  "license_spdx": "AGPL-3.0",
+  "recursive": true,
+  "truncated": false,
+  "blob_bytes": 45585273,
+  "blob_count": 933,
+  "max_blob": 15514816,
+  "download_allowed": true,
+  "status": "QUARANTINED_SECRET_CANDIDATE",
+  "archive_sha256": "dea3b6f265445aa98e25ff12596940bbb7e6e4f9b939ab10588ffaaf0f16a62d",
+  "compressed_bytes": 7495271,
+  "expanded_bytes": 45585273,
+  "verified_files": 933,
+  "lfs_pointer_paths": [],
+  "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+  "history_included": false,
+  "other_branches_included": false,
+  "releases_dependencies_remote_media_included": false,
+  "installation_enabled": false,
+  "execution_enabled": false,
+  "snapshot_delivery": "HOLD",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "LICENSE",
+      "http_status": 200,
+      "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+    },
+    {
+      "path": "LICENSE-COMMERCIAL.md",
+      "http_status": 200,
+      "sha256": "07bbea0fa1300e6ea51ebde1104004b7a400c58ade52bdf1d427523b519e7bff"
+    },
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "ffd69f58c4f9035afe8785139da05937c3a48e23fb6d513255787d3a615be7c9"
+    }
+  ]
+}

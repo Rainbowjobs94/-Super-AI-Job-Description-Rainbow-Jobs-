@@ -1,0 +1,44 @@
+{
+  "repo": "LuxAlgo/edge-stats",
+  "url": "https://github.com/LuxAlgo/edge-stats",
+  "commit": "a48259887962d0f67a27d2b0815e2df9a52efca5",
+  "tree": "20eaf51e1552a912eb0ed882cb5b3e5f020fe435",
+  "license_spdx": "MIT",
+  "recursive": true,
+  "truncated": false,
+  "blob_bytes": 2332430,
+  "blob_count": 225,
+  "max_blob": 298890,
+  "download_allowed": true,
+  "status": "VERIFIED_TRACKED_SNAPSHOT",
+  "archive_sha256": "827b0c769817bbd543ad008d92971e3aecaa46b40bfacb33c04a37579c502c01",
+  "compressed_bytes": 1554745,
+  "expanded_bytes": 2332430,
+  "verified_files": 225,
+  "lfs_pointer_paths": [],
+  "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+  "history_included": false,
+  "other_branches_included": false,
+  "releases_dependencies_remote_media_included": false,
+  "installation_enabled": false,
+  "execution_enabled": false,
+  "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "DATA_LICENSE",
+      "http_status": 200,
+      "sha256": "37eea09b8897aec17f79e947ccbcd5fc7271bdfbe5a0fd6a71f4c7e851d781d1"
+    },
+    {
+      "path": "LICENSE",
+      "http_status": 200,
+      "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+    },
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "dd08862deca759f990795bc5e30284aadf67c1c47f7de8d3123c6ac1ee3116e9"
+    }
+  ]
+}

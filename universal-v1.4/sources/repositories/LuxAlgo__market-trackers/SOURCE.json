@@ -1,0 +1,39 @@
+{
+  "repo": "LuxAlgo/market-trackers",
+  "url": "https://github.com/LuxAlgo/market-trackers",
+  "commit": "1ecfcca36a224d4758cc6e2e20cca216db43d5ee",
+  "tree": "97e42880eafd654c0a220594869b140de5c4d605",
+  "license_spdx": "MIT",
+  "recursive": true,
+  "truncated": false,
+  "blob_bytes": 2310991,
+  "blob_count": 430,
+  "max_blob": 102142,
+  "download_allowed": true,
+  "status": "VERIFIED_TRACKED_SNAPSHOT",
+  "archive_sha256": "c4c55b59ec8a063db20e18856446215b8cc269672763907bc57842e2590a2825",
+  "compressed_bytes": 934424,
+  "expanded_bytes": 2310991,
+  "verified_files": 430,
+  "lfs_pointer_paths": [],
+  "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+  "history_included": false,
+  "other_branches_included": false,
+  "releases_dependencies_remote_media_included": false,
+  "installation_enabled": false,
+  "execution_enabled": false,
+  "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "LICENSE",
+      "http_status": 200,
+      "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+    },
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "e509d28e8853c425c5e189bea3fdcd7becca0067656265ef958ae6fb3166296b"
+    }
+  ]
+}
