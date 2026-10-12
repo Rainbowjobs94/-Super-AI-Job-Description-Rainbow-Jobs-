@@ -215,7 +215,9 @@ class TestHubRepoEndpoints(unittest.TestCase):
     def setUp(self):
         from src.hub import app
         app.config["TESTING"] = True
+        app.config["HAB_TOKEN"] = "test-" + "x" * 40
         self.client = app.test_client()
+        self.client.environ_base["HTTP_AUTHORIZATION"] = "Bearer " + app.config["HAB_TOKEN"]
 
     @patch("src.hub.github_client")
     def test_repo_tree_success(self, mock_gh):

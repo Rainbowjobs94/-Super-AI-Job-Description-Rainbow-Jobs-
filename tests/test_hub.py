@@ -5,7 +5,9 @@ from src.hub import app
 class TestHubChat(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True
+        app.config['HAB_TOKEN'] = 'test-' + 'x' * 40
         self.client = app.test_client()
+        self.client.environ_base['HTTP_AUTHORIZATION'] = 'Bearer ' + app.config['HAB_TOKEN']
 
     def test_chat_endpoint_success(self):
         response = self.client.post(
@@ -16,7 +18,7 @@ class TestHubChat(unittest.TestCase):
         data = json.loads(response.data)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data['status'], 'success')
-        self.assertIn("I am Physical-23", data['response'])
+        self.assertIn("IA Guardian Hab", data['response'])
         self.assertIn("Hello AI", data['response'])
 
     def test_chat_endpoint_missing_message(self):
@@ -33,7 +35,9 @@ class TestHubChat(unittest.TestCase):
 class TestHubFiles(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True
+        app.config['HAB_TOKEN'] = 'test-' + 'x' * 40
         self.client = app.test_client()
+        self.client.environ_base['HTTP_AUTHORIZATION'] = 'Bearer ' + app.config['HAB_TOKEN']
 
     def test_list_files(self):
         response = self.client.get('/api/files')

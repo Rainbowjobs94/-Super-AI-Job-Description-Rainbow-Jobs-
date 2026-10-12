@@ -1,4 +1,20 @@
-# Super AI Job Description - Rainbow Jobs
+# IA Guardian Hab
+
+Local-first operator workspace and portable source toolkit. Preserve,
+catalog, review and deliberately transfer code, contracts, documents and media.
+
+See [the operator guide](docs/HAB_GUIDE.md) for access provisioning, source
+packages, approved merges, rollback and explicit limitations.
+The original Community Guardian modules and GitHub source browser remain;
+legacy source overwrites are disabled by default.
+No live mining, financial deployment or general external AI provider is enabled.
+
+Version **1.1.0** adds offline branch/project revision comparison and private
+project-scoped source/skill overlays. See [revision reconciliation](docs/REVISION_SYNC.md).
+`python -m src.hab.cli reconcile previous.json current.json --output review.json`
+produces a review report, not an automatic merge or deployment.
+
+## Original Community Guardian context
 
 Community Guardian Agent (Physical-23) for multi-platform community management.
 

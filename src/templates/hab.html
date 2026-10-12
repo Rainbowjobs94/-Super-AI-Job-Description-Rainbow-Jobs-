@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IA Guardian Hab — Operator workspace</title>
+  <link rel="stylesheet" href="/static/hab.css">
+</head>
+<body>
+  <aside>
+    <div class="mark">IA<span>HAB</span></div>
+    <p class="eyebrow">LOVE TRANSCENDS / OPERATOR</p>
+    <nav aria-label="Workspace">
+      <a href="#sources">01 / Source library</a>
+      <a href="#planner">02 / Request planner</a>
+      <a href="#registry">03 / Shared registry</a>
+      <a href="#transfer">04 / Transfer preview</a>
+      <a href="/legacy">Legacy workspace ↗</a>
+    </nav>
+    <div class="boundary"><strong>Review before release</strong><p>No live mining, minting, trading or automatic deployment. Imported files never execute.</p></div>
+    <small>Hab v1.1 · LOCAL-FIRST</small>
+  </aside>
+  <main>
+    <header><div><p class="eyebrow">ONE LIBRARY. EXPLICIT CONNECTIONS.</p><h1>IA Guardian Hab</h1><p class="subtitle">Preserve the source. Understand the change. Transfer deliberately.</p></div><span class="badge">REVIEW MODE</span></header>
+    <section class="access" aria-labelledby="access-title">
+      <h2 id="access-title">Operator access</h2>
+      <label for="token">Operator token — provision HAB_OPERATOR_TOKEN in the server secrets</label>
+      <div class="inline"><input id="token" type="password" autocomplete="off" placeholder="Token stays in this tab only"><button id="unlock">Connect workspace</button><button id="lock" class="secondary">Lock</button></div>
+      <p id="notice" role="status" aria-live="polite">Not connected. No catalog or private content has been loaded.</p>
+    </section>
+    <div class="stats"><div><span id="source-count">—</span><small>Unique sources</small></div><div><span id="file-count">—</span><small>Cataloged files</small></div><div><span id="flag-count">—</span><small>Restricted entries</small></div><div><span>0</span><small>External model calls</small></div></div>
+    <section id="sources">
+      <div class="section-heading"><div><p class="eyebrow">01 / INTAKE & PROVENANCE</p><h2>Source library</h2></div><button id="export" disabled>Export selected</button></div>
+      <p>Duplicate bytes share one object; original names remain aliases. Exports exclude flagged entries. License review is still required.</p>
+      <label class="drop">Import a file or ZIP <input id="upload" type="file" disabled><small>16 MiB request limit · bounded ZIP validation · no auto-install</small></label>
+      <div id="source-list" class="source-list"><p class="empty">Connect operator access to inspect the catalog.</p></div>
+    </section>
+    <section id="planner">
+      <p class="eyebrow">02 / BOUNDED, NO-MODEL PLANNING</p><h2>Your request, preserved</h2>
+      <label for="request">Punctuated, run-on or unspaced text</label><textarea id="request" rows="4" maxlength="12000" placeholder="archiveallfilesmergeskillsreviewcontracts"></textarea>
+      <button id="parse" disabled>Extract task candidates</button>
+      <p>Local candidate detection is not general AI understanding. Negation, ambiguous names and unspaced text require review. Candidates authorize no actions.</p>
+      <pre id="plan-output" aria-live="polite">No request analyzed.</pre>
+    </section>
+    <section id="registry">
+      <p class="eyebrow">03 / SHARED DEFINITIONS</p><h2>Tasks, features & evidence</h2>
+      <div class="inline"><label for="kind">Record type</label><select id="kind"><option value="task">Tasks</option><option value="feature">Features</option><option value="deployment">Deployment candidates</option><option value="research">Research sources</option></select><button id="refresh" disabled class="secondary">Load records</button></div>
+      <p>Deployment candidates are not live checks. Duplicate chain/address or chain/role combinations are rejected. Research URLs are recorded, not fetched.</p>
+      <label for="record">Record JSON — ASCII ID, status and evidence reference where applicable</label>
+      <textarea id="record" rows="4">{"id":"review-source","title":"Review imported source","status":"PROPOSED"}</textarea>
+      <button id="save-record" disabled>Save reviewed record</button>
+      <pre id="record-output">No records loaded.</pre>
+    </section>
+    <section id="transfer">
+      <p class="eyebrow">04 / PREVIEW BEFORE APPLY</p><h2>Transfer without surprises</h2>
+      <label for="source-id">Source ID</label><input id="source-id" placeholder="SHA-256 source ID from the catalog">
+      <label for="mappings">Source → destination mappings (JSON)</label><textarea id="mappings" rows="3" placeholder='{"src/example.py":"src/example.py"}'></textarea>
+      <button id="preview" disabled>Preview transfer</button>
+      <p>The web preview targets <code>data/transfer-preview</code>. Apply and rollback are CLI-only, with an exact reviewed plan hash. No conflict overwrite is automatic.</p>
+      <pre id="merge-output">No transfer previewed.</pre>
+    </section>
+    <footer>Integrity is not ownership. A contribution record is not a price guarantee, tax deduction or zero-knowledge proof.</footer>
+  </main>
+  <script src="/static/hab.js" defer></script>
+</body>
+</html>
