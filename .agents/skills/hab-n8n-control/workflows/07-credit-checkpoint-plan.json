@@ -1,0 +1,79 @@
+{
+  "name": "Hab v1.2 \u2014 Credit and checkpoint preparation [manual preparation]",
+  "active": false,
+  "nodes": [
+    {
+      "id": "manual",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "sample",
+      "name": "Edit sample input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const userInput = {\n  \"goal\": \"Inspect one repository and prepare a reviewed skill wrapper.\",\n  \"max_reads\": 20,\n  \"max_retries\": 1,\n  \"data_classification\": \"public\"\n};\nreturn [{json:userInput}];"
+      }
+    },
+    {
+      "id": "prepare",
+      "name": "Prepare bounded output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "\nconst items = $input.all();\nif (!Array.isArray(items) || items.length !== 1) throw new Error(\"Exactly one input required\");\nconst d = items[0].json;\nif (!d || typeof d !== \"object\" || Array.isArray(d)) throw new Error(\"Object input required\");\nconst serialized = JSON.stringify(d);\nif (serialized.length > 262144) throw new Error(\"Input exceeds character budget\");\nif (![\"public\", \"synthetic\"].includes(d.data_classification)) throw new Error(\"Only public or synthetic input is supported\");\nif (/\"(?:private_key|mnemonic|seed_phrase|api_key|password|authorization|cookie|access_token|decryption_key)\"\\s*:/i.test(serialized)\n || /\\b(?:sk-[A-Za-z0-9]{16,}|gh[pousr]_[A-Za-z0-9]{20,})\\b/.test(serialized)\n || /-----BEGIN [^-]*PRIVATE KEY-----/.test(serialized))\n throw new Error(\"Possible credential input rejected; use a secret manager\");\nif (d.approved === true || d.authorized === true) throw new Error(\"Input booleans do not authorize execution\");\nif (d.provider_spend_budget !== undefined && d.provider_spend_budget !== 0) throw new Error(\"Preparation templates support zero added provider spend only\");\nconst envelope = {schema:\"hab-preparation/1\", mode:\"PREPARATION_ONLY\", execution_enabled:false,\n provider_calls_enabled:false, financial_actions_enabled:false, provider_spend_budget:0};\n\nif (typeof d.goal!==\"string\" || !d.goal.trim() || d.goal.length>2000) throw new Error(\"Bounded goal required\");\nif (!Number.isInteger(d.max_reads) || d.max_reads<1 || d.max_reads>50) throw new Error(\"Read limit must be 1..50\");\nif (!Number.isInteger(d.max_retries) || d.max_retries<0 || d.max_retries>2) throw new Error(\"Retry limit must be 0..2\");\nreturn [{json:{...envelope,goal:d.goal,max_reads:d.max_reads,max_retries:d.max_retries,workers:1,\n strategy:[\"Inspect existing source first\",\"Hash-based reuse\",\"Targeted spans\",\"Batch independent reads\",\"Checkpoint before limits\"],\n checkpoint_fields:[\"opaque task ID\",\"source digests\",\"completed checks\",\"next action\",\"holds\",\"permission expiry\"],\n platform_credit_usage:\"UNKNOWN; not guaranteed zero\",prohibited:[\"metering bypass\",\"identity rotation\",\"keep-alive evasion\",\"unbounded model fan-out\"]}}];\n"
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit sample input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit sample input": {
+      "main": [
+        [
+          {
+            "node": "Prepare bounded output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "executionTimeout": 60,
+    "saveDataErrorExecution": "none",
+    "saveDataSuccessExecution": "none",
+    "saveManualExecutions": false
+  },
+  "pinData": {}
+}

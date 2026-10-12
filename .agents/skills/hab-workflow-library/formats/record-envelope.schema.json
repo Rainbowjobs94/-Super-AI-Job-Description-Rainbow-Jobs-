@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Hab proposed record envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "payload"],
+  "properties": {
+    "schema_version": {"const": "1"},
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{1,80}$"},
+    "payload": {"type": "object"}
+  }
+}

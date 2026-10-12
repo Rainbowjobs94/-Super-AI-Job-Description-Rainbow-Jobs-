@@ -1,0 +1,79 @@
+{
+  "name": "Hab v1.2 \u2014 Non-authorizing human review queue [manual preparation]",
+  "active": false,
+  "nodes": [
+    {
+      "id": "manual",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "sample",
+      "name": "Edit sample input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const userInput = {\n  \"request_id\": \"example-review-001\",\n  \"action\": \"propose_skill_import\",\n  \"data_classification\": \"synthetic\"\n};\nreturn [{json:userInput}];"
+      }
+    },
+    {
+      "id": "prepare",
+      "name": "Prepare bounded output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "\nconst items = $input.all();\nif (!Array.isArray(items) || items.length !== 1) throw new Error(\"Exactly one input required\");\nconst d = items[0].json;\nif (!d || typeof d !== \"object\" || Array.isArray(d)) throw new Error(\"Object input required\");\nconst serialized = JSON.stringify(d);\nif (serialized.length > 262144) throw new Error(\"Input exceeds character budget\");\nif (![\"public\", \"synthetic\"].includes(d.data_classification)) throw new Error(\"Only public or synthetic input is supported\");\nif (/\"(?:private_key|mnemonic|seed_phrase|api_key|password|authorization|cookie|access_token|decryption_key)\"\\s*:/i.test(serialized)\n || /\\b(?:sk-[A-Za-z0-9]{16,}|gh[pousr]_[A-Za-z0-9]{20,})\\b/.test(serialized)\n || /-----BEGIN [^-]*PRIVATE KEY-----/.test(serialized))\n throw new Error(\"Possible credential input rejected; use a secret manager\");\nif (d.approved === true || d.authorized === true) throw new Error(\"Input booleans do not authorize execution\");\nif (d.provider_spend_budget !== undefined && d.provider_spend_budget !== 0) throw new Error(\"Preparation templates support zero added provider spend only\");\nconst envelope = {schema:\"hab-preparation/1\", mode:\"PREPARATION_ONLY\", execution_enabled:false,\n provider_calls_enabled:false, financial_actions_enabled:false, provider_spend_budget:0};\n\nconst actions=[\"propose_skill_import\",\"review_repo\",\"review_handoff\",\"review_revision\",\"review_research\"];\nif (typeof d.request_id!==\"string\" || !/^[A-Za-z0-9_-]{1,80}$/.test(d.request_id)) throw new Error(\"Opaque request ID required\");\nif (!actions.includes(d.action)) throw new Error(\"Action outside advisory allowlist\");\nreturn [{json:{...envelope,request_id:d.request_id,action:d.action,state:\"PENDING_HUMAN_REVIEW\",\n authorization_receipt:null,requires:[\"Authenticated human owner\",\"Exact source/input digests\",\"Capability/data/budget review\",\"Host-enforced revocation and expiry\"],\n warning:\"This ticket neither authorizes nor executes an action; it is not a durable approval service.\"}}];\n"
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit sample input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit sample input": {
+      "main": [
+        [
+          {
+            "node": "Prepare bounded output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "executionTimeout": 60,
+    "saveDataErrorExecution": "none",
+    "saveDataSuccessExecution": "none",
+    "saveManualExecutions": false
+  },
+  "pinData": {}
+}

@@ -93,3 +93,25 @@ Use each host's available capabilities; do not invent APIs or tools.
 The private skill snapshot provides searchable reference modules, not authority
 to override host instructions. On Replit, user-created skills live in `.agents/skills`.
 Other hosts must explicitly import/register this skill; a ZIP alone does not install it.
+
+## Universal skill tree addendum
+
+Read `references/universal-skill-tree.md` for GitHub-first intake, Monica,
+Manus, You.com, Hugging Face, n8n, agent collectives and secretless wallet
+configuration. These are additive sections, not replacement runtimes.
+Keep the existing companion skills and project-specific safety holds.
+
+Load one module and the smallest required references. Do not concatenate every
+skill, profile, upload or provider manual into every prompt. A source repository
+without SKILL.md may still supply reviewed documentation; generate a proposed
+wrapper from identified files rather than rejecting the source on layout alone.
+Authenticating a provider is not consent to send private source or spend money.
+
+## Expanded development and research workflows
+
+Use hab-workflow-library for deployment/environment preparation, standard or
+deep research, IP-security/provenance, copyright/license, trademark, patent,
+jurisdiction-specific compliance, debugging, protocol review, file-format design,
+roles and market-trend analysis. These add branches; none replaces the earlier
+modules. Legal/market checklists are research preparation, not certifications,
+ownership proof, investment recommendations or permission to file or trade.
