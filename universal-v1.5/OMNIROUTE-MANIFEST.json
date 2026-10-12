@@ -1,0 +1,33 @@
+{
+  "activation": "NOT_INSTALLED",
+  "entries": [
+    {
+      "bytes": 4420,
+      "path": ".agents/skills/hab-omniroute/SKILL.md",
+      "sha256": "68ca35aabb33c56d6a63a82110dfad5ffd6a169d797b20fccf43194b3c2192cd"
+    },
+    {
+      "bytes": 15234,
+      "path": ".agents/skills/hab-omniroute/references/source.json",
+      "sha256": "5711cad9e32999a347116175e4dc5bf5cb598f140787cf7747a1aa7bca285a25"
+    },
+    {
+      "bytes": 30256,
+      "path": ".agents/skills/hab-omniroute/references/native-skills.json",
+      "sha256": "bdacb2e8c928aaab44f5e318629dbe58755443f479a0b0acc25db0a32cfd80df"
+    },
+    {
+      "bytes": 1787,
+      "path": ".agents/skills/hab-omniroute/references/copy-paste.md",
+      "sha256": "aed8aa3b5dc586908a8d9cad82aa800b79b947062da82f3fe5aecc2fd3c4c9b6"
+    },
+    {
+      "bytes": 1546,
+      "path": "universal-v1.5/OMNIROUTE.md",
+      "sha256": "89797672e6deb7bf07c6291216a0870940e2c0151af0a56ccbaa37fc699bf758"
+    }
+  ],
+  "kind": "additive-source-reference-wrapper",
+  "schema": "hab-package/1",
+  "version": "1.5-omniroute-addition"
+}
