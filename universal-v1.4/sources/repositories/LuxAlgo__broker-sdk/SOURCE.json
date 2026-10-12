@@ -1,0 +1,39 @@
+{
+  "repo": "LuxAlgo/broker-sdk",
+  "url": "https://github.com/LuxAlgo/broker-sdk",
+  "commit": "6ec9de427b8f6adb2ddaf35ba7e78630f9a3743f",
+  "tree": "bdd81de869976b6001fbe5c1b5b60a9bad7df301",
+  "license_spdx": "MIT",
+  "recursive": true,
+  "truncated": false,
+  "blob_bytes": 570695,
+  "blob_count": 124,
+  "max_blob": 64792,
+  "download_allowed": true,
+  "status": "VERIFIED_TRACKED_SNAPSHOT",
+  "archive_sha256": "c011109e2d59d02597aa4850e2555299afbbdaf87bc8b8ed654677ebd518a84f",
+  "compressed_bytes": 237327,
+  "expanded_bytes": 570695,
+  "verified_files": 124,
+  "lfs_pointer_paths": [],
+  "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+  "history_included": false,
+  "other_branches_included": false,
+  "releases_dependencies_remote_media_included": false,
+  "installation_enabled": false,
+  "execution_enabled": false,
+  "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "LICENSE",
+      "http_status": 200,
+      "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+    },
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "6c579e3b433519f381d3846bf3496050b70065fd8b5a28425d5d9e026ec96869"
+    }
+  ]
+}

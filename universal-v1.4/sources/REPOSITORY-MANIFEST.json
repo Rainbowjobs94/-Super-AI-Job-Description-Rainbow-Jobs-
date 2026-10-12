@@ -1,0 +1,656 @@
+[
+  {
+    "repo": "HermanTrading/aw_trades_-model",
+    "url": "https://github.com/HermanTrading/aw_trades_-model",
+    "commit": "f64cf5a48db4df7cc72d7d493921cfd5450984ad",
+    "tree": "2027d9f5ebe84fd62b4d0b5bd8698520c463ed4a",
+    "license_spdx": null,
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 33332,
+    "blob_count": 1,
+    "max_blob": 33332,
+    "download_allowed": false,
+    "status": "INDEX_ONLY_RIGHTS_PRIVACY_HOLD",
+    "snapshot_delivery": "HOLD",
+    "live_actions_enabled": false,
+    "docs_read": []
+  },
+  {
+    "repo": "LuxAlgo/Vela",
+    "url": "https://github.com/LuxAlgo/Vela",
+    "commit": "766a0f134935ac714871c5e89ba63940a245965f",
+    "tree": "2383188b76ade2bcd4dd4c63e9aadbe689d6d3ad",
+    "license_spdx": "Apache-2.0",
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 8065751,
+    "blob_count": 619,
+    "max_blob": 1109550,
+    "download_allowed": true,
+    "status": "VERIFIED_TRACKED_SNAPSHOT",
+    "archive_sha256": "ec2ee8a33fa329dd63b68593d430f8621fc9d27992150417cc2c8e0051e7ac98",
+    "compressed_bytes": 4119472,
+    "expanded_bytes": 8065751,
+    "verified_files": 619,
+    "lfs_pointer_paths": [],
+    "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+    "history_included": false,
+    "other_branches_included": false,
+    "releases_dependencies_remote_media_included": false,
+    "installation_enabled": false,
+    "execution_enabled": false,
+    "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      },
+      {
+        "path": "NOTICE",
+        "http_status": 200,
+        "sha256": "be6747b87ae46ab2063e4f2cb27d4042319e39cef076c68b98b02d1845dea138"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "d86ffe8f7ca793c1311d4da095e777e0f80def8f974828f2cc6471d705d4347c"
+      }
+    ]
+  },
+  {
+    "repo": "LuxAlgo/prop-firm-sim",
+    "url": "https://github.com/LuxAlgo/prop-firm-sim",
+    "commit": "05e443250f1294c03fe65120727666feeb353e32",
+    "tree": "8e3c7f4a130de22d3a1ad9e80103a4f08c852dc1",
+    "license_spdx": "MIT",
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 1956565,
+    "blob_count": 135,
+    "max_blob": 536957,
+    "download_allowed": true,
+    "status": "VERIFIED_TRACKED_SNAPSHOT",
+    "archive_sha256": "53ab64ba9bdb31e2bdd3cdb4d70fbfb79ff6e371638e84f57101f49a068fdb91",
+    "compressed_bytes": 1349299,
+    "expanded_bytes": 1956565,
+    "verified_files": 135,
+    "lfs_pointer_paths": [],
+    "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+    "history_included": false,
+    "other_branches_included": false,
+    "releases_dependencies_remote_media_included": false,
+    "installation_enabled": false,
+    "execution_enabled": false,
+    "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "1684a3bd3afcfa6f5fa2213b9cba83c179583572589666828c183a3910a7aea8"
+      }
+    ]
+  },
+  {
+    "repo": "LuxAlgo/trade-journal",
+    "url": "https://github.com/LuxAlgo/trade-journal",
+    "commit": "7fc41406f69aa2f0ff2644b5cbcc2f9393b4d15a",
+    "tree": "2d5befee8faa8b2d0a34f0d4289b070179e76007",
+    "license_spdx": "MIT",
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 3739637,
+    "blob_count": 370,
+    "max_blob": 569208,
+    "download_allowed": true,
+    "status": "VERIFIED_TRACKED_SNAPSHOT",
+    "archive_sha256": "6c8b8a3e6586c9ba34889465081ca0d17068b64a9ae017b730ac16cd868357b1",
+    "compressed_bytes": 2035750,
+    "expanded_bytes": 3739637,
+    "verified_files": 370,
+    "lfs_pointer_paths": [],
+    "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+    "history_included": false,
+    "other_branches_included": false,
+    "releases_dependencies_remote_media_included": false,
+    "installation_enabled": false,
+    "execution_enabled": false,
+    "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "5b0dce54c02ebfd1ba98083e6b41583bc39be0442e593f96c33728a5e71b6b26"
+      }
+    ]
+  },
+  {
+    "repo": "LuxAlgo/PineTS",
+    "url": "https://github.com/LuxAlgo/PineTS",
+    "commit": "c5e6b0efee7e42d78b42d96f14173f38be082551",
+    "tree": "b001537914021accd1662b872eed7e52b621e83b",
+    "license_spdx": "AGPL-3.0",
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 45585273,
+    "blob_count": 933,
+    "max_blob": 15514816,
+    "download_allowed": true,
+    "status": "QUARANTINED_SECRET_CANDIDATE",
+    "archive_sha256": "dea3b6f265445aa98e25ff12596940bbb7e6e4f9b939ab10588ffaaf0f16a62d",
+    "compressed_bytes": 7495271,
+    "expanded_bytes": 45585273,
+    "verified_files": 933,
+    "lfs_pointer_paths": [],
+    "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+    "history_included": false,
+    "other_branches_included": false,
+    "releases_dependencies_remote_media_included": false,
+    "installation_enabled": false,
+    "execution_enabled": false,
+    "snapshot_delivery": "HOLD",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+      },
+      {
+        "path": "LICENSE-COMMERCIAL.md",
+        "http_status": 200,
+        "sha256": "07bbea0fa1300e6ea51ebde1104004b7a400c58ade52bdf1d427523b519e7bff"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "ffd69f58c4f9035afe8785139da05937c3a48e23fb6d513255787d3a615be7c9"
+      }
+    ]
+  },
+  {
+    "repo": "LuxAlgo/market-trackers-data",
+    "url": "https://github.com/LuxAlgo/market-trackers-data",
+    "commit": "7da610f3876308bbc276972d0869e4cc0f20cd30",
+    "tree": "d0c63c172f78ec443a2289982946edc54de44534",
+    "license_spdx": "CC0-1.0",
+    "recursive": false,
+    "truncated": false,
+    "blob_bytes": 142761,
+    "blob_count": 5,
+    "max_blob": 94996,
+    "download_allowed": false,
+    "status": "INDEX_ONLY_SIZE_HOLD",
+    "snapshot_delivery": "HOLD",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "6aef0b4b47e9be25527e33c704f8ebe5fe3da5a0010b567e0f0a87613101ff90"
+      }
+    ]
+  },
+  {
+    "repo": "LuxAlgo/luxalgo-mcp-server",
+    "url": "https://github.com/LuxAlgo/luxalgo-mcp-server",
+    "commit": "fbef999fce5ae2fe4392a430806e928656f0f846",
+    "tree": "24dffca6da02a85a5e6bd1927993b6689a71d9cd",
+    "license_spdx": "MIT",
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 7251408,
+    "blob_count": 105,
+    "max_blob": 6581756,
+    "download_allowed": true,
+    "status": "VERIFIED_TRACKED_SNAPSHOT",
+    "archive_sha256": "0dd2cc60d6761b4aee2e981a75208ee2e1faa66d3aa6e58bc9502f51a1a0d7f6",
+    "compressed_bytes": 6641298,
+    "expanded_bytes": 7251408,
+    "verified_files": 105,
+    "lfs_pointer_paths": [],
+    "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+    "history_included": false,
+    "other_branches_included": false,
+    "releases_dependencies_remote_media_included": false,
+    "installation_enabled": false,
+    "execution_enabled": false,
+    "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+      },
+      {
+        "path": "NOTICE",
+        "http_status": 200,
+        "sha256": "57b3bc75abeed567facf72d1666dd2d72243529bde6d9f9b164883d0355e9fba"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "0db05f65cc8917cb9fa8ee9d0a2057d733b764b89ed7a416e68e913242fb9420"
+      }
+    ]
+  },
+  {
+    "repo": "LuxAlgo/trade-relay",
+    "url": "https://github.com/LuxAlgo/trade-relay",
+    "commit": "3e431aea4cfdacf9c9454067a647e155945e541d",
+    "tree": "759eb60bb5bac19f6b5bd4af1fb8f315f6217963",
+    "license_spdx": "MIT",
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 1066500,
+    "blob_count": 77,
+    "max_blob": 284162,
+    "download_allowed": true,
+    "status": "VERIFIED_TRACKED_SNAPSHOT",
+    "archive_sha256": "da165eef22b05fad890859c7991ed22f43b16e217305bd00e09181d17e1e2658",
+    "compressed_bytes": 783969,
+    "expanded_bytes": 1066500,
+    "verified_files": 77,
+    "lfs_pointer_paths": [],
+    "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+    "history_included": false,
+    "other_branches_included": false,
+    "releases_dependencies_remote_media_included": false,
+    "installation_enabled": false,
+    "execution_enabled": false,
+    "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "bbde2391f7800b9d8cc82eddc877a0469f09084dce961f21cb3ff0d008094aed"
+      },
+      {
+        "path": "THIRD_PARTY_NOTICES.md",
+        "http_status": 200,
+        "sha256": "cee56f7b0848621eed7d678dc48543932a82883fd925f769cab88b2b9ba83f3e"
+      }
+    ]
+  },
+  {
+    "repo": "LuxAlgo/Vela-pinets",
+    "url": "https://github.com/LuxAlgo/Vela-pinets",
+    "commit": "34f2c79c3515b39f84348ace56c0b6d9e1e5d356",
+    "tree": "ec7cdecffd80ce61bb21495d9b4bd9e84d670f1f",
+    "license_spdx": "AGPL-3.0",
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 1070255,
+    "blob_count": 66,
+    "max_blob": 318536,
+    "download_allowed": true,
+    "status": "VERIFIED_TRACKED_SNAPSHOT",
+    "archive_sha256": "0d27bbd1f0405b654f1afe3d2838d64760e6b2bae5277409609fbc00d68c15cb",
+    "compressed_bytes": 520993,
+    "expanded_bytes": 1070255,
+    "verified_files": 66,
+    "lfs_pointer_paths": [],
+    "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+    "history_included": false,
+    "other_branches_included": false,
+    "releases_dependencies_remote_media_included": false,
+    "installation_enabled": false,
+    "execution_enabled": false,
+    "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "4dad06b9357acfe6258718c90dda1329d35c76304f9f28aa381737571d75410e"
+      }
+    ]
+  },
+  {
+    "repo": "LuxAlgo/whale-options",
+    "url": "https://github.com/LuxAlgo/whale-options",
+    "commit": "205f18975264f32703211317c55b416374a5e2c8",
+    "tree": "338cddb15589d6ce3d8ec531acdbc5a3aa285ef8",
+    "license_spdx": "MIT",
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 9455493,
+    "blob_count": 200,
+    "max_blob": 4186800,
+    "download_allowed": true,
+    "status": "VERIFIED_TRACKED_SNAPSHOT",
+    "archive_sha256": "37d4c8a09464f12b33e487c659428e651dc037d662718486972aa867b2d08a70",
+    "compressed_bytes": 2468283,
+    "expanded_bytes": 9455493,
+    "verified_files": 200,
+    "lfs_pointer_paths": [],
+    "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+    "history_included": false,
+    "other_branches_included": false,
+    "releases_dependencies_remote_media_included": false,
+    "installation_enabled": false,
+    "execution_enabled": false,
+    "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "cbaded7139990c59f1b89433daf875f2a393d9fd51aae2491b78c6869777cdcc"
+      },
+      {
+        "path": "THIRD_PARTY_NOTICES.md",
+        "http_status": 200,
+        "sha256": "19527426de7ebf2eef73f90793f76c2f8fef2cd29eddecdf20564709f669b810"
+      }
+    ]
+  },
+  {
+    "repo": "LuxAlgo/cla-signatures",
+    "url": "https://github.com/LuxAlgo/cla-signatures",
+    "commit": "84f207a0fda778d56468874e04c615ffd9817d61",
+    "tree": "7f90c1f6a8e7ac1f1c47f2dc2fd9c20dce3aa95c",
+    "license_spdx": null,
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 9596,
+    "blob_count": 5,
+    "max_blob": 3504,
+    "download_allowed": false,
+    "status": "INDEX_ONLY_RIGHTS_PRIVACY_HOLD",
+    "snapshot_delivery": "HOLD",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "b519298de08910a8442189a4cc3a94e87367b72fb06e0b5b181f113f251d93a4"
+      }
+    ]
+  },
+  {
+    "repo": "LuxAlgo/edge-stats",
+    "url": "https://github.com/LuxAlgo/edge-stats",
+    "commit": "a48259887962d0f67a27d2b0815e2df9a52efca5",
+    "tree": "20eaf51e1552a912eb0ed882cb5b3e5f020fe435",
+    "license_spdx": "MIT",
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 2332430,
+    "blob_count": 225,
+    "max_blob": 298890,
+    "download_allowed": true,
+    "status": "VERIFIED_TRACKED_SNAPSHOT",
+    "archive_sha256": "827b0c769817bbd543ad008d92971e3aecaa46b40bfacb33c04a37579c502c01",
+    "compressed_bytes": 1554745,
+    "expanded_bytes": 2332430,
+    "verified_files": 225,
+    "lfs_pointer_paths": [],
+    "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+    "history_included": false,
+    "other_branches_included": false,
+    "releases_dependencies_remote_media_included": false,
+    "installation_enabled": false,
+    "execution_enabled": false,
+    "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "DATA_LICENSE",
+        "http_status": 200,
+        "sha256": "37eea09b8897aec17f79e947ccbcd5fc7271bdfbe5a0fd6a71f4c7e851d781d1"
+      },
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "dd08862deca759f990795bc5e30284aadf67c1c47f7de8d3123c6ac1ee3116e9"
+      }
+    ]
+  },
+  {
+    "repo": "LuxAlgo/broker-sdk",
+    "url": "https://github.com/LuxAlgo/broker-sdk",
+    "commit": "6ec9de427b8f6adb2ddaf35ba7e78630f9a3743f",
+    "tree": "bdd81de869976b6001fbe5c1b5b60a9bad7df301",
+    "license_spdx": "MIT",
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 570695,
+    "blob_count": 124,
+    "max_blob": 64792,
+    "download_allowed": true,
+    "status": "VERIFIED_TRACKED_SNAPSHOT",
+    "archive_sha256": "c011109e2d59d02597aa4850e2555299afbbdaf87bc8b8ed654677ebd518a84f",
+    "compressed_bytes": 237327,
+    "expanded_bytes": 570695,
+    "verified_files": 124,
+    "lfs_pointer_paths": [],
+    "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+    "history_included": false,
+    "other_branches_included": false,
+    "releases_dependencies_remote_media_included": false,
+    "installation_enabled": false,
+    "execution_enabled": false,
+    "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "6c579e3b433519f381d3846bf3496050b70065fd8b5a28425d5d9e026ec96869"
+      }
+    ]
+  },
+  {
+    "repo": "LuxAlgo/pinets-cli",
+    "url": "https://github.com/LuxAlgo/pinets-cli",
+    "commit": "f0e692210d6b12b8bdbe27b1b2a6a482b931aa7c",
+    "tree": "ffcebcbb808a1d2681ea54498c3920d709296ad5",
+    "license_spdx": "AGPL-3.0",
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 174134,
+    "blob_count": 22,
+    "max_blob": 53234,
+    "download_allowed": true,
+    "status": "VERIFIED_TRACKED_SNAPSHOT",
+    "archive_sha256": "b0a5bfb6d6b318caaad30f6b1d12cd164710f64dd3136a32d688ded61542f5f2",
+    "compressed_bytes": 63686,
+    "expanded_bytes": 174134,
+    "verified_files": 22,
+    "lfs_pointer_paths": [],
+    "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+    "history_included": false,
+    "other_branches_included": false,
+    "releases_dependencies_remote_media_included": false,
+    "installation_enabled": false,
+    "execution_enabled": false,
+    "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "082be36f94d899ae0fddb23b61f52eb6f5a741d0e42e542001c69ae1ce99805a"
+      }
+    ]
+  },
+  {
+    "repo": "LuxAlgo/market-trackers",
+    "url": "https://github.com/LuxAlgo/market-trackers",
+    "commit": "1ecfcca36a224d4758cc6e2e20cca216db43d5ee",
+    "tree": "97e42880eafd654c0a220594869b140de5c4d605",
+    "license_spdx": "MIT",
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 2310991,
+    "blob_count": 430,
+    "max_blob": 102142,
+    "download_allowed": true,
+    "status": "VERIFIED_TRACKED_SNAPSHOT",
+    "archive_sha256": "c4c55b59ec8a063db20e18856446215b8cc269672763907bc57842e2590a2825",
+    "compressed_bytes": 934424,
+    "expanded_bytes": 2310991,
+    "verified_files": 430,
+    "lfs_pointer_paths": [],
+    "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+    "history_included": false,
+    "other_branches_included": false,
+    "releases_dependencies_remote_media_included": false,
+    "installation_enabled": false,
+    "execution_enabled": false,
+    "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "e509d28e8853c425c5e189bea3fdcd7becca0067656265ef958ae6fb3166296b"
+      }
+    ]
+  },
+  {
+    "repo": "elementalsouls/Claude-BugHunter",
+    "url": "https://github.com/elementalsouls/Claude-BugHunter",
+    "commit": "210aad159f5bf3d96a7e6e46a0b2e452ad8c9cfb",
+    "tree": "3f7b9702aa798b660cc3bf6669474176e887623b",
+    "license_spdx": "MIT",
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 4266300,
+    "blob_count": 298,
+    "max_blob": 612291,
+    "download_allowed": true,
+    "status": "QUARANTINED_SECRET_CANDIDATE",
+    "archive_sha256": "d0fe4ef64a102c6c0babe8f89bcbb5c8641c67adba7053fd8c9bcfe01fedd121",
+    "compressed_bytes": 2085874,
+    "expanded_bytes": 4266300,
+    "verified_files": 298,
+    "lfs_pointer_paths": [],
+    "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+    "history_included": false,
+    "other_branches_included": false,
+    "releases_dependencies_remote_media_included": false,
+    "installation_enabled": false,
+    "execution_enabled": false,
+    "snapshot_delivery": "HOLD",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "177adb7c8613539a985a98b4c6d51ba09a2d3f435eb396d25cc45f4e0bf8cb45"
+      },
+      {
+        "path": "LICENSE-CONTENT",
+        "http_status": 200,
+        "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+      },
+      {
+        "path": "NOTICE",
+        "http_status": 200,
+        "sha256": "547ed8bfa070693c2014bd66329dba258e0010add743fc5830e3b473b70e4eee"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "f6de87414c43a35ffa7c6ead7e33dae4be15d353cbf6196e0dc2d8da245022eb"
+      }
+    ]
+  },
+  {
+    "repo": "slavakurilyak/awesome-ai-agents",
+    "url": "https://github.com/slavakurilyak/awesome-ai-agents",
+    "commit": "a32e86f60db8dd9556218403532264e0794822c4",
+    "tree": "e1fda8f99865829bf5635cb6673713fdb339bad6",
+    "license_spdx": "MIT",
+    "recursive": true,
+    "truncated": false,
+    "blob_bytes": 1139926,
+    "blob_count": 32,
+    "max_blob": 397565,
+    "download_allowed": true,
+    "status": "VERIFIED_TRACKED_SNAPSHOT",
+    "archive_sha256": "43a9bada206543413447931c9bb5593a02dd7eff76912c72421038a0cc9df85e",
+    "compressed_bytes": 217914,
+    "expanded_bytes": 1139926,
+    "verified_files": 32,
+    "lfs_pointer_paths": [],
+    "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+    "history_included": false,
+    "other_branches_included": false,
+    "releases_dependencies_remote_media_included": false,
+    "installation_enabled": false,
+    "execution_enabled": false,
+    "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+    "live_actions_enabled": false,
+    "docs_read": [
+      {
+        "path": "LICENSE",
+        "http_status": 200,
+        "sha256": "26e3e3f3091ebe9d3611ef77ba6ec5a0162a9300913ddb71475fa57eb9001efa"
+      },
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "sha256": "eb79e97ba41c2eeae05cad3e151e77fad034918294aae66e10b93be53724be28"
+      }
+    ]
+  }
+]

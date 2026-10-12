@@ -1,0 +1,44 @@
+{
+  "repo": "LuxAlgo/whale-options",
+  "url": "https://github.com/LuxAlgo/whale-options",
+  "commit": "205f18975264f32703211317c55b416374a5e2c8",
+  "tree": "338cddb15589d6ce3d8ec531acdbc5a3aa285ef8",
+  "license_spdx": "MIT",
+  "recursive": true,
+  "truncated": false,
+  "blob_bytes": 9455493,
+  "blob_count": 200,
+  "max_blob": 4186800,
+  "download_allowed": true,
+  "status": "VERIFIED_TRACKED_SNAPSHOT",
+  "archive_sha256": "37d4c8a09464f12b33e487c659428e651dc037d662718486972aa867b2d08a70",
+  "compressed_bytes": 2468283,
+  "expanded_bytes": 9455493,
+  "verified_files": 200,
+  "lfs_pointer_paths": [],
+  "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+  "history_included": false,
+  "other_branches_included": false,
+  "releases_dependencies_remote_media_included": false,
+  "installation_enabled": false,
+  "execution_enabled": false,
+  "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "LICENSE",
+      "http_status": 200,
+      "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+    },
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "cbaded7139990c59f1b89433daf875f2a393d9fd51aae2491b78c6869777cdcc"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "http_status": 200,
+      "sha256": "19527426de7ebf2eef73f90793f76c2f8fef2cd29eddecdf20564709f669b810"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "repo": "LuxAlgo/trade-relay",
+  "url": "https://github.com/LuxAlgo/trade-relay",
+  "commit": "3e431aea4cfdacf9c9454067a647e155945e541d",
+  "tree": "759eb60bb5bac19f6b5bd4af1fb8f315f6217963",
+  "license_spdx": "MIT",
+  "recursive": true,
+  "truncated": false,
+  "blob_bytes": 1066500,
+  "blob_count": 77,
+  "max_blob": 284162,
+  "download_allowed": true,
+  "status": "VERIFIED_TRACKED_SNAPSHOT",
+  "archive_sha256": "da165eef22b05fad890859c7991ed22f43b16e217305bd00e09181d17e1e2658",
+  "compressed_bytes": 783969,
+  "expanded_bytes": 1066500,
+  "verified_files": 77,
+  "lfs_pointer_paths": [],
+  "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+  "history_included": false,
+  "other_branches_included": false,
+  "releases_dependencies_remote_media_included": false,
+  "installation_enabled": false,
+  "execution_enabled": false,
+  "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "LICENSE",
+      "http_status": 200,
+      "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+    },
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "bbde2391f7800b9d8cc82eddc877a0469f09084dce961f21cb3ff0d008094aed"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "http_status": 200,
+      "sha256": "cee56f7b0848621eed7d678dc48543932a82883fd925f769cab88b2b9ba83f3e"
+    }
+  ]
+}

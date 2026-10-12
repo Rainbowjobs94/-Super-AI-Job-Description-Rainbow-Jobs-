@@ -1,0 +1,39 @@
+{
+  "repo": "LuxAlgo/prop-firm-sim",
+  "url": "https://github.com/LuxAlgo/prop-firm-sim",
+  "commit": "05e443250f1294c03fe65120727666feeb353e32",
+  "tree": "8e3c7f4a130de22d3a1ad9e80103a4f08c852dc1",
+  "license_spdx": "MIT",
+  "recursive": true,
+  "truncated": false,
+  "blob_bytes": 1956565,
+  "blob_count": 135,
+  "max_blob": 536957,
+  "download_allowed": true,
+  "status": "VERIFIED_TRACKED_SNAPSHOT",
+  "archive_sha256": "53ab64ba9bdb31e2bdd3cdb4d70fbfb79ff6e371638e84f57101f49a068fdb91",
+  "compressed_bytes": 1349299,
+  "expanded_bytes": 1956565,
+  "verified_files": 135,
+  "lfs_pointer_paths": [],
+  "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+  "history_included": false,
+  "other_branches_included": false,
+  "releases_dependencies_remote_media_included": false,
+  "installation_enabled": false,
+  "execution_enabled": false,
+  "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "LICENSE",
+      "http_status": 200,
+      "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+    },
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "1684a3bd3afcfa6f5fa2213b9cba83c179583572589666828c183a3910a7aea8"
+    }
+  ]
+}

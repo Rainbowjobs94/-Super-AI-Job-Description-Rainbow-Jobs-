@@ -1,0 +1,44 @@
+{
+  "repo": "LuxAlgo/luxalgo-mcp-server",
+  "url": "https://github.com/LuxAlgo/luxalgo-mcp-server",
+  "commit": "fbef999fce5ae2fe4392a430806e928656f0f846",
+  "tree": "24dffca6da02a85a5e6bd1927993b6689a71d9cd",
+  "license_spdx": "MIT",
+  "recursive": true,
+  "truncated": false,
+  "blob_bytes": 7251408,
+  "blob_count": 105,
+  "max_blob": 6581756,
+  "download_allowed": true,
+  "status": "VERIFIED_TRACKED_SNAPSHOT",
+  "archive_sha256": "0dd2cc60d6761b4aee2e981a75208ee2e1faa66d3aa6e58bc9502f51a1a0d7f6",
+  "compressed_bytes": 6641298,
+  "expanded_bytes": 7251408,
+  "verified_files": 105,
+  "lfs_pointer_paths": [],
+  "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+  "history_included": false,
+  "other_branches_included": false,
+  "releases_dependencies_remote_media_included": false,
+  "installation_enabled": false,
+  "execution_enabled": false,
+  "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "LICENSE",
+      "http_status": 200,
+      "sha256": "1b008cf586117be793d621e875f6270aca14a8c7c31914e2371b39b6d6c01631"
+    },
+    {
+      "path": "NOTICE",
+      "http_status": 200,
+      "sha256": "57b3bc75abeed567facf72d1666dd2d72243529bde6d9f9b164883d0355e9fba"
+    },
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "0db05f65cc8917cb9fa8ee9d0a2057d733b764b89ed7a416e68e913242fb9420"
+    }
+  ]
+}

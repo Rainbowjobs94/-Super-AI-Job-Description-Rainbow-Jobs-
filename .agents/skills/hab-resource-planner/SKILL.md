@@ -21,3 +21,10 @@ without forcing the user to pick technologies.
 Record IMPLEMENTED only after source exists, TESTED only after the named checks
 ran, and live status only after actual deployment evidence. Failed or partial
 work must retain a checkpoint and a specific blocker.
+
+## Free-first execution
+
+Read `references/free-first-policy.md`. Reuse successful work, then use local
+tools and the host's actual Free mode for the bounded main pass. Power is only
+for a verified unresolved slice; never automatically add a paid finishing pass.
+This skill cannot operate a model selector or guarantee zero platform charges.

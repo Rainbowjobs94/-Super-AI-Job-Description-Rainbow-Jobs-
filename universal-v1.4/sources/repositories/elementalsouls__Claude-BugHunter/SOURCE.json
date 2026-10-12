@@ -1,0 +1,49 @@
+{
+  "repo": "elementalsouls/Claude-BugHunter",
+  "url": "https://github.com/elementalsouls/Claude-BugHunter",
+  "commit": "210aad159f5bf3d96a7e6e46a0b2e452ad8c9cfb",
+  "tree": "3f7b9702aa798b660cc3bf6669474176e887623b",
+  "license_spdx": "MIT",
+  "recursive": true,
+  "truncated": false,
+  "blob_bytes": 4266300,
+  "blob_count": 298,
+  "max_blob": 612291,
+  "download_allowed": true,
+  "status": "QUARANTINED_SECRET_CANDIDATE",
+  "archive_sha256": "d0fe4ef64a102c6c0babe8f89bcbb5c8641c67adba7053fd8c9bcfe01fedd121",
+  "compressed_bytes": 2085874,
+  "expanded_bytes": 4266300,
+  "verified_files": 298,
+  "lfs_pointer_paths": [],
+  "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+  "history_included": false,
+  "other_branches_included": false,
+  "releases_dependencies_remote_media_included": false,
+  "installation_enabled": false,
+  "execution_enabled": false,
+  "snapshot_delivery": "HOLD",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "LICENSE",
+      "http_status": 200,
+      "sha256": "177adb7c8613539a985a98b4c6d51ba09a2d3f435eb396d25cc45f4e0bf8cb45"
+    },
+    {
+      "path": "LICENSE-CONTENT",
+      "http_status": 200,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+    },
+    {
+      "path": "NOTICE",
+      "http_status": 200,
+      "sha256": "547ed8bfa070693c2014bd66329dba258e0010add743fc5830e3b473b70e4eee"
+    },
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "f6de87414c43a35ffa7c6ead7e33dae4be15d353cbf6196e0dc2d8da245022eb"
+    }
+  ]
+}

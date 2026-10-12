@@ -1,0 +1,39 @@
+{
+  "repo": "LuxAlgo/pinets-cli",
+  "url": "https://github.com/LuxAlgo/pinets-cli",
+  "commit": "f0e692210d6b12b8bdbe27b1b2a6a482b931aa7c",
+  "tree": "ffcebcbb808a1d2681ea54498c3920d709296ad5",
+  "license_spdx": "AGPL-3.0",
+  "recursive": true,
+  "truncated": false,
+  "blob_bytes": 174134,
+  "blob_count": 22,
+  "max_blob": 53234,
+  "download_allowed": true,
+  "status": "VERIFIED_TRACKED_SNAPSHOT",
+  "archive_sha256": "b0a5bfb6d6b318caaad30f6b1d12cd164710f64dd3136a32d688ded61542f5f2",
+  "compressed_bytes": 63686,
+  "expanded_bytes": 174134,
+  "verified_files": 22,
+  "lfs_pointer_paths": [],
+  "secret_screen": "HEURISTIC_NOT_COMPLETE_DLP",
+  "history_included": false,
+  "other_branches_included": false,
+  "releases_dependencies_remote_media_included": false,
+  "installation_enabled": false,
+  "execution_enabled": false,
+  "snapshot_delivery": "OWNER_LIBRARY_ONLY",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "LICENSE",
+      "http_status": 200,
+      "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+    },
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "082be36f94d899ae0fddb23b61f52eb6f5a741d0e42e542001c69ae1ce99805a"
+    }
+  ]
+}

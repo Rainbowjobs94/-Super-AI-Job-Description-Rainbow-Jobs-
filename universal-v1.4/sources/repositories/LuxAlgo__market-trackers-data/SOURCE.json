@@ -1,0 +1,28 @@
+{
+  "repo": "LuxAlgo/market-trackers-data",
+  "url": "https://github.com/LuxAlgo/market-trackers-data",
+  "commit": "7da610f3876308bbc276972d0869e4cc0f20cd30",
+  "tree": "d0c63c172f78ec443a2289982946edc54de44534",
+  "license_spdx": "CC0-1.0",
+  "recursive": false,
+  "truncated": false,
+  "blob_bytes": 142761,
+  "blob_count": 5,
+  "max_blob": 94996,
+  "download_allowed": false,
+  "status": "INDEX_ONLY_SIZE_HOLD",
+  "snapshot_delivery": "HOLD",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "LICENSE",
+      "http_status": 200,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "6aef0b4b47e9be25527e33c704f8ebe5fe3da5a0010b567e0f0a87613101ff90"
+    }
+  ]
+}

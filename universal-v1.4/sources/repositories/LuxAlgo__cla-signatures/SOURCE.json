@@ -1,0 +1,23 @@
+{
+  "repo": "LuxAlgo/cla-signatures",
+  "url": "https://github.com/LuxAlgo/cla-signatures",
+  "commit": "84f207a0fda778d56468874e04c615ffd9817d61",
+  "tree": "7f90c1f6a8e7ac1f1c47f2dc2fd9c20dce3aa95c",
+  "license_spdx": null,
+  "recursive": true,
+  "truncated": false,
+  "blob_bytes": 9596,
+  "blob_count": 5,
+  "max_blob": 3504,
+  "download_allowed": false,
+  "status": "INDEX_ONLY_RIGHTS_PRIVACY_HOLD",
+  "snapshot_delivery": "HOLD",
+  "live_actions_enabled": false,
+  "docs_read": [
+    {
+      "path": "README.md",
+      "http_status": 200,
+      "sha256": "b519298de08910a8442189a4cc3a94e87367b72fb06e0b5b181f113f251d93a4"
+    }
+  ]
+}

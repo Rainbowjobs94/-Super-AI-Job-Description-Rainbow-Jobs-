@@ -115,3 +115,11 @@ jurisdiction-specific compliance, debugging, protocol review, file-format design
 roles and market-trend analysis. These add branches; none replaces the earlier
 modules. Legal/market checklists are research preparation, not certifications,
 ownership proof, investment recommendations or permission to file or trade.
+
+## Free-first revision
+
+Use hab-resource-planner/references/free-first-policy.md for all new passes and
+handoffs: deterministic reuse, bounded Free main pass, acceptance checkpoint,
+then Power only for the unresolved reasoning/implementation slice if needed.
+Keep completed results and original versions. Never claim this instruction
+changed the host's selector, erased prior charges or bypassed an account limit.
