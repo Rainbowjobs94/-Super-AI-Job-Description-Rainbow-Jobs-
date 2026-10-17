@@ -214,6 +214,11 @@
 
 ## 14. 🤝 AI Guilds for Tools: Working Together for Better Results
 
+For the consolidated build/review/update procedure, implementation limitations,
+and approval boundaries, see [the proposed AI Guild workflow](docs/AI_GUILD_WORKFLOW.md).
+The examples below are conceptual tool choices, not live integrations or
+permission to execute financial, database, hardware, or production operations.
+
 An "AI Guild" is an orchestrated collection of tools, agents, and models working in synergy to achieve complex tasks that a single tool cannot accomplish alone. By layering free tools for broad analysis and transitioning to paid/premium tools for deep execution, you can optimize both cost and performance.
 
 ### 1. Tool Synergy: Free to Paid Escalation Strategy

@@ -1,210 +1,44 @@
-name: Auto Review, Test, and Merge PRs
+name: PR Verification (Manual Merge Only)
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, ready_for_review]
   workflow_dispatch:
 
-jobs:
-  review-and-test:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-      checks: read
+permissions:
+  contents: read
 
+concurrency:
+  group: pr-verification-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - name: Checkout code
+      - name: Check out code without persisted credentials
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pytest pytest-cov flake8 black isort
+      - name: Install application and verification dependencies
+        run: python -m pip install -r requirements-dev.txt
 
-      - name: Run linting checks
-        id: lint
-        run: |
-          echo "Running flake8..."
-          flake8 src/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics || true
-          echo "lint_status=success" >> $GITHUB_OUTPUT
+      - name: Check Python syntax
+        run: python -m compileall -q src tests ai_operator_agent.py
 
-      - name: Check code formatting
-        id: format
-        run: |
-          echo "Checking black formatting..."
-          black --check src/ tests/ || true
-          echo "format_status=success" >> $GITHUB_OUTPUT
+      - name: Check fatal lint errors
+        run: python -m flake8 src tests --count --select=E9,F63,F7,F82 --show-source --statistics
 
-      - name: Run test suite
-        id: tests
-        run: |
-          echo "Running pytest..."
-          pytest tests/ -v --tb=short --cov=src --cov-report=term-missing 2>&1 | tee test_output.log
-          TEST_EXIT_CODE=${PIPESTATUS[0]}
-          
-          if [ $TEST_EXIT_CODE -eq 0 ]; then
-            echo "tests_passed=true" >> $GITHUB_OUTPUT
-            echo "✅ All tests passed!"
-          else
-            echo "tests_passed=false" >> $GITHUB_OUTPUT
-            echo "❌ Some tests failed"
-          fi
-          exit 0
-
-      - name: Check for merge conflicts
-        id: conflicts
-        run: |
-          git fetch origin main
-          if git merge --no-commit --no-ff origin/main; then
-            echo "conflicts=false" >> $GITHUB_OUTPUT
-            echo "✅ No merge conflicts detected"
-            git merge --abort
-          else
-            echo "conflicts=true" >> $GITHUB_OUTPUT
-            echo "⚠️ Merge conflicts detected"
-            git merge --abort
-            exit 1
-          fi
-
-      - name: Generate test report comment
-        if: always()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const testOutput = fs.existsSync('test_output.log') 
-              ? fs.readFileSync('test_output.log', 'utf8') 
-              : 'No test output available';
-            
-            const testsPassedStatus = '${{ steps.tests.outputs.tests_passed }}' === 'true' 
-              ? '✅ PASS' 
-              : '⚠️ REVIEW REQUIRED';
-            
-            const comment = `## 🤖 PR Review Report
-
-| Check | Status |
-|-------|--------|
-| **Linting** | ✅ Passed |
-| **Format** | ✅ Passed |
-| **Tests** | ${testsPassedStatus} |
-| **Merge Conflicts** | ✅ None |
-
-### Test Details
-\`\`\`
-${testOutput.slice(-2000)}
-\`\`\`
-
----
-**Actions:** This PR is ready for review and merge (if tests pass).
-`;
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: comment
-            });
-
-  merge-pr:
-    needs: review-and-test
-    runs-on: ubuntu-latest
-    if: always()
-    permissions:
-      pull-requests: write
-      contents: write
-
-    steps:
-      - name: Auto-merge PR
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const { data: pr } = await github.rest.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number
-            });
-
-            // Check if PR is in mergeable state
-            if (pr.mergeable === false) {
-              console.log('⚠️ PR has conflicts, skipping auto-merge');
-              return;
-            }
-
-            if (pr.merged) {
-              console.log('ℹ️ PR already merged');
-              return;
-            }
-
-            try {
-              await github.rest.pulls.merge({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.issue.number,
-                merge_method: 'squash',
-                commit_message: `${pr.title} (PR #${pr.number})`,
-                commit_title: pr.title
-              });
-              console.log('✅ PR merged successfully');
-            } catch (error) {
-              console.log(`⚠️ Auto-merge failed: ${error.message}`);
-            }
-
-  close-pr-post-merge:
-    needs: merge-pr
-    runs-on: ubuntu-latest
-    if: always()
-    permissions:
-      pull-requests: write
-
-    steps:
-      - name: Close PR with summary comment
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const { data: pr } = await github.rest.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number
-            });
-
-            if (pr.merged) {
-              const closingComment = `## ✅ PR Processing Complete
-
-**Status:** ✅ MERGED & CLOSED
-
-**Summary:**
-- ✅ Linting passed
-- ✅ Tests passed
-- ✅ No conflicts
-- ✅ Successfully merged to main
-- ✅ Ready for deployment
-
----
-*Auto-processed by GitHub Actions PR Bot*
-`;
-
-              await github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: closingComment
-              });
-
-              // Optionally close PR if not auto-closed
-              if (pr.state === 'open') {
-                await github.rest.pulls.update({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  pull_number: context.issue.number,
-                  state: 'closed'
-                });
-              }
-            }
+      - name: Run regression suite
+        run: python -m unittest discover -s tests -v
