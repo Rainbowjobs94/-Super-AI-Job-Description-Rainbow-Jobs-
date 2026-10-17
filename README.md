@@ -14,6 +14,10 @@ project-scoped source/skill overlays. See [revision reconciliation](docs/REVISIO
 `python -m src.hab.cli reconcile previous.json current.json --output review.json`
 produces a review report, not an automatic merge or deployment.
 
+The [proposed AI Guild workflow](docs/AI_GUILD_WORKFLOW.md) consolidates the
+build/review/update playbook and domain-specific research proposals. It does
+not activate external AI providers, autonomous execution, or production changes.
+
 ## Original Community Guardian context
 
 Community Guardian Agent (Physical-23) for multi-platform community management.
