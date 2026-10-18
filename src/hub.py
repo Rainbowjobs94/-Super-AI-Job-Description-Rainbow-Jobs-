@@ -193,6 +193,24 @@ def chat():
         ai_response = f"I have generated and saved a new status report to {saved_path}."
     elif 'archive' in user_message or 'build' in user_message:
         ai_response = "Use the Hab catalog to export inspected source bytes. Imported code is never executed. The historical AiRainbowRepo generator remains a legacy example, not deployment evidence."
+    elif 'fix' in user_message:
+        try:
+            original_message = data['message']
+            fix_index = original_message.lower().find('fix')
+            path_str = original_message[fix_index + 3:].strip()
+
+            target_path = _get_safe_path(path_str)
+            with open(target_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            lines = content.split('\n')
+            fixed_content = '\n'.join(line.rstrip() for line in lines).rstrip() + '\n'
+            with open(target_path, 'w', encoding='utf-8') as f:
+                f.write(fixed_content)
+            ai_response = f"I have applied formatting fixes to {path_str}."
+        except ValueError:
+            ai_response = f"Could not fix {path_str}: Invalid path."
+        except Exception as e:
+            ai_response = f"An error occurred while fixing {path_str}: {str(e)}"
     else:
         ai_response = f"I am IA Guardian Hab (legacy agent: Physical-23). Use the request planner for candidate tasks; it does not run a general AI model. I received your message: '{data['message']}'"
 
