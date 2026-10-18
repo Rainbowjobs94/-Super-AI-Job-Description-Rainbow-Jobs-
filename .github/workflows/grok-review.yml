@@ -1,0 +1,15 @@
+name: grok-review
+on: pull_request
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: curl -fsSL https://x.ai/cli/install.sh | bash
+      - run: echo "$HOME/.grok/bin" >> $GITHUB_PATH
+      - run: grok -p "Review this PR for bugs" --always-approve
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          GH_TOKEN: ${{ github.token }} # lets grok post the review
