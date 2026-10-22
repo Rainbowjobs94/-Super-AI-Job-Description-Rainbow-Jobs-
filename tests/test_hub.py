@@ -32,6 +32,38 @@ class TestHubChat(unittest.TestCase):
         self.assertEqual(data['status'], 'error')
         self.assertEqual(data['message'], 'Missing message')
 
+    def test_chat_endpoint_fix_command(self):
+        import tempfile
+        import os
+        from pathlib import Path
+
+        # Create a temp file inside docs/ since it's an allowed directory
+        base_dir = Path(__file__).resolve().parent.parent
+        docs_dir = base_dir / 'docs'
+        docs_dir.mkdir(exist_ok=True)
+
+        with tempfile.NamedTemporaryFile(dir=docs_dir, delete=False, suffix='.txt') as f:
+            f.write(b"line 1 \nline 2\t\n")
+            temp_path = Path(f.name)
+
+        try:
+            rel_path = temp_path.relative_to(base_dir)
+            response = self.client.post(
+                '/api/chat',
+                data=json.dumps({'message': f'Please fix {rel_path}'}),
+                content_type='application/json'
+            )
+            data = json.loads(response.data)
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(data['status'], 'success')
+            self.assertIn("Fixed", data['response'])
+
+            fixed_content = temp_path.read_text()
+            self.assertEqual(fixed_content, "line 1\nline 2\n")
+        finally:
+            if temp_path.exists():
+                os.remove(temp_path)
+
 class TestHubFiles(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True
