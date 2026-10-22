@@ -193,6 +193,27 @@ def chat():
         ai_response = f"I have generated and saved a new status report to {saved_path}."
     elif 'archive' in user_message or 'build' in user_message:
         ai_response = "Use the Hab catalog to export inspected source bytes. Imported code is never executed. The historical AiRainbowRepo generator remains a legacy example, not deployment evidence."
+    elif 'fix ' in user_message:
+        # We need the original casing for the file path to exist in the filesystem,
+        # so we split the original message rather than the lowercased user_message.
+        filepath = data['message'].split('fix ')[1].strip()
+        try:
+            target_path = _get_safe_path(filepath)
+            if not target_path.exists() or not target_path.is_file():
+                ai_response = f"Could not fix {filepath}: File not found."
+            else:
+                content = target_path.read_text(encoding='utf-8')
+                fixed_lines = [line.rstrip() for line in content.splitlines()]
+                fixed_content = '\n'.join(fixed_lines) + '\n'
+                if content != fixed_content:
+                    target_path.write_text(fixed_content, encoding='utf-8')
+                    ai_response = f"Fixed {filepath} by stripping trailing whitespace and ensuring a single trailing newline."
+                else:
+                    ai_response = f"No fixes needed for {filepath}."
+        except ValueError:
+            ai_response = f"Could not fix {filepath}: Invalid file path."
+        except Exception as e:
+            ai_response = f"Could not fix {filepath}: {str(e)}"
     else:
         ai_response = f"I am IA Guardian Hab (legacy agent: Physical-23). Use the request planner for candidate tasks; it does not run a general AI model. I received your message: '{data['message']}'"
 
